@@ -3,14 +3,7 @@
         <title>My New Hugo Site</title>
         <link>https://ZevaXu.github.io/</link>
         <description>This is My New Hugo Site</description>
-        <generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 30 Nov 2021 22:42:56 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>en-us</language>
             <atom:link href="https://ZevaXu.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
-    <title>First_post</title>
-    <link>https://ZevaXu.github.io/first_post/</link>
-    <pubDate>Tue, 30 Nov 2021 22:42:56 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/first_post/</guid>
-    <description><![CDATA[test test ]]></description>
-</item></channel>
+        </channel>
 </rss>
