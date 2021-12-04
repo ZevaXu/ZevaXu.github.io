@@ -1,11 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Zeva`s Space</title>
-        <link>https://ZevaXu.github.io/</link>
-        <description>Blog &amp; Note about Zeva</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 02 Dec 2021 10:22:37 &#43;0800</lastBuildDate>
-            <atom:link href="https://ZevaXu.github.io/index.xml" rel="self" type="application/rss+xml" />
-        <item>
+        <title>NoteBook - Category - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/categories/notebook/</link>
+        <description>NoteBook - Category - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 02 Dec 2021 10:22:37 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/notebook/" rel="self" type="application/rss+xml" /><item>
     <title>Go语言基础—3.基础数据类型</title>
     <link>https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
     <pubDate>Thu, 02 Dec 2021 10:22:37 &#43;0800</pubDate>

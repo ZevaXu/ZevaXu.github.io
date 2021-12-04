@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>conda - Tag - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/tags/conda/</link>
+        <description>conda - Tag - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 20 Apr 2021 10:29:20 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/conda/" rel="self" type="application/rss+xml" /><item>
+    <title>Conda常用命令</title>
+    <link>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+    <pubDate>Tue, 20 Apr 2021 10:29:20 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+    <description><![CDATA[conda常用命令 1. 管理conda   查看conda版本
+1  conda --version     查看python版本
+1  conda --python     进入/退出python环境
+1 2  python quit()     更新conda版本
+1  conda update conda      2. 管理环境   创建一个环境
+1  conda create --name python34 python=3.4 #创建一个名为python34的环境，指定python版本为3.4     切换环境
+1 2 3 4  #windows activate python34 #mac/linux source activate python34     删除一个已有的环境]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,66 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Go - Tag - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/tags/go/</link>
+        <description>Go - Tag - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 02 Dec 2021 10:22:37 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/go/" rel="self" type="application/rss+xml" /><item>
+    <title>Go语言基础—3.基础数据类型</title>
+    <link>https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <pubDate>Thu, 02 Dec 2021 10:22:37 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <description><![CDATA[3 基础数据类型 虽然从底层而言，所有的数据都是由比特组成，但计算机一般操作的是固定大小的数，如整数、浮点数、比特数组、内存地址等。进一步将这些数组织在一起，就可表达更多的对象。
+Go语言将数据类型分为四类：基础类型、复合类型、引用类型和接口类型。
+3.1 整型 基础类型
+有符号：
+int8、int16、int32、int64四种
+无符号：
+uint8、uint16、uint32、uint64四种
+rune：对应int32，表示一个Unicode码点。这两个名称可以互换使用
+byte：是uint8类型的等价类型，强调数值是一个原始的数据而不是一个小的整数。
+int：32位操作系统—int32、64位操作系统—int64
+uintptr:一种无符号的整数类型,没有指定具体的bit大小但是足以容纳指针.
+类型转换
+算术和逻辑运算的二元操作中必须是相同的类型，所以int32和int64不能直接相加减。
+显示类型转换：
+1  var compote = int(apples) + int(oranges)   对于将一个大尺寸的整数类型转为一个小尺寸的整数类型，或者是将一个浮点数转为整数，可能会改变数值或丢失精度。
+浮点数到整数的转换将丢失任何小数部分，然后向数轴零方向截断。
+3.2 浮点数 Go语言提供了两种精度的浮点数，float32和float64。
+float32
+1.4e-45～3.4e38；
+精度到6个十进制位
+float64:
+4.9e-324～1.8e308
+精度到15个十进制位
+3.3 复数 Go语言提供了两种精度的复数类型：complex64和complex128。
+内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部：
+1 2 3 4 5 6 7 8 9 10  var x complex128 = complex(1, 2) // 1+2i var y complex128 = complex(3, 4) // 3+4i fmt.]]></description>
+</item><item>
+    <title>Go语言基础—2.程序结构</title>
+    <link>https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/</link>
+    <pubDate>Wed, 01 Dec 2021 10:14:04 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/</guid>
+    <description><![CDATA[2.1 命名 命名规则：
+  字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。
+  不能使用go关键字来命名。
+  不推荐使用go预定义名字命名。
+  习惯用驼峰命名法。
+  可见性：
+  在函数内定义，仅函数可用。
+  在函数外定义，包级可用。
+  循环体的变量仅循环内可用。
+  名字开头的大小写决定了是否是导出型（外部是否可以访问）
+fmt.Printf()
+  2.2 声明 声明语句定义了程序的各种实体对象以及部分或全部的属性。主要有4种类型的声明语句：
+  var：变量
+  const：常量
+  type：类型
+  func：函数
+  2.3 变量 声明变量的一般语法：
+1  var 变量名 类型 = 表达式   其中，类型和= 表达式两者可省略其一。编译器会自动推断变量的类型或者初始值。
+各个类型的0值：
+  整型类型0值为0
+  布尔类型为false]]></description>
+</item></channel>
+</rss>

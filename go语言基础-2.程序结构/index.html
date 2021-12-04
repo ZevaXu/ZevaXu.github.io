@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Go语言基础—2.程序结构 - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="Go语言基础—2.程序结构" />
+<meta property="og:description" content="2.1 命名 命名规则：
+  字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。
+  不能使用go关键字来命名。
+  不推荐使用go预定义名字命名。
+  习惯用驼峰命名法。
+  可见性：
+  在函数内定义，仅函数可用。
+  在函数外定义，包级可用。
+  循环体的变量仅循环内可用。
+  名字开头的大小写决定了是否是导出型（外部是否可以访问）
+fmt.Printf()
+  2.2 声明 声明语句定义了程序的各种实体对象以及部分或全部的属性。主要有4种类型的声明语句：
+  var：变量
+  const：常量
+  type：类型
+  func：函数
+  2.3 变量 声明变量的一般语法：
+1  var 变量名 类型 = 表达式   其中，类型和= 表达式两者可省略其一。编译器会自动推断变量的类型或者初始值。
+各个类型的0值：
+  整型类型0值为0
+  布尔类型为false" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" /><meta property="og:image" content="https://ZevaXu.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-01T10:14:04+08:00" />
+<meta property="article:modified_time" content="2021-12-01T10:14:04+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ZevaXu.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Go语言基础—2.程序结构"/>
+<meta name="twitter:description" content="2.1 命名 命名规则：
+  字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。
+  不能使用go关键字来命名。
+  不推荐使用go预定义名字命名。
+  习惯用驼峰命名法。
+  可见性：
+  在函数内定义，仅函数可用。
+  在函数外定义，包级可用。
+  循环体的变量仅循环内可用。
+  名字开头的大小写决定了是否是导出型（外部是否可以访问）
+fmt.Printf()
+  2.2 声明 声明语句定义了程序的各种实体对象以及部分或全部的属性。主要有4种类型的声明语句：
+  var：变量
+  const：常量
+  type：类型
+  func：函数
+  2.3 变量 声明变量的一般语法：
+1  var 变量名 类型 = 表达式   其中，类型和= 表达式两者可省略其一。编译器会自动推断变量的类型或者初始值。
+各个类型的0值：
+  整型类型0值为0
+  布尔类型为false"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" /><link rel="prev" href="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/" /><link rel="next" href="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go语言基础—2.程序结构",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84\/"
+        },"genre": "posts","keywords": "Go","wordcount":  429 ,
+        "url": "https:\/\/ZevaXu.github.io\/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84\/","datePublished": "2021-12-01T10:14:04+08:00","dateModified": "2021-12-01T10:14:04+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Go语言基础—2.程序结构</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notebook/"><i class="far fa-folder fa-fw"></i>NoteBook</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-01">2021-12-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;429 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#21-命名">2.1 命名</a></li>
+    <li><a href="#22-声明">2.2 声明</a></li>
+    <li><a href="#23-变量">2.3 变量</a>
+      <ul>
+        <li><a href="#231-简短变量声明">2.3.1 简短变量声明</a></li>
+        <li><a href="#232-指针">2.3.2 指针</a></li>
+        <li><a href="#233-new函数">2.3.3 new函数</a></li>
+        <li><a href="#234-变量的生命周期">2.3.4 变量的生命周期</a></li>
+      </ul>
+    </li>
+    <li><a href="#24-赋值">2.4 赋值</a>
+      <ul>
+        <li><a href="#241-元组赋值">2.4.1 元组赋值</a></li>
+        <li><a href="#242-可赋值性">2.4.2 可赋值性</a></li>
+      </ul>
+    </li>
+    <li><a href="#25-类型">2.5 类型</a></li>
+    <li><a href="#27-作用域">2.7 作用域</a></li>
+    <li><a href="#28-包的概念">2.8 包的概念</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="21-命名">2.1 命名</h2>
+<p>命名规则：</p>
+<ul>
+<li>
+<p>字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。</p>
+</li>
+<li>
+<p>不能使用go关键字来命名。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png"
+        data-srcset="https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png, https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png 1.5x, https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png"
+        title="NAyObwoSjYhXeHF" /></p>
+</li>
+<li>
+<p>不推荐使用go预定义名字命名。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png"
+        data-srcset="https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png, https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png 1.5x, https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png 2x"
+        data-sizes="auto"
+        alt="https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png"
+        title="OtC9Tj31aHfs5An" /></p>
+</li>
+<li>
+<p>习惯用驼峰命名法。</p>
+</li>
+</ul>
+<p>可见性：</p>
+<ul>
+<li>
+<p>在函数内定义，仅函数可用。</p>
+</li>
+<li>
+<p>在函数外定义，包级可用。</p>
+</li>
+<li>
+<p>循环体的变量仅循环内可用。</p>
+</li>
+<li>
+<p>名字开头的大小写决定了是否是导出型（外部是否可以访问）</p>
+<p><code>fmt.Printf()</code></p>
+</li>
+</ul>
+<h2 id="22-声明">2.2 声明</h2>
+<p>声明语句定义了程序的各种实体对象以及部分或全部的属性。主要有4种类型的声明语句：</p>
+<ul>
+<li>
+<p>var：变量</p>
+</li>
+<li>
+<p>const：常量</p>
+</li>
+<li>
+<p>type：类型</p>
+</li>
+<li>
+<p>func：函数</p>
+</li>
+</ul>
+<h2 id="23-变量">2.3 变量</h2>
+<p>声明变量的一般语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var 变量名 类型 = 表达式
+</code></pre></td></tr></table>
+</div>
+</div><p>其中，类型和<code>= 表达式</code>两者可省略其一。编译器会自动推断变量的类型或者初始值。</p>
+<p>各个类型的0值：</p>
+<ul>
+<li>
+<p>整型类型0值为0</p>
+</li>
+<li>
+<p>布尔类型为false</p>
+</li>
+<li>
+<p>字符串为&quot;&quot;</p>
+</li>
+<li>
+<p>接口或引用类型（slice、map、chan、函数）变量对应nil</p>
+</li>
+<li>
+<p>数组或结构体等聚合类型对应的0值为每个元素或字段对应的0值</p>
+</li>
+</ul>
+<p>包级变量在main函数执行之前完成初始化，局部变量在声明语句被执行到时完成初始化。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var i,j,k int
+var b,f,s = true,2.3,&#34;foo&#34;
+var f,err = os.Open(name)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="231-简短变量声明">2.3.1 简短变量声明</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">变量名 := 表达式
+i := 0
+i,j := 0,1 //声明+（可能赋值）
+i,j = j,i //赋值
+</code></pre></td></tr></table>
+</div>
+</div><p>左边为单个变量：</p>
+<p>该变量必须为首次声明，语句即起到声明+初始化的作用。</p>
+<p>左边为多个变量：</p>
+<p>左边至少要有一个是首次声明的变量，对于该变量—声明+初始化；对于其他变量—仅仅赋值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">i := 0
+i ++
+i,j:= 2,3
+j++    
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="232-指针">2.3.2 指针</h3>
+<p>go中的指针对C语言中指针类型进行了一定的限制，使其变得更加安全。</p>
+<p><strong>指针的值和类型：</strong></p>
+<p>一个指针的值对应着一个变量在内存中的地址。</p>
+<p>一个指针的类型对应其值对应的内存地址中存储的元素类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var x int
+addr := &amp;x    
+</code></pre></td></tr></table>
+</div>
+</div><p>那么addr的类型为<code>*int</code>，addr被称为“指向int类型的指针”，保存了x变量的内存地址。</p>
+<p><strong>指针运算符：</strong></p>
+<p><code>&amp;x</code>:取地址操作</p>
+<p><code>*addr</code>:取值操作</p>
+<p>优先级很高，高于自增、自减语句</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">i := 0
+i++
+t := &amp;i
+fmt.Println(i, t)//1 0x140000140a0
+fmt.Println(*t)//1
+fmt.Println(&amp;*t)//0x140000140a0
+fmt.Println(*&amp;*t)//1    
+</code></pre></td></tr></table>
+</div>
+</div><p>指针类型的0值为nil。</p>
+<p>指针之间也可以比较，当取值（地址）相同或者全部为nil时，才相等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var x, y int 
+fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == nil) // &#34;true false false&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p>go语言中局部变量的地址也是安全的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var p = f()
+
+func f() *int { 
+    v := 1 return &amp;v 
+}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="233-new函数">2.3.3 new函数</h3>
+<p>另一个创建变量的方法是调用用内建的new函数。表达式new(T)将创建一个T类型的匿名变量，初始化为T类型的零值，然后返回变量地址，返回的指针类型为*T。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">p := new(int) // p, *int 类型, 指向匿名的 int 变量 
+fmt.Println(*p) // &#34;0&#34; 
+*p = 2 // 设置 int 匿名变量的值为 2 
+fmt.Println(*p) // &#34;2&#34;
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="234-变量的生命周期">2.3.4 变量的生命周期</h3>
+<p>变量的生命周期指的是在程序运行期间变量有效存在的时间间隔。</p>
+<p>包一级声明的变量:生命周期和整个程序的运行周期是一致的。</p>
+<p>局部变量的声明周期则是动态的：从每次创建一个新变量的声明语句开始，直到该变量不再被引用为止，然后变量的存储空间可能被回收。函数的参数变量和返回值变量都是局部变量。</p>
+<h2 id="24-赋值">2.4 赋值</h2>
+<h3 id="241-元组赋值">2.4.1 元组赋值</h3>
+<p>元组赋值是另一种形式的赋值语句，它允许同时更新多个变量的值。在赋值之前，赋值语句右边的所有表达式将会先进行求值，然后再统一更新左边对应变量的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">x, y = y, x
+
+a[i], a[j] = a[j], a[i]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="242-可赋值性">2.4.2 可赋值性</h3>
+<p>在赋值语句左边的变量和右边最终的求到的值必须有相同的数据类型。更直白地说，只有右边的值对于左边的变量是可赋值的，赋值语句才是允许的。</p>
+<p>目前来说的规则：</p>
+<p>赋值要求类型必须完全匹配；</p>
+<p>nil可以赋值给任何指针或引用类型的变量。</p>
+<p>常量有更加灵活的赋值规则。</p>
+<h2 id="25-类型">2.5 类型</h2>
+<p>变量或表达式的类型定义了对应存储值的属性特征，例如数值在内存的存储大小（或者是元素的bit个数），它们在内部是如何表达的，是否支持一些操作符，以及它们自己关联的方法集等。</p>
+<p>类型声明语句：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">type 类型名字 底层类型
+</code></pre></td></tr></table>
+</div>
+</div><p>类型声明语句一般出现在包一级，因此如果新创建的类型名字的首字符大写，则在外部包也可以使用。目前中文汉字作为不能导出的类型。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">tempconv</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">type</span> <span class="nx">Celsius</span> <span class="kt">float64</span> <span class="c1">// 摄氏温度 
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fahrenheit</span> <span class="kt">float64</span> <span class="c1">// 华氏温度
+</span><span class="c1"></span>
+<span class="kd">const</span> <span class="p">(</span> 
+    <span class="nx">AbsoluteZeroC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="o">-</span><span class="mf">273.15</span> <span class="c1">// 绝对零度 
+</span><span class="c1"></span>    <span class="nx">FreezingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 结冰点温度 
+</span><span class="c1"></span>    <span class="nx">BoilingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">100</span> <span class="c1">// 沸水温度 )
+</span><span class="c1"></span>
+<span class="kd">func</span> <span class="nf">CToF</span><span class="p">(</span><span class="nx">c</span> <span class="nx">Celsius</span><span class="p">)</span> <span class="nx">Fahrenheit</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Fahrenheit</span><span class="p">(</span><span class="nx">c</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">FToC</span><span class="p">(</span><span class="nx">f</span> <span class="nx">Fahrenheit</span><span class="p">)</span> <span class="nx">Celsius</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Celsius</span><span class="p">((</span><span class="nx">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span> <span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>为什么要像上述代码自定义类型：</p>
+<ul>
+<li>
+<p>为了语义上的考虑，虽然Celsius，Fahrenheit都是float64类型，但是其语义不同，刻意区分类型，可以避免一些像无意中使用不同单位的温度混合计算导致的错误；</p>
+</li>
+<li>
+<p>一个命名的类型可以提供书写方便，特别是可以避免一遍又一遍地书写复杂类型。</p>
+</li>
+<li>
+<p>命名类型还可以为该类型的值定义新的行为。这些行为表示为一组关联到该类型的函数集合，我们称为类型的方法集。</p>
+</li>
+</ul>
+<p>比较运算符==和&lt;也可以用来比较一个命名类型的变量和另一个有相同类型的变量，或有着相同底层类型 的未命名类型的值之间做比较。但是如果两个值有着不同的类型，则不能直接进行比较：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var c Celsius 
+var f Fahrenheit 
+fmt.Println(c == 0) // &#34;true&#34; 
+fmt.Println(f &gt;= 0) // &#34;true&#34; 
+fmt.Println(c == f) // compile error: type mismatch 
+fmt.Println(c == Celsius(f)) // &#34;true&#34;!
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="27-作用域">2.7 作用域</h2>
+<p>作用域和生命周期：</p>
+<p>声明语句的作用域对应的是一个源代码的文本区域；它是一个编译时的属性。</p>
+<p>一个变量的生命周期是指程序运行时变量存在（声明到被回收）的有效时间段，在此时间区域内它可以被程序的其他部分引用；是一个运行时的概念。</p>
+<p><strong>作用域：</strong></p>
+<ul>
+<li>
+<p>语法块内部声明的名字是无法被外部语法块访问的。</p>
+<p>语法块是由花括弧所包含的一系列语句，就像函数体或循环体花括弧对应的语法块那样。</p>
+<p>有一个语法块为整个源代码，称为全局语法块；然后是每个包的包语法决；每个for、if和switch语句的语法决；每个 switch或select的分支也有独立的语法决；当然也包括显式书写的语法块（花括弧包含的语句）。</p>
+</li>
+<li>
+<p>内置的类型、函数和常量，比如int、len和true 等是在全局作用域的，因此可以在整个程序中直接使用。</p>
+</li>
+<li>
+<p>包级声明的可以在一个包中的任何源文件中访问。</p>
+</li>
+<li>
+<p>导入的包，只有当前go文件可用。</p>
+</li>
+<li>
+<p>局部作用域仅局部可用。</p>
+</li>
+</ul>
+<h2 id="28-包的概念">2.8 包的概念</h2>
+<p><strong>声明属于哪个包：package语句</strong></p>
+<p>go语言以包来组织代码，包类似其他语言中的库或者模块。每个包中可以包含多个xxx.go文件，这些go文件的命名没有要求。其内部第一行的<code>packge xxx</code> 代码规定了该文件归属于哪个包。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">{</span>    
+    <span class="s">&#34;fmt&#34;</span>
+    <span class="s">&#34;math/rand&#34;</span>
+    <span class="s">&#34;time&#34;</span>
+
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span> <span class="kt">bool</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">i</span> <span class="kt">int</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span><span class="p">)</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">)</span>
+    <span class="nx">rand</span><span class="p">.</span><span class="nf">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">())</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>对于应用程序（可以运行的程序）来说，必须要有一个main包，main包下可以包含若干个go文件，但是必须有且仅有一个go文件中包含一个main函数，作为程序的入口。</p>
+<p>对于供其他人使用的模块(库)来说，可以没有main包。</p>
+<p><strong>导入包：import 语句</strong></p>
+<p>一个go文件中，以大写字母开头命名的函数称为可导出的函数，也就是可以给外界显示调用；以小写字母开头命名的函数称为不可导出的函数，外界无法调用。此规则适用于（变量、常量、函数、定义类型和类型别名）。</p>
+<p>用<code>import xxx</code>导入一个包后，即可使用其中的资源，使用时需要加上包名<code>xxx.funcA</code>。</p>
+<p>当没有导入需要用到的包或者导入了没有用到的包，go编译器都无法编译通过。</p>
+<p><strong>查找包</strong></p>
+<blockquote>
+<p><a href="https://golang.org/pkg" target="_blank" rel="noopener noreffer">https://golang.org/pkg</a></p>
+</blockquote>
+<blockquote>
+<p><a href="https://godoc.org/" target="_blank" rel="noopener noreffer">https://godoc.org/</a></p>
+</blockquote>
+<p>中可以找到标准库和社区写的包。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-12-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构" data-hashtags="Go"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/" data-title="Go语言基础—2.程序结构"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/" class="prev" rel="prev" title="计算机网络：链路层和局域网"><i class="fas fa-angle-left fa-fw"></i>计算机网络：链路层和局域网</a>
+            <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="next" rel="next" title="Go语言基础—3.基础数据类型">Go语言基础—3.基础数据类型<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

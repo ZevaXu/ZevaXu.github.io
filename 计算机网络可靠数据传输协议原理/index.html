@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>计算机网络：可靠数据传输协议原理 - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="计算机网络：可靠数据传输协议原理" />
+<meta property="og:description" content="可靠数据传输协议原理 构造可靠传输协议 可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。
+其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。
+将发送方称为S，接收方成为R，考虑以上几种情况：
+  一切正常
+S向R发送0号分组，R收到了分组，利用检验和判断分组是否正确，如果正确，R向S发送一个0号分组的ACK确认分组，告诉S已经收到了正确分组。S再向R发送下一个分组1。
+  分组丢失
+S向R发送0号分组，此时S的定时器开始计时，0号分组在传输过程中丢失，R没有收到任何数据，所以也没有向S发送任何确认信号。当计时器停止时，S向R在发送一个0号分组。
+  ACK丢失
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中丢失，当S的定时器停止时，S会再向R发送相同分组，此时R再次收到了相同的分组，开启冗余检测机制，会丢弃冗余的分组。
+  过早超时
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中超时，S又发了一个相同的分组给R，之后S收到该上一个分组ACK，但是它什么也不做。
+  流水线可靠数据传输协议 如果采取“可靠数据传输协议”：接收一个分组，等待一个ACK到达后，再发送下一个分组的方式，发送发大部分时间都处于等待中，会带来有效吞吐量小，发送方利用率低的缺陷。
+引入流水线技术有助于解决这种缺陷。即不以停等的方式运行，允许发送方发送多个分组而无须等待确认。
+这样的技术提出如下几个要求：
+ 增加序号的范围，每个分组必须有一个唯一的序号，有多个再输送中而未被确认的分组 发送方和接收方两端需要缓存多个分组。发送方最低限度要缓存那些已经发送但没有确认的分组。  解决流水线的差错恢复有两种基本方法：回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)
+GBN(回退N步) 窗口长度N由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。
+一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。
+GBN的运行过程如下图：
+发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。
+例如发送方批量发送了0—4号分组，其中3号分组丢失。
+对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；
+对于接收方：它收到了0、1、2号分组，每收到一个就发送该分组的ACK。由于未收到3号分组，它接收到4号分组后，把4号分组丢弃，再发送上一个正确分组的ACK，即2号ACK。直到接收到3号分组为止。
+GBN协议允许发送方用多个分组填充流水线，因此避免了停等协议中的信道利用率问题，使用到了序号、累计确认、检验和、超时重传操作等技术。
+选择重传 GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。
+选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。
+分组重新排序问题：
+分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。
+当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。
+解决：
+确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" /><meta property="og:image" content="https://i.imgur.com/ND6oMFz.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-11-04T12:29:26+08:00" />
+<meta property="article:modified_time" content="2021-11-04T12:29:26+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://i.imgur.com/ND6oMFz.png"/>
+
+<meta name="twitter:title" content="计算机网络：可靠数据传输协议原理"/>
+<meta name="twitter:description" content="可靠数据传输协议原理 构造可靠传输协议 可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。
+其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。
+将发送方称为S，接收方成为R，考虑以上几种情况：
+  一切正常
+S向R发送0号分组，R收到了分组，利用检验和判断分组是否正确，如果正确，R向S发送一个0号分组的ACK确认分组，告诉S已经收到了正确分组。S再向R发送下一个分组1。
+  分组丢失
+S向R发送0号分组，此时S的定时器开始计时，0号分组在传输过程中丢失，R没有收到任何数据，所以也没有向S发送任何确认信号。当计时器停止时，S向R在发送一个0号分组。
+  ACK丢失
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中丢失，当S的定时器停止时，S会再向R发送相同分组，此时R再次收到了相同的分组，开启冗余检测机制，会丢弃冗余的分组。
+  过早超时
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中超时，S又发了一个相同的分组给R，之后S收到该上一个分组ACK，但是它什么也不做。
+  流水线可靠数据传输协议 如果采取“可靠数据传输协议”：接收一个分组，等待一个ACK到达后，再发送下一个分组的方式，发送发大部分时间都处于等待中，会带来有效吞吐量小，发送方利用率低的缺陷。
+引入流水线技术有助于解决这种缺陷。即不以停等的方式运行，允许发送方发送多个分组而无须等待确认。
+这样的技术提出如下几个要求：
+ 增加序号的范围，每个分组必须有一个唯一的序号，有多个再输送中而未被确认的分组 发送方和接收方两端需要缓存多个分组。发送方最低限度要缓存那些已经发送但没有确认的分组。  解决流水线的差错恢复有两种基本方法：回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)
+GBN(回退N步) 窗口长度N由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。
+一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。
+GBN的运行过程如下图：
+发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。
+例如发送方批量发送了0—4号分组，其中3号分组丢失。
+对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；
+对于接收方：它收到了0、1、2号分组，每收到一个就发送该分组的ACK。由于未收到3号分组，它接收到4号分组后，把4号分组丢弃，再发送上一个正确分组的ACK，即2号ACK。直到接收到3号分组为止。
+GBN协议允许发送方用多个分组填充流水线，因此避免了停等协议中的信道利用率问题，使用到了序号、累计确认、检验和、超时重传操作等技术。
+选择重传 GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。
+选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。
+分组重新排序问题：
+分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。
+当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。
+解决：
+确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" /><link rel="prev" href="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/" /><link rel="next" href="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "计算机网络：可靠数据传输协议原理",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86\/"
+        },"genre": "posts","keywords": "计算机网络","wordcount":  39 ,
+        "url": "https:\/\/ZevaXu.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86\/","datePublished": "2021-11-04T12:29:26+08:00","dateModified": "2021-11-04T12:29:26+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">计算机网络：可靠数据传输协议原理</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notebook/"><i class="far fa-folder fa-fw"></i>NoteBook</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-04">2021-11-04</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;39 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#构造可靠传输协议">构造可靠传输协议</a></li>
+    <li><a href="#流水线可靠数据传输协议">流水线可靠数据传输协议</a>
+      <ul>
+        <li><a href="#gbn回退n步">GBN(回退N步)</a></li>
+        <li><a href="#选择重传">选择重传</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="可靠数据传输协议原理">可靠数据传输协议原理</h1>
+<h2 id="构造可靠传输协议">构造可靠传输协议</h2>
+<p>可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。</p>
+<p>其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。</p>
+<img title="" src="https://i.imgur.com/QqZzMDd.jpg" alt="QqZzMDd" data-align="center" width="384">
+<p>将发送方称为S，接收方成为R，考虑以上几种情况：</p>
+<ol>
+<li>
+<p><strong>一切正常</strong></p>
+<p>S向R发送0号分组，R收到了分组，利用检验和判断分组是否正确，如果正确，R向S发送一个0号分组的ACK确认分组，告诉S已经收到了正确分组。S再向R发送下一个分组1。</p>
+</li>
+<li>
+<p><strong>分组丢失</strong></p>
+<p>S向R发送0号分组，此时S的定时器开始计时，0号分组在传输过程中丢失，R没有收到任何数据，所以也没有向S发送任何确认信号。当计时器停止时，S向R在发送一个0号分组。</p>
+</li>
+<li>
+<p><strong>ACK丢失</strong></p>
+<p>S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中丢失，当S的定时器停止时，S会再向R发送相同分组，此时R再次收到了相同的分组，开启冗余检测机制，会丢弃冗余的分组。</p>
+</li>
+<li>
+<p><strong>过早超时</strong></p>
+<p>S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中超时，S又发了一个相同的分组给R，之后S收到该上一个分组ACK，但是它什么也不做。</p>
+</li>
+</ol>
+<h2 id="流水线可靠数据传输协议">流水线可靠数据传输协议</h2>
+<p>如果采取“可靠数据传输协议”：接收一个分组，等待一个ACK到达后，再发送下一个分组的方式，发送发大部分时间都处于等待中，会带来有效吞吐量小，发送方利用率低的缺陷。</p>
+<p>引入流水线技术有助于解决这种缺陷。即不以停等的方式运行，允许发送方发送多个分组而无须等待确认。</p>
+<p>这样的技术提出如下几个要求：</p>
+<ol>
+<li><strong>增加序号的范围</strong>，每个分组必须有一个唯一的序号，有多个再输送中而未被确认的分组</li>
+<li><strong>发送方和接收方两端需要缓存多个分组</strong>。发送方最低限度要缓存那些已经发送但没有确认的分组。</li>
+</ol>
+<p>解决流水线的差错恢复有两种基本方法：<strong>回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)</strong></p>
+<h3 id="gbn回退n步">GBN(回退N步)</h3>
+<img src="https://i.imgur.com/V542oJZ.jpg" title="" alt="V542oJZ" data-align="center">
+<p><strong>窗口长度N</strong>由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。</p>
+<p>一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。</p>
+<p>GBN的运行过程如下图：</p>
+<img title="" src="https://i.imgur.com/5RrU2FL.jpg" alt="5RrU2FL" data-align="center" width="391">
+<p>发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。</p>
+<p>例如发送方批量发送了0—4号分组，其中3号分组丢失。</p>
+<p>对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；</p>
+<p>对于接收方：它收到了0、1、2号分组，每收到一个就发送该分组的ACK。由于未收到3号分组，它接收到4号分组后，把4号分组丢弃，再发送上一个正确分组的ACK，即2号ACK。直到接收到3号分组为止。</p>
+<p>GBN协议允许发送方用多个分组填充流水线，因此避免了停等协议中的信道利用率问题，使用到了序号、累计确认、检验和、超时重传操作等技术。</p>
+<h3 id="选择重传">选择重传</h3>
+<p>GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。</p>
+<p>选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。</p>
+<img src="https://i.imgur.com/in15Xwu.jpg" title="" alt="in15Xwu" data-align="center">
+<img title="" src="https://i.imgur.com/vnS3xcf.jpg" alt="vnS3xcf" data-align="center" width="465">
+<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvw5ud5c32j316u0km434.jpg" title="" alt="" data-align="center">
+<p><strong>分组重新排序问题：</strong></p>
+<p>分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。</p>
+<p>当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。</p>
+<p>解决：</p>
+<p>确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-11-04</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理" data-hashtags="计算机网络"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-hashtag="计算机网络"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/" data-title="计算机网络：可靠数据传输协议原理"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/" class="prev" rel="prev" title="计算机网络: 面向连接的传输-TCP"><i class="fas fa-angle-left fa-fw"></i>计算机网络: 面向连接的传输-TCP</a>
+            <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/" class="next" rel="next" title="计算机网络：网络层协议">计算机网络：网络层协议<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
