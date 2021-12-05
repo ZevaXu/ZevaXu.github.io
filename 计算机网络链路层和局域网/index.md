@@ -7,7 +7,7 @@
 
 在本章中，将运行链路层协议的任何设备称为节点，节点包括主机、路由器、交换机和wifi接入点。把沿着通信路径连接相邻的通信信道称为链路。
 
-<img title="" src="https://i.imgur.com/7ARQvpg.png" alt="7ARQvpg" data-align="center" width="471">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-HmOL3l.png" alt="20211205-1242-HmOL3l" data-align="center" width="439">
 
 该数据报将实际通过6段链路：发送主机与WiFi接入点之间的WiFi链路，接入点和链路层交换机之间的以太网链路，链路层交换机与路由器之间的链路，两台路由器之间的链路，最后是交换机和服务器之间的以太网链路。在通过特定的链路时，传 输节点将数据报封装在链路层帧中，并将该帧传送到链路中。
 
@@ -57,7 +57,7 @@ ARP表：
 
 每个主机和路由器在内存中都有一个ARP表，该表包含了IP地址到MAC地址的转换，每条记录都有一个生存时期（一般20分钟），ARP表不一定记录了局域网内所有主机IP和MAC的条目。
 
-![bl6pV0t](https://i.imgur.com/bl6pV0t.png)
+![20211205-1242-2YZmzt](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png)
 
 当ARP表中没有目的主机对应的MAC地址时：
 
@@ -74,7 +74,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 #### 发送数据报到子网以外
 
-![TxJsboP](https://i.imgur.com/TxJsboP.png)
+![20211205-1243-xlMZUR](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png)
 
 右上角主机A向右下角主机B发送数据。
 
@@ -93,7 +93,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 #### 1. 以太网帧结构
 
-​ ![qBaU0A7](https://i.imgur.com/qBaU0A7.png)
+​ ![20211205-1243-7kzTr4](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png)
 
 - 数据(46~1500字节)：承载IP数据报。MTU（最大传输单元），一般为1500字节，如果IP数据报超过1500，主机必须将数据报分片；最小为46字节，如果小于46字节，数据报必须被填充到46字节（利用IP数据报中长度字节去除填充部分）。
 - 目的地址(6字节)：目的适配器的MAC地址。当目的适配器收到一个以太网帧，当该帧中的目的地址是自身地址或者是广播地址时，该适配器将帧的数据字段内容传给网络层；当收到其他MAC地址的帧，丢弃之。
@@ -113,7 +113,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 在演化过程中，初始的以太网MAC协议和帧格式被保留了下来。
 
-![4bN0gZs](https://i.imgur.com/4bN0gZs.png)
+![20211205-1243-1TBTEL](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png)
 
 ### 6.4.3 链路层交换机
 
@@ -131,7 +131,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 交换机表包含某个局域网上某些主机和路由器的非全部的表项。如下
 
-![OAQuDjg](https://i.imgur.com/OAQuDjg.png)
+![20211205-1243-yP7GpB](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png)
 
 假定目的地址为DD-DD-DD-DD-DD-DD的 帧从交换机接口x到达。交换机用MAC地址DD-DD-DD-DD-DD-DD索引它的表。
 
@@ -176,14 +176,15 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 - 非即插即用，需要人为配置IP地址
 - 每个分组处理时间比交换机长
 
-| ![OiVwe6l](https://i.imgur.com/OiVwe6l.png) | ![q6wm75W](https://i.imgur.com/q6wm75W.png) |
-| ------------------------------------------- | ------------------------------------------- |
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1244-j78i60.png" alt="20211205-1244-j78i60" width="524" data-align="center">
+
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-SZMAfk.png" alt="20211205-1245-SZMAfk" data-align="center" width="517">
 
 ### 6.4.4 虚拟局域网
 
 虚拟局域网：VLAN，支持VLAN的交换机允许经一个单一的物理局域网 基础设施定义多个虚拟局域网。在一个VLAN内的主机彼此通信，仿佛它们（并且没有其他主机）与交换机连接。
 
-<img title="" src="https://i.imgur.com/wuT5bmu.png" alt="wuT5bmu" width="384" data-align="center">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-vyW1CV.png" alt="20211205-1245-vyW1CV" data-align="center" width="489">
 
 如上图，电子工程系流量如何发送到计算机科学系呢？
 
@@ -191,7 +192,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 2. VLAN干线连接
    
-   <img title="" src="https://i.imgur.com/gf6SDSc.png" alt="gf6SDSc" data-align="center" width="475">
+   <img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-z05SQU.png" alt="20211205-1245-z05SQU" data-align="center" width="489">
    
    每台交换机上的一个特殊端口（左侧交换机上的端口 16,右侧交换机上的端口 1）被配置为干线端口，以互联这两台VLAN交换机。
    
@@ -205,7 +206,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 
 数据中心网络设计是互联网络和协议设计的艺术，该艺术专注与机架彼此连接和与边界路由器相连接。
 
-<img title="" src="https://i.imgur.com/NtlLYBG.png" alt="NtlLYBG" data-align="center" width="519">#### 1. 负载均衡
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1246-3TgdWA.png" alt="20211205-1246-3TgdWA" data-align="center" width="515">
 
 在数据中心内部, 外部请求首先被定向到一个负载均衡器（load balancer）。负载均衡器的任务是向主机分发 请求，以主机当前的负载作为函数来在主机之间均衡负载。
 

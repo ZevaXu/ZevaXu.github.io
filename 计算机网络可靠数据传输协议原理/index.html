@@ -186,7 +186,7 @@ GBN协议允许发送方用多个分组填充流水线，因此避免了停等�
 <h2 id="构造可靠传输协议">构造可靠传输协议</h2>
 <p>可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。</p>
 <p>其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。</p>
-<img title="" src="https://i.imgur.com/QqZzMDd.jpg" alt="QqZzMDd" data-align="center" width="384">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-ornurh.png" alt="20211205-1234-ornurh" data-align="center" width="349">
 <p>将发送方称为S，接收方成为R，考虑以上几种情况：</p>
 <ol>
 <li>
@@ -216,11 +216,18 @@ GBN协议允许发送方用多个分组填充流水线，因此避免了停等�
 </ol>
 <p>解决流水线的差错恢复有两种基本方法：<strong>回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)</strong></p>
 <h3 id="gbn回退n步">GBN(回退N步)</h3>
-<img src="https://i.imgur.com/V542oJZ.jpg" title="" alt="V542oJZ" data-align="center">
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png"
+        title="20211205-1234-IgnLm0" /></p>
 <p><strong>窗口长度N</strong>由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。</p>
 <p>一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。</p>
 <p>GBN的运行过程如下图：</p>
-<img title="" src="https://i.imgur.com/5RrU2FL.jpg" alt="5RrU2FL" data-align="center" width="391">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-V0YovJ.png" alt="20211205-1234-V0YovJ" data-align="center" width="343">
 <p>发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。</p>
 <p>例如发送方批量发送了0—4号分组，其中3号分组丢失。</p>
 <p>对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；</p>
@@ -229,9 +236,23 @@ GBN协议允许发送方用多个分组填充流水线，因此避免了停等�
 <h3 id="选择重传">选择重传</h3>
 <p>GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。</p>
 <p>选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。</p>
-<img src="https://i.imgur.com/in15Xwu.jpg" title="" alt="in15Xwu" data-align="center">
-<img title="" src="https://i.imgur.com/vnS3xcf.jpg" alt="vnS3xcf" data-align="center" width="465">
-<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvw5ud5c32j316u0km434.jpg" title="" alt="" data-align="center">
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png"
+        title="20211205-1235-w4m4aw" /></p>
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-kE7LAx.png" alt="20211205-1235-kE7LAx" data-align="center" width="491">
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png"
+        title="20211205-1236-sDXSrd" /></p>
 <p><strong>分组重新排序问题：</strong></p>
 <p>分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。</p>
 <p>当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。</p>

@@ -9,11 +9,11 @@
 
 - 不能使用go关键字来命名。
   
-  ![NAyObwoSjYhXeHF](https://i.loli.net/2021/12/01/NAyObwoSjYhXeHF.png)
+  ![20211205-1218-1SIOZY](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1218-1SIOZY.png)
 
 - 不推荐使用go预定义名字命名。
   
-  ![OtC9Tj31aHfs5An](https://i.loli.net/2021/12/01/OtC9Tj31aHfs5An.png)
+  ![20211205-1219-VBrR0X](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1219-VBrR0X.png)
 
 - 习惯用驼峰命名法。
 

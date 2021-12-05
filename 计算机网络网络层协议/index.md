@@ -27,11 +27,11 @@
 
 ### 5.2.2 距离向量路由选择算法
 
-![bSMhkzI](https://i.imgur.com/bSMhkzI.png)
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1237-lBq87L.png" alt="20211205-1237-lBq87L" data-align="center" width="571">
 
-![pLWMUeP](https://i.imgur.com/pLWMUeP.png)
+![20211205-1237-DfyZsn](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1237-DfyZsn.png)
 
-![LO4SLaQ](https://i.imgur.com/LO4SLaQ.png)
+![20211205-1237-zVdU7z](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1237-zVdU7z.png)
 
 ## 5.3 因特网中自治系统内部的路由选择:**OSPF**
 
@@ -60,7 +60,7 @@ OSPF是一种链路状态协议，它使用洪泛链路状态信息和Dijkstra�
 
 4. 支持在单个AS中的层次结构。一个OSPF自治系统能够层次化地配置多个区域。 每个区域都运行自己的OSPF链路状态路由选择算法，区域内的每台路由器都向该区域内的所有其他路由器广播其链路状态。
    
-   ![z74TcGt](https://i.imgur.com/z74TcGt.png)
+   <img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1238-oo5W6X.png" title="" alt="20211205-1238-oo5W6X" data-align="center">
    
    **区边界路由器**：即在子区中，又在主干网络区中。“汇总” 到达所在区网络的距离, 通告给其他区边界路由器。
    
@@ -72,19 +72,19 @@ OSPF是一种链路状态协议，它使用洪泛链路状态信息和Dijkstra�
 
 BGP(Broder Bateway Protocal)：边界网关协议。
 
-![e5aPMzO](https://i.imgur.com/e5aPMzO.png)
+![20211205-1238-xMGrhH](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1238-xMGrhH.png)
 
-![D12iERm](https://i.imgur.com/D12iERm.png)
+![20211205-1238-V3oJY8](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1238-V3oJY8.png)
 
-![OD6gxKj](https://i.imgur.com/OD6gxKj.png)
+![20211205-1239-hjJ6nt](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1239-hjJ6nt.png)
 
-![X3vQxyA](https://i.imgur.com/X3vQxyA.png)
+![20211205-1239-Gtamfd](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1239-Gtamfd.png)
 
-![frOiLpG](https://i.imgur.com/frOiLpG.png)
+![20211205-1240-ebizaR](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1240-ebizaR.png)
 
-![nl1VFjQ](https://i.imgur.com/nl1VFjQ.png)
+![20211205-1240-9Gxujm](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1240-9Gxujm.png)
 
-![HTNKaJy](https://i.imgur.com/HTNKaJy.png)
+![20211205-1241-VHOxQk](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1241-VHOxQk.png)
 
 #### **热土豆路由选择依据的思想**
 
@@ -100,7 +100,7 @@ ICMP，被主机和路由器用来彼此沟通网络层的信息，典型的用�
 
 ICMP报文是作为IP有效承载的，就像TCP和UDP报文段作为IP有效承载那样。ICMP有一个类型字段和一个编码字段，并且包含引起该IP数据报的首部和前8个字节。
 
-![5psvkXj](https://i.imgur.com/5psvkXj.png)
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1241-4Zgvvz.png" alt="20211205-1241-4Zgvvz" data-align="center" width="519">
 
 Ping：ping程序发送一个ICMP类型8编码0的报文到指定主机，看到回显请求，目的主机发回一个类型0编码0的ICMP报文。
 

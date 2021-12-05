@@ -3,15 +3,13 @@
 
 # 可靠数据传输协议原理
 
-
-
 ## 构造可靠传输协议
 
 可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。
 
 其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。
 
-<img title="" src="https://i.imgur.com/QqZzMDd.jpg" alt="QqZzMDd" data-align="center" width="384">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-ornurh.png" alt="20211205-1234-ornurh" data-align="center" width="349">
 
 将发送方称为S，接收方成为R，考虑以上几种情况：
 
@@ -46,7 +44,7 @@
 
 ### GBN(回退N步)
 
-<img src="https://i.imgur.com/V542oJZ.jpg" title="" alt="V542oJZ" data-align="center">
+![20211205-1234-IgnLm0](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-IgnLm0.png)
 
 **窗口长度N**由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。
 
@@ -54,7 +52,7 @@
 
 GBN的运行过程如下图：
 
-<img title="" src="https://i.imgur.com/5RrU2FL.jpg" alt="5RrU2FL" data-align="center" width="391">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1234-V0YovJ.png" alt="20211205-1234-V0YovJ" data-align="center" width="343">
 
 发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。
 
@@ -72,11 +70,11 @@ GBN协议也存在一些性能问题，当窗口长度和传输时延过大时�
 
 选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。
 
-<img src="https://i.imgur.com/in15Xwu.jpg" title="" alt="in15Xwu" data-align="center">
+![20211205-1235-w4m4aw](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-w4m4aw.png)
 
-<img title="" src="https://i.imgur.com/vnS3xcf.jpg" alt="vnS3xcf" data-align="center" width="465">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1235-kE7LAx.png" alt="20211205-1235-kE7LAx" data-align="center" width="491">
 
-<img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvw5ud5c32j316u0km434.jpg" title="" alt="" data-align="center">
+![20211205-1236-sDXSrd](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1236-sDXSrd.png)
 
 **分组重新排序问题：**
 

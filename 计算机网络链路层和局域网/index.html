@@ -87,7 +87,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ZevaXu.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91\/"
-        },"genre": "posts","keywords": "计算机网络","wordcount":  161 ,
+        },"genre": "posts","keywords": "计算机网络","wordcount":  158 ,
         "url": "https:\/\/ZevaXu.github.io\/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91\/","datePublished": "2021-11-23T13:29:32+08:00","dateModified": "2021-11-23T13:29:32+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -164,7 +164,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">计算机网络：链路层和局域网</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/notebook/"><i class="far fa-folder fa-fw"></i>NoteBook</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-23">2021-11-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;161 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-11-23">2021-11-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;158 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;One minute&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="true">
                 <div class="details-summary toc-title">
@@ -218,7 +218,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
             </div><div class="content" id="content"><h1 id="链路层和局域网">链路层和局域网</h1>
 <h2 id="61-链路层概述">6.1 链路层概述</h2>
 <p>在本章中，将运行链路层协议的任何设备称为节点，节点包括主机、路由器、交换机和wifi接入点。把沿着通信路径连接相邻的通信信道称为链路。</p>
-<img title="" src="https://i.imgur.com/7ARQvpg.png" alt="7ARQvpg" data-align="center" width="471">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-HmOL3l.png" alt="20211205-1242-HmOL3l" data-align="center" width="439">
 <p>该数据报将实际通过6段链路：发送主机与WiFi接入点之间的WiFi链路，接入点和链路层交换机之间的以太网链路，链路层交换机与路由器之间的链路，两台路由器之间的链路，最后是交换机和服务器之间的以太网链路。在通过特定的链路时，传 输节点将数据报封装在链路层帧中，并将该帧传送到链路中。</p>
 <p>注意到这3段运输是由不同的公司管理，使用了完全不同的运输方式（豪华大轿车、飞机和火车）。尽管运输方式不同，但它们都提供了将旅客从一个地点运输到相邻地点的基本服务。在这个运输类比中，一个游客好比一个数据报，每个运输区段好比一条链路，每种运输方式好比一种链路层协议，而该旅行社好比一个路由选择协议。</p>
 <h3 id="611-链路层提供的服务">6.1.1 链路层提供的服务</h3>
@@ -246,11 +246,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/bl6pV0t.png"
-        data-srcset="https://i.imgur.com/bl6pV0t.png, https://i.imgur.com/bl6pV0t.png 1.5x, https://i.imgur.com/bl6pV0t.png 2x"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png 2x"
         data-sizes="auto"
-        alt="https://i.imgur.com/bl6pV0t.png"
-        title="bl6pV0t" /></p>
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1242-2YZmzt.png"
+        title="20211205-1242-2YZmzt" /></p>
 <p>当ARP表中没有目的主机对应的MAC地址时：</p>
 <ul>
 <li>源主机向适配器传递一个包含MAC广播地址的ARP查询分组</li>
@@ -265,11 +265,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/TxJsboP.png"
-        data-srcset="https://i.imgur.com/TxJsboP.png, https://i.imgur.com/TxJsboP.png 1.5x, https://i.imgur.com/TxJsboP.png 2x"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png 2x"
         data-sizes="auto"
-        alt="https://i.imgur.com/TxJsboP.png"
-        title="TxJsboP" /></p>
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-xlMZUR.png"
+        title="20211205-1243-xlMZUR" /></p>
 <p>右上角主机A向右下角主机B发送数据。</p>
 <ul>
 <li>A发送的数据报携带B的IP地址和路由器的MAC地址</li>
@@ -284,11 +284,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p>​ <img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/qBaU0A7.png"
-        data-srcset="https://i.imgur.com/qBaU0A7.png, https://i.imgur.com/qBaU0A7.png 1.5x, https://i.imgur.com/qBaU0A7.png 2x"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png 2x"
         data-sizes="auto"
-        alt="https://i.imgur.com/qBaU0A7.png"
-        title="qBaU0A7" /></p>
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-7kzTr4.png"
+        title="20211205-1243-7kzTr4" /></p>
 <ul>
 <li>数据(46~1500字节)：承载IP数据报。MTU（最大传输单元），一般为1500字节，如果IP数据报超过1500，主机必须将数据报分片；最小为46字节，如果小于46字节，数据报必须被填充到46字节（利用IP数据报中长度字节去除填充部分）。</li>
 <li>目的地址(6字节)：目的适配器的MAC地址。当目的适配器收到一个以太网帧，当该帧中的目的地址是自身地址或者是广播地址时，该适配器将帧的数据字段内容传给网络层；当收到其他MAC地址的帧，丢弃之。</li>
@@ -308,11 +308,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/4bN0gZs.png"
-        data-srcset="https://i.imgur.com/4bN0gZs.png, https://i.imgur.com/4bN0gZs.png 1.5x, https://i.imgur.com/4bN0gZs.png 2x"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png 2x"
         data-sizes="auto"
-        alt="https://i.imgur.com/4bN0gZs.png"
-        title="4bN0gZs" /></p>
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-1TBTEL.png"
+        title="20211205-1243-1TBTEL" /></p>
 <h3 id="643-链路层交换机">6.4.3 链路层交换机</h3>
 <p>交换机的任务时接收入链路层帧，并将它们转发到出链路，交换机对于子网中的主机和路由器是透明的。</p>
 <h4 id="1-交换机转发和过滤">1 交换机转发和过滤</h4>
@@ -324,11 +324,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/OAQuDjg.png"
-        data-srcset="https://i.imgur.com/OAQuDjg.png, https://i.imgur.com/OAQuDjg.png 1.5x, https://i.imgur.com/OAQuDjg.png 2x"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png 2x"
         data-sizes="auto"
-        alt="https://i.imgur.com/OAQuDjg.png"
-        title="OAQuDjg" /></p>
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1243-yP7GpB.png"
+        title="20211205-1243-yP7GpB" /></p>
 <p>假定目的地址为DD-DD-DD-DD-DD-DD的 帧从交换机接口x到达。交换机用MAC地址DD-DD-DD-DD-DD-DD索引它的表。</p>
 <ul>
 <li>如果找不到目的MAC地址，交换机则广播该帧。</li>
@@ -366,31 +366,11 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <li>非即插即用，需要人为配置IP地址</li>
 <li>每个分组处理时间比交换机长</li>
 </ul>
-<table>
-<thead>
-<tr>
-<th><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/OiVwe6l.png"
-        data-srcset="https://i.imgur.com/OiVwe6l.png, https://i.imgur.com/OiVwe6l.png 1.5x, https://i.imgur.com/OiVwe6l.png 2x"
-        data-sizes="auto"
-        alt="https://i.imgur.com/OiVwe6l.png"
-        title="OiVwe6l" /></th>
-<th><img
-        class="lazyload"
-        src="/svg/loading.min.svg"
-        data-src="https://i.imgur.com/q6wm75W.png"
-        data-srcset="https://i.imgur.com/q6wm75W.png, https://i.imgur.com/q6wm75W.png 1.5x, https://i.imgur.com/q6wm75W.png 2x"
-        data-sizes="auto"
-        alt="https://i.imgur.com/q6wm75W.png"
-        title="q6wm75W" /></th>
-</tr>
-</thead>
-</table>
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1244-j78i60.png" alt="20211205-1244-j78i60" width="524" data-align="center">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-SZMAfk.png" alt="20211205-1245-SZMAfk" data-align="center" width="517">
 <h3 id="644-虚拟局域网">6.4.4 虚拟局域网</h3>
 <p>虚拟局域网：VLAN，支持VLAN的交换机允许经一个单一的物理局域网 基础设施定义多个虚拟局域网。在一个VLAN内的主机彼此通信，仿佛它们（并且没有其他主机）与交换机连接。</p>
-<img title="" src="https://i.imgur.com/wuT5bmu.png" alt="wuT5bmu" width="384" data-align="center">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-vyW1CV.png" alt="20211205-1245-vyW1CV" data-align="center" width="489">
 <p>如上图，电子工程系流量如何发送到计算机科学系呢？</p>
 <ol>
 <li>
@@ -398,7 +378,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 </li>
 <li>
 <p>VLAN干线连接</p>
-<img title="" src="https://i.imgur.com/gf6SDSc.png" alt="gf6SDSc" data-align="center" width="475">
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1245-z05SQU.png" alt="20211205-1245-z05SQU" data-align="center" width="489">
 <p>每台交换机上的一个特殊端口（左侧交换机上的端口 16,右侧交换机上的端口 1）被配置为干线端口，以互联这两台VLAN交换机。</p>
 <p>由标准以太网帧与加进首部的4字节VLAN标签（VLAN tag）组成，而VLAN 标承载着该帧所属的VLAN标识符。</p>
 </li>
@@ -407,7 +387,7 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 <p>每个数据中心都容纳了数万至数十万台主机, 并且同时支持着很多不同的云应用（例如搜索、电子邮件、社交网络和电子商务）。每个数据中心都有自己的数据中心网络（data center network）,这些数据中心网络将其内部主机彼此互联并与因特网中的数据中心互联。</p>
 <p>数据中心中的主机称为刀片（blade）,与比萨饼盒类似，一般是包括CPU、内存和磁盘存储的商 用主机。主机被堆叠在机架上，每个机架一般堆放20-40台刀片。在每一个机架顶部有一台交换机，这台交换机被形象地称为机架顶部（Top of Rack, TOR）交换机，它们与机架上的主机互联，并与数据中心中的其他交换机互联。具体来说，机架上的每台主机都有一块与TOR交换机连接的网卡，每台TOR交换机有额外的端口能够与其他TOR交换机连接。</p>
 <p>数据中心网络设计是互联网络和协议设计的艺术，该艺术专注与机架彼此连接和与边界路由器相连接。</p>
-<p><img title="" src="https://i.imgur.com/NtlLYBG.png" alt="NtlLYBG" data-align="center" width="519">#### 1. 负载均衡</p>
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1246-3TgdWA.png" alt="20211205-1246-3TgdWA" data-align="center" width="515">
 <p>在数据中心内部, 外部请求首先被定向到一个负载均衡器（load balancer）。负载均衡器的任务是向主机分发 请求，以主机当前的负载作为函数来在主机之间均衡负载。</p>
 <ul>
 <li>负载均衡器基于分组的目的端口号和目的IP地址做出决策，将客户的请求打到某一台主机。</li>

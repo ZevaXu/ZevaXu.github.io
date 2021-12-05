@@ -107,13 +107,13 @@ fmt.Println("后来: %d\n", len(s)) //9
 
 ### 3.5.1 字符串字面值
 
-![azsnElcuTRf6xUG](https://i.loli.net/2021/12/02/azsnElcuTRf6xUG.png)
+![20211205-1219-KzNpDz](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1219-KzNpDz.png)
 
 Go语言源文件总是用UTF8编码，并且Go语言的文本字符串也以UTF8编码的方式处理，因此我们可以将Unicode码点也写到字符串面值中。
 
 **常用转义字符：**
 
-![kX1Tqda587FtbVE](https://i.loli.net/2021/12/02/kX1Tqda587FtbVE.png)
+<img title="" src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1220-j0cQQC.png" alt="20211205-1220-j0cQQC" width="444" data-align="center">
 
 ### 3.5.2 Unicode
 
@@ -127,11 +127,11 @@ UTF8是一个将Unicode码点编码为字节序列的变长编码。现在已经
 
 UTF8编码使用1到4个字节来表示每个Unicode码点，ASCII字符只使用1个字节，常用字符部分使用2或3个字节表示。每个符号编码后第一个字节的高端bit位用于 表示总共有多少编码个字节。如果第一个字节的高端bit为0，则表示对应7bit的ASCII字符，ASCII字符 每个字符依然是一个字节，和传统的ASCII编码兼容。如果第一个字节的高端bit是110，则说明需要2个字节；后续的每个高端bit都以10开头。
 
-![HyFULAZaT8Cxm7P](https://i.loli.net/2021/12/02/HyFULAZaT8Cxm7P.png)
+![20211205-1220-B3mWLu](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1220-B3mWLu.png)
 
 Go语言的源文件采用UTF8编码，并且Go语言处理UTF8编码的文本也很出色。
 
-![ZanuX4txHJBeT6q](https://i.loli.net/2021/12/02/ZanuX4txHJBeT6q.png)
+![20211205-1221-jPWKcC](https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1221-jPWKcC.png)
 
 ```
 s := "你好，不好也好" 
