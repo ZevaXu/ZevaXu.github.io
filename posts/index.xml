@@ -3,7 +3,40 @@
         <title>All Posts - Zeva`s Space</title>
         <link>https://ZevaXu.github.io/posts/</link>
         <description>All Posts | Zeva`s Space</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 16 Dec 2021 14:03:15 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Thu, 16 Dec 2021 19:21:04 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>计算机网络: 无线网络和移动网络</title>
+    <link>https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/</link>
+    <pubDate>Thu, 16 Dec 2021 19:21:04 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/</guid>
+    <description><![CDATA[7.1 概述 无线网络中的要素：
+ 无线主机。可能移动、可能不动。 无线链路。主机通过无线通信链路连接到一个基站或者另外一个主机。 基站。负责向与之关联的无线主机发送数据和从主机那接收数据，协调与之相关联的多个无线主机的传输。如蜂窝塔、LAN接入点。 网络基础设施  7.2 无线链路和网络特征 有线网络和无线网络的重要区别主要在链路层，如：
+ 递减的信号强度。电磁波在穿过物体和随之距离增加会减弱（路径损耗）。 来自其他源的干扰。同一个频段下发送信号的电波源将相互干扰。 多径传播。当电磁波的一部分受物体和地面反射，在发送方和接收方之间走了不同长度的路径，回造成信号模糊。  所以，无线链路中的比特差错比有线链路中更为常见。
+信噪比(Signal-to-Noise,SNR)：所收到的信号和噪声强度的相对测量（越大越好）。
+比特差错率(BER)：收到的有错传输比特的概率。
+  当调制方案一定，SNR越高，BER越低。发送方通过增加发送功率可以提高SNR，但是当功率超过一定阈值时，不会有显著效果。
+  给定SNR，具有较高比特传输率的调制技术将具有较高的BER。
+  物理层调制技术的动态选择能用于适配对信道条件的调制技术。
+  CDMA 码分多址，多址技术的一种，用于一个基站同多个用户传输数据。
+时分多址TDMA：也是一种多址技术，将时间分为不同的时间片，每个时间片与一个用户通信。（GSM中使用）
+频分多址FDMA：按照频率的不同与多个用户通信。
+CDMA比方：
+让聚会的客人使用多种语言谈论，人们实际上非常善于锁定他们能听懂的语言，而过滤其他的谈话。
+7.3 WI-FI：802.11 无线LAN 7.3.1 协议及信道与关联 WI-FI协议簇下有几套不同的标准。它们都适用相同的媒体访问协议CSMA/CA、链路层帧使用相同的帧结构、向后兼容（旧设备可以支持新协议）。
+2.4GHz：2.4～2.458GHz频段，无须执照的频道
+5GHz：5.1～5.8GHz频段
+安装一个AP时，需要分配一个SSID和一个信道号。
+SSID：一个AP的服务集标志符号，代表着不同的WI-FI信号。
+信道号：在一个频段范围内，不同的信道（2.4GHz频段内就有11个信道，其中有部分是重叠的，仅当两个信道相互隔着4个其他信道时，才叫非重叠的。比如1、6、11信道就是非重叠的）
+无线主机加入AP：
+被动扫描：802.11标准规定每个AP要周期性的发送信标帧，每个信标帧包括该AP的SSID和MAC地址。
+主动扫描：通过向无线主机范围内所有的AP发送广播探测帧，AP会响应该探测帧。
+一旦主机连接上一个AP，通过DHCP协议获取了一个AP的子网IP。
+AP也可以要求主机鉴权：
+​ 基于MAC地址
+​ 基于用户名和口令
+7.3.3 802.11 帧  有效载荷:承载数据，IP数据报或者ARP分组等。允许的最大长度为2312字节，但是通常小于1500字节。 CRC：循环冗余校验 地址字段：包含4个MAC地址 序号、持续期和帧控制字段：序号用于使接收方区分新传输的帧和以前帧的重传；持续期包括了节点预约信道的持续期；  7.3.5 802.11 中的高级特色 速率适应 实现了一种具有速率自适应能力，该能力自适应地根据当前和近期信道特点来选择下面的物理层调制技术。]]></description>
+</item><item>
     <title>万历十五年摘抄与读后感</title>
     <link>https://ZevaXu.github.io/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4%E6%91%98%E6%8A%84%E4%B8%8E%E8%AF%BB%E5%90%8E%E6%84%9F/</link>
     <pubDate>Thu, 16 Dec 2021 14:03:15 &#43;0800</pubDate>
