@@ -102,6 +102,15 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://www.instagram.com/wdxbb1" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Go:复合数据类型</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-20">2021-12-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">复合数据类型 主要的四种复合数据类型：
+ 数组：同构的元素组成，内存大小固定 结构体：异构元素组成，内存大小固定 切片：动态数据类型 映射：动态数据类型  4.1 数组 数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。
+数组的定义
+1 2 3 4 5 6 7  var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0 var b [3]int = [3]{1,2,3} //自定义数组的初始值 // 也可以用简短声明 d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断   当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。
+1 2 3 4 5  a := [2]int{1, 2} b := [...]int{1, 2} c := [2]int{1, 3} fmt.Println(a == b, a == c, b == c) // true,false,false   数组的长度等于其容量</div><div class="post-footer">
+        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/">计算机网络: 无线网络和移动网络</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-16">2021-12-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">7.1 概述 无线网络中的要素：
  无线主机。可能移动、可能不动。 无线链路。主机通过无线通信链路连接到一个基站或者另外一个主机。 基站。负责向与之关联的无线主机发送数据和从主机那接收数据，协调与之相关联的多个无线主机的传输。如蜂窝塔、LAN接入点。 网络基础设施  7.2 无线链路和网络特征 有线网络和无线网络的重要区别主要在链路层，如：
@@ -296,26 +305,6 @@ GBN协议允许发送方用多个分组填充流水线，因此避免了停等�
 解决：
 确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。</div><div class="post-footer">
         <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/">计算机网络: 面向连接的传输-TCP</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-01">2021-11-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">TCP是因特网运输层的面向连接的可靠的运输协议。依赖于差错检测、重传、累计确认、定时器以及带有序号和确认号的首部字段，使得它可以在不可靠的IP协议之上，提供可靠的运输协议。
-3.5.1 TCP连接概述   TCP是面向连接的。这里的连接指的是一两条逻辑连接，其共同状态包括要维护的参数、TCP缓存等,仅仅保留在两个通信端系统的TCP程序中。
-  *TCP是点到点的。即单个发送方和单个接收方之间的连接，其中发送方被称为客户端，接收端被称为服务器。
-  *建立连接的过程：客户先发送一个特殊（首部字段特殊）的TCP报文段，服务器用另一个特殊的TCP报文段来响应，最后客户端再用第三个特殊报文段作为响应，前两个报文段不承载任何应用层数据。这样一个建立连接的过程称为三次握手。
-  一旦建立起TCP连接，两个应用进程旧可以相互发送数据。客户进程将数据通过套接字传给TCP，TCP将这些数据存入发送缓存，接下来再陆续从发送缓存里取出数据，封装送给网络层。
-  *MSS（Maximum Segment Size,最大报文长度）：报文段里应用层数据的最大长度，不包括首部字段。
-  *MTU（Maximum Transmission Unit,最大传输单元）：包含TCP首部的报文段最大长度，以太网和PPP链路层协议都有1500字节的MTU，一个典型值是1460。
-  TCP连接的组成：客户端主机上的缓存、变量与套接字；服务器主机上的缓存、变量与套接字。
-3.5.2 TCP报文段结构 TCP的首部一般是20字节，比UDP首部多12字节。
- 源端口号和目的端口号：用于多路复用/分解 32比特的序号字段/32比特的确认号字段：用于实现可靠数据传输 16比特的接收窗口字段，用于流量控制 4比特首部长度字段：指示了TCP的首部长度 可选与变长的选项字段：用于连接双方协商最大报文长度（MSS） 6比特的标志字段：  ACK：指示确认字段中的值是否有效 RST、SYN、FIN：用于连接的建立和断开。 CWR、ECE：拥塞明确。 PSH：数据是否立即交给上层。 URG：指示包含紧急数据。    序号和确认号 序号和确认号是TCP首部中最重要的两个字段。一个报文段的序号是报文段首字节的字节流编号。 假定数据流由一个包含500000字节的文件组成，其MSS为1000字节，数据流的首字节编号是0。该TCP将为该数据流构建500个报文段。给第一个报文段分配序号0,第二个报文段分配序号1000,第三个报文段分配序号2000,以此类推。每一个序号被填入到相应TCP 报文段首部的序号字段中。
-确认号用于接收端向发送端发送已经接收到的正确顺序报文段中，序号最大的报文段。也就是主机正在等待的数据的下一个字节的序号
-3.5.3 往返时间的估计和超时 TCP采用超时/重传机制来处理报文段的丢失问题，那么如何设置超时间隔呢。
-估计往返时间 RTT（SimpleRTT ）:某报文段被发出（交给IP）到对该报文的确认被收到之间的时间间隔。 由于路由器的拥塞，报文段的RTT会随时间波动，TCP维持一个RTT的均值（EstimatedRTT)，一旦获得一个新的R TT，TCP采用下列公式来更新EstimatedRTT： DevRTT ：RTT偏差，用于估算SampleRTT 一般会偏离EstimatedRTT的程度，RTT波动较小，则DevRTT值就很小。
-设置和管理重传超时间隔 超时间隔被定义为上式，初始Timeoutinterval为1秒，当出现超时后，Timeoutinterval值将加倍，再次接收报文段后，再使用上式计算Timeoutinterval。
-3.5.4 可靠数据传输 英特网网络层（IP服务）是不可靠的，IP服务的数据报可能会溢出路由器缓存而丢失；也可能是乱序到达；数据报中的比特还可能会损坏（0变成1）。 TCP在IP不可靠的尽力而为的服务上创建了一种可靠数据传输服务，确保一个进程从其接收缓存中读取的数据流是无损坏、无间隙、非冗余、按序的数据流。下图给出了TCP发送方的高度简化描述。
-NextSeqNum和SendBase的差组成了窗口。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

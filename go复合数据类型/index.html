@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Go:复合数据类型 - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="Go:复合数据类型" />
+<meta property="og:description" content="复合数据类型 主要的四种复合数据类型：
+ 数组：同构的元素组成，内存大小固定 结构体：异构元素组成，内存大小固定 切片：动态数据类型 映射：动态数据类型  4.1 数组 数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。
+数组的定义
+1 2 3 4 5 6 7  var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0 var b [3]int = [3]{1,2,3} //自定义数组的初始值 // 也可以用简短声明 d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断   当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。
+1 2 3 4 5  a := [2]int{1, 2} b := [...]int{1, 2} c := [2]int{1, 3} fmt.Println(a == b, a == c, b == c) // true,false,false   数组的长度等于其容量" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><meta property="og:image" content="https://ZevaXu.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-12-20T14:41:05+08:00" />
+<meta property="article:modified_time" content="2021-12-20T14:41:05+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ZevaXu.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Go:复合数据类型"/>
+<meta name="twitter:description" content="复合数据类型 主要的四种复合数据类型：
+ 数组：同构的元素组成，内存大小固定 结构体：异构元素组成，内存大小固定 切片：动态数据类型 映射：动态数据类型  4.1 数组 数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。
+数组的定义
+1 2 3 4 5 6 7  var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0 var b [3]int = [3]{1,2,3} //自定义数组的初始值 // 也可以用简短声明 d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断   当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。
+1 2 3 4 5  a := [2]int{1, 2} b := [...]int{1, 2} c := [2]int{1, 3} fmt.Println(a == b, a == c, b == c) // true,false,false   数组的长度等于其容量"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><link rel="prev" href="https://ZevaXu.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Go:复合数据类型",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/"
+        },"genre": "posts","keywords": "Go","wordcount":  851 ,
+        "url": "https:\/\/ZevaXu.github.io\/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/","datePublished": "2021-12-20T14:41:05+08:00","dateModified": "2021-12-20T14:41:05+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/catch-the-cat/"> Game </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/catch-the-cat/" title="">Game</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Go:复合数据类型</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-20">2021-12-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;851 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;4 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#41-数组">4.1 数组</a></li>
+    <li><a href="#42-切片">4.2 切片</a>
+      <ul>
+        <li><a href="#421-append函数">4.2.1 append函数</a></li>
+        <li><a href="#422-切片的内存技巧">4.2.2 切片的内存技巧</a></li>
+      </ul>
+    </li>
+    <li><a href="#43-map映射">4.3 Map映射</a></li>
+    <li><a href="#44-结构体">4.4 结构体</a>
+      <ul>
+        <li><a href="#441-结构体赋值">4.4.1 结构体赋值</a></li>
+        <li><a href="#442-结构体和结构体指针">4.4.2 结构体和结构体指针</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="复合数据类型">复合数据类型</h1>
+<p>主要的四种复合数据类型：</p>
+<ul>
+<li>数组：同构的元素组成，内存大小固定</li>
+<li>结构体：异构元素组成，内存大小固定</li>
+<li>切片：动态数据类型</li>
+<li>映射：动态数据类型</li>
+</ul>
+<h2 id="41-数组">4.1 数组</h2>
+<p>数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。</p>
+<p><strong>数组的定义</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0
+
+var b [3]int = [3]{1,2,3} //自定义数组的初始值
+
+// 也可以用简短声明
+
+d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断
+</code></pre></td></tr></table>
+</div>
+</div><p>当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">a := [2]int{1, 2}
+b := [...]int{1, 2}
+c := [2]int{1, 3}
+
+fmt.Println(a == b, a == c, b == c) // true,false,false
+</code></pre></td></tr></table>
+</div>
+</div><p>数组的长度等于其容量</p>
+<p>Go语言函数调用传递参数的方式为值传递，即形参是实参的副本。这就导致传递大的数组类型是低效的，并且对数组参数的任何的修改都是发生在复制的数组上，并不能直接修改调用时原始的数组变量。</p>
+<h2 id="42-切片">4.2 切片</h2>
+<p>Slice（切片）代表变长的序列，序列中每个元素都有相同的类型。一个slice类型一般写作[]T，其中T 代表slice中元素的类型；slice的语法和数组很像，只是没有固定长度而已。</p>
+<p>切片的定义：类似数组但是没有指定元素个数，隐式创建一个合适大小的数组。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//1 不加索引
+weekdays := []string{&#34;Sunday&#34;, &#34;Monday&#34;, &#34;Tuesday&#34;, &#34;Wednesday&#34;, &#34;Thursday&#34;, &#34;Friday&#34;, &#34;Saturday&#34;}
+//2 加索引
+weekdays := []string{0: &#34;Sunday&#34;, 1: &#34;Monday&#34;, 2: &#34;Tuesday&#34;, 3: &#34;Wednesday&#34;, 4: &#34;Thursday&#34;, 5: &#34;Friday&#34;, 6: &#34;Saturday&#34;}
+// 3 加索引乱序(对数组也有效果)
+weekdays := []string{6: &#34;Saturday&#34;, 0: &#34;Sunday&#34;, 1: &#34;Monday&#34;, 2: &#34;Tuesday&#34;, 3: &#34;Wednesday&#34;, 4: &#34;Thursday&#34;, 5: &#34;Friday&#34;}
+</code></pre></td></tr></table>
+</div>
+</div><p>切片包含三部分属性，1是切片里的元素、2是切片的长度<code>len()</code>、3是切片的容量<code>cap()</code>
+切片的容量总是不小于切片的长度。如果切片操作超出了容量上限，会导致恐慌；如果超出长度，就是扩展了切片。
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211218-1620-MBfams.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211218-1620-MBfams.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211218-1620-MBfams.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211218-1620-MBfams.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211218-1620-MBfams.png"
+        title="20211218-1620-MBfams-c480" /></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">fmt.Println(summer[:10])// 恐慌
+fmt.Println(summer[:5])// [June July August September October]
+</code></pre></td></tr></table>
+</div>
+</div><p>由于切片在底层是共享的一个数组，所以对切片复制时，改变新的切片内容将会同时改变原来的切片。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">months2 := months[:]
+months2[0] = &#34;Go&#34;
+fmt.Println(months) //[Go January February March April May June July August September October November December]
+fmt.Println(months2) //[Go January February March April May June July August September October November December]
+</code></pre></td></tr></table>
+</div>
+</div><p>不同于数组，切片是不能比较大小的，原因：</p>
+<ol>
+<li>切片内元素是间接引用的，一个切片甚至可以包含自身。</li>
+<li>一个切片可能在不同时间内包含不同的元素（底层的数组改变）</li>
+</ol>
+<p>切片可以和nil比较：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var s []int // len(s) == 0, s == nil 
+s = nil // len(s) == 0, s == nil 
+s = []int(nil) // len(s) == 0, s == nil 
+s = []int{} // len(s) == 0, s != nil
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="421-append函数">4.2.1 append函数</h3>
+<p>内置的append函数用于向切片追加元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">months := []string{1: &#34;January&#34;, 2: &#34;February&#34;, 3: &#34;March&#34;, 4: &#34;April&#34;, 5: &#34;May&#34;, 6: &#34;June&#34;, 7: &#34;July&#34;, 8: &#34;August&#34;, 9: &#34;September&#34;, 10: &#34;October&#34;, 11: &#34;November&#34;, 12: &#34;December&#34;}
+fmt.Println(&#34;len:&#34;,len(months), &#34;cap&#34;,cap(months)) // len: 13 cap 13
+fmt.Printf(&#34;%p \n&#34;, months) //0x14000064b60
+
+months = append(months, &#34;Go&#34;)
+fmt.Println(months) //[ January February March April May June July August September October November December Go] 
+fmt.Println(&#34;len:&#34;,len(months), &#34;cap&#34;,cap(months)) // len: 14 cap 26
+fmt.Printf(&#34;%p \n&#34;, months) //0x140000016c0 
+</code></pre></td></tr></table>
+</div>
+</div><p>append函数的底层实现：</p>
+<ol>
+<li>如果切片容量够，那么直接追加</li>
+<li>如果不够，先建立一个容量更大的切片，复制原来的元素，再追加</li>
+</ol>
+<p>append可以一次追加多个元素：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">months = append(months, &#34;Python&#34;,&#34;C++&#34;,&#34;Java&#34;)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="422-切片的内存技巧">4.2.2 切片的内存技巧</h3>
+<ol>
+<li>修改新切片会照成原来切片的改变</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">func Remove_empty_string(strings []string) []string {
+	i := 0
+	for _, j := range strings {
+		if j != &#34;&#34; {
+			strings[i] = j
+			i++
+		}
+	}
+	return strings[:i]
+}
+
+func main() {
+	s := []string{&#34;1&#34;, &#34;&#34;, &#34;3&#34;}
+	fmt.Println(Remove_empty_string(s)) //[1,3]
+	fmt.Println(s) // [1,3,3] 可以 s = Remove_empty_string(s)
+}
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>删除切片中间某个元素</li>
+</ol>
+<ul>
+<li>通过<code>copy()</code>函数复制覆盖</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">func remove(slice []int, i int) []int { 
+    copy(slice[i:], slice[i+1:]) 
+    return slice[:len(slice)-1] 
+}
+
+func main() {
+	s := []int{4, 5, 6, 7}
+	fmt.Println(remove(s, 2)) // [4 5 7]
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="43-map映射">4.3 Map映射</h2>
+<p>哈希表是一种巧妙并且实用的数据结构。它是一个无序的key/value对的集合，其中所有的key都是不同 的，然后通过给定的key可以在常数时间复杂度内检索、更新或删除对应的value。
+所有的key必须是同一类型元素，value也必须是同一类型元素。</p>
+<p><strong>Map的创建</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//1
+ages := make(map[string]int) //键：string 值：int
+
+//2
+ages := map[string]int{ &#34;alice&#34;: 31, &#34;charlie&#34;: 34, } //初始化 
+
+//3
+ages := make(map[string]int) 
+ages[&#34;alice&#34;] = 31 
+ages[&#34;charlie&#34;] = 34
+</code></pre></td></tr></table>
+</div>
+</div><p><strong>删除元素</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">delete(ages, &#34;alice&#34;) // remove element ages[&#34;alice&#34;]
+</code></pre></td></tr></table>
+</div>
+</div><p>上述操作是安全的，即使要删除的元素不在map中。</p>
+<p><strong>特点</strong>
+如果查找map中元素失败，即无该key-value，那么会返回value的一个0值。</p>
+<p>禁止对map中元素取地址，map可能随着元素数量的增长而重新分配更大的内存空间，从而可能导致之前的地址无效。</p>
+<p>Map的迭代顺序是不确定的，遍历的顺序是随机的，每一次遍历的顺序都不相同。如果要按顺序遍历key/value对，我们必须显式地对key进行排序，可以使用sort包的Strings函数对字符串slice进行排序。</p>
+<p>map的零值是nil,即没有引用任何元素。</p>
+<p>map的创建和初始化：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var ages map[string]int // map的零值是nil，还没有创建。查找、删除、len和range循环都可以安全工作在nil值的map上，但是不可以存入元素
+fmt.Println(ages == nil) // true
+fmt.Println(ages) // map[]
+ages[&#34;alice&#34;] = 31 // 引起panic
+
+age := make(map[string]int) // 创建map,可以存入元素
+fmt.Println(age == nil) // false
+fmt.Println(age) // map[]
+age[&#34;alice&#34;] = 31 // 没有panic
+</code></pre></td></tr></table>
+</div>
+</div><p>查看键值对是否在map中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//age[&#34;alice&#34;] = 31 会返回两个值，一个是“alice”键对应的值，一个是“alice”键对应的值是否存在，不存在时，第一个值为0，第二个值为false。防止混淆
+
+if age, ok := ages[&#34;alice&#34;]; ok {
+	fmt.Println(age)
+} else {
+	fmt.Println(&#34;alice is not in the map&#34;)
+}
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="44-结构体">4.4 结构体</h2>
+<p>结构体是一种聚合的数据类型，是由零个或多个任意类型的值聚合成的实体。每个值称为结构体的成员。
+<strong>结构体的定义</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">
+// 结构体成员的顺序不同，结构体类型也不同。
+type Employee struct {
+	ID int
+	Name string
+	Address string
+	Date time.Time
+	Position string
+	Salary int
+	ManagerID int
+}
+var dilbert Employee
+
+// 初始化，用.来访问成员
+dilbert = Employee{
+	ID: 123,
+	Name: &#34;Dilbert&#34;,
+	Address: &#34;123 Acacia Road&#34;,
+	Date: time.Now(),
+	Position: &#34;Senior Engineer&#34;,
+	Salary: 12345,
+	ManagerID: 123,
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>如果成员的名字是以大写字母开头，那么它就是对外的接口，可以被外部代码访问。</p>
+<p>结构体成员类型不可以是它自己，因为一个聚合类型的值不能包含自身。但是，如果结构体成员类型是聚合类型的指针，那么它就可以包含自身。这可用于创建递归类型数据结构，链表和树结构。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">type tree struct {
+	value int
+	left, right *tree
+}
+</code></pre></td></tr></table>
+</div>
+</div><p>如果结构体的全部成员都是可以比较的，那么结构体也是可以比较的，那样的话两个结构体将可以使用 ==或!=运算符进行比较。</p>
+<p>结构体类型的零值是每个成员都是零值。</p>
+<h3 id="441-结构体赋值">4.4.1 结构体赋值</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">//1 适用于简单的结构体,要求赋值顺序一致
+type Point struct {
+	X, Y int
+}
+p := Point{1, 2}
+
+//2 适用于复杂的结构体，顺序不重要，如果有缺失的成员，则赋值为零值
+p := Point{X: 1, Y: 2}
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="442-结构体和结构体指针">4.4.2 结构体和结构体指针</h3>
+<p>结构体和结构体指针的相同点：</p>
+<ol>
+<li>实际都是指针</li>
+<li>都可以用<code>结构体名.成员名</code>的方式访问成员
+结构体和结构体指针的不同点：</li>
+<li>用结构体指针会改变结构体的值，用结构体不会改变结构体的值</li>
+<li>如果要在函数内部修改结构体成员的话，用指针传入是必须的；因为在Go语言中，所有的函数参数都是 值拷贝传入的，函数参数将不再是函数调用时的原始变量。</li>
+<li></li>
+</ol>
+<p>type Rect struct {
+width, length float64
+}</p>
+<p>//结构体形式
+func double_area(rect Rect) float64 {
+rect.width *= 2
+rect.length *= 2
+return rect.width * rect.length
+}
+func main() {
+var rect = Rect{100, 200}
+fmt.Println(double_area(rect))//8000
+fmt.Println(&ldquo;Width:&rdquo;, rect.width, &ldquo;Length:&rdquo;, rect.length)//Width: 100 Length: 200
+}</p>
+<p>//结构体指针形式
+func double_area(rect *Rect) float64 {
+rect.width *= 2
+rect.length *= 2
+return rect.width * rect.length
+}
+func main() {
+var rect = Rect{100, 200}
+fmt.Println(double_area(&amp;rect))//4000
+fmt.Println(&ldquo;Width:&rdquo;, rect.width, &ldquo;Length:&rdquo;, rect.length)//Width: 200 Length: 400
+}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">### 4.4.3 结构体嵌入和匿名成员
+
+结构体嵌入机制让一个命名的结构体包含另一个结构体类型的匿名成员，这样就可以通过简单的点运算符x.f来访问匿名成员链中嵌套的x.d.e.f成员。
+结构体字面值并没有简短表示匿名成员的语法。
+因为匿名成员也有一个隐式的名字，因此不能同时包含两个类型相同的匿名成员，这会导致名字冲突。
+简短的点运算符语法可以用于选择匿名成员嵌套的成员，也可以用于访问它们的方法。
+</code></pre></td></tr></table>
+</div>
+</div><p>type Point struct {
+X, Y int
+}
+type Circle struct {
+Point
+Radius int
+}
+type Wheel struct {
+Circle
+Spokes int
+}
+var w Wheel
+w.X = 8 // w.Circle.Point.X = 8
+w.Y = 8  // w.Circle.Point.Y = 8
+w.Radius = 5  // w.Circle.Radius = 5
+w.Spokes = 20</p>
+<p>w = Wheel{X: 8, Y: 8, Radius: 5, Spokes: 20} // 但是不能这样写 编译不通过
+w = Wheel{
+Circle: Circle{
+Point: Point{X: 8, Y: 8},
+Radius: 5,
+},
+Spokes: 20,
+}</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2021-12-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型" data-hashtags="Go"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-hashtag="Go"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" data-title="Go:复合数据类型"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/" class="prev" rel="prev" title="计算机网络: 无线网络和移动网络"><i class="fas fa-angle-left fa-fw"></i>计算机网络: 无线网络和移动网络</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
