@@ -37,7 +37,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/ZevaXu.github.io\/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/"
-        },"genre": "posts","keywords": "Go","wordcount":  896 ,
+        },"genre": "posts","keywords": "Go","wordcount":  895 ,
         "url": "https:\/\/ZevaXu.github.io\/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\/","datePublished": "2021-12-20T14:41:05+08:00","dateModified": "2021-12-20T14:41:05+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"author": {
@@ -114,7 +114,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Go:复合数据类型</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-20">2021-12-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;896 words&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2021-12-20">2021-12-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;895 words&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;5 minutes&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="true">
                 <div class="details-summary toc-title">
@@ -565,15 +565,14 @@ p := Point{X: 1, Y: 2}
 </div>
 </div><h3 id="442-结构体和结构体指针">4.4.2 结构体和结构体指针</h3>
 <p><strong>结构体和结构体指针的相同点：</strong></p>
-<ol>
+<ul>
 <li>实际都是指针</li>
 <li>都可以用<code>结构体名.成员名</code>的方式访问成员</li>
-</ol>
+</ul>
 <p><strong>结构体和结构体指针的不同点：</strong></p>
-<ol>
+<ul>
 <li>用结构体指针会改变结构体的值，用结构体不会改变结构体的值</li>
-<li>如果要在函数内部修改结构体成员的话，用指针传入是必须的；因为在Go语言中，所有的函数参数都是 值拷贝传入的，函数参数将不再是函数调用时的原始变量。</li>
-</ol>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -634,11 +633,11 @@ func main() {
 }
 </code></pre></td></tr></table>
 </div>
-</div><h3 id="443-结构体嵌入和匿名成员">4.4.3 结构体嵌入和匿名成员</h3>
+</div><p>如果要在函数内部修改结构体成员的话，用指针传入是必须的；因为在Go语言中，所有的函数参数都是值拷贝传入的，函数参数将不再是函数调用时的原始变量。</p>
+<h3 id="443-结构体嵌入和匿名成员">4.4.3 结构体嵌入和匿名成员</h3>
 <p>结构体嵌入机制让一个命名的结构体包含另一个结构体类型的匿名成员，这样就可以通过简单的点运算符x.f来访问匿名成员链中嵌套的x.d.e.f成员。
 结构体字面值并没有简短表示匿名成员的语法。
-因为匿名成员也有一个隐式的名字，因此不能同时包含两个类型相同的匿名成员，这会导致名字冲突。
-简短的点运算符语法可以用于选择匿名成员嵌套的成员，也可以用于访问它们的方法。</p>
+因为匿名成员也有一个隐式的名字，因此不能同时包含两个类型相同的匿名成员，这会导致名字冲突。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -695,7 +694,8 @@ w = Wheel{
 }
 </code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><p>简短的点运算符语法可以用于选择匿名成员嵌套的成员，也可以用于访问它们的方法。</p>
+</div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
