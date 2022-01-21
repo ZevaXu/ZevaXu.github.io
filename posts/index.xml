@@ -3,7 +3,19 @@
         <title>All Posts - Zeva`s Space</title>
         <link>https://ZevaXu.github.io/posts/</link>
         <description>All Posts | Zeva`s Space</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 20 Dec 2021 14:41:05 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Fri, 21 Jan 2022 22:33:21 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>M1 Mac安装mysql过程</title>
+    <link>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</link>
+    <pubDate>Fri, 21 Jan 2022 22:33:21 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</guid>
+    <description><![CDATA[设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
+1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
+1 2 3 4  sudo mysql.server start //开启服务 sudo mysql.server stop //关闭服务 sudo mysql.server restart //重启服务 sudo mysql.server status //查看状态   注意需要输入Mac开机密码来确认上述命令的执行。
+初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：
+1  mysql_secure_installation   一切设置完毕就可以正常使用了 卸载mysql 首先用以下命令卸载
+1  brew uninstall mysql   要想彻底清除数据库文件，还要去/opt/homebrew/var目录执行： sudo rm -rf mysql命令。]]></description>
+</item><item>
     <title>Go:复合数据类型</title>
     <link>https://ZevaXu.github.io/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
     <pubDate>Mon, 20 Dec 2021 14:41:05 &#43;0800</pubDate>
@@ -246,18 +258,5 @@ GBN协议允许发送方用多个分组填充流水线，因此避免了停等�
 设置和管理重传超时间隔 超时间隔被定义为上式，初始Timeoutinterval为1秒，当出现超时后，Timeoutinterval值将加倍，再次接收报文段后，再使用上式计算Timeoutinterval。
 3.5.4 可靠数据传输 英特网网络层（IP服务）是不可靠的，IP服务的数据报可能会溢出路由器缓存而丢失；也可能是乱序到达；数据报中的比特还可能会损坏（0变成1）。 TCP在IP不可靠的尽力而为的服务上创建了一种可靠数据传输服务，确保一个进程从其接收缓存中读取的数据流是无损坏、无间隙、非冗余、按序的数据流。下图给出了TCP发送方的高度简化描述。
 NextSeqNum和SendBase的差组成了窗口。]]></description>
-</item><item>
-    <title>Conda常用命令</title>
-    <link>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-    <pubDate>Tue, 20 Apr 2021 10:29:20 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-    <description><![CDATA[conda常用命令 1. 管理conda   查看conda版本
-1  conda --version     查看python版本
-1  conda --python     进入/退出python环境
-1 2  python quit()     更新conda版本
-1  conda update conda      2. 管理环境   创建一个环境
-1  conda create --name python34 python=3.4 #创建一个名为python34的环境，指定python版本为3.4     切换环境
-1 2 3 4  #windows activate python34 #mac/linux source activate python34     删除一个已有的环境]]></description>
 </item></channel>
 </rss>

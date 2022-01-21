@@ -102,6 +102,40 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://www.instagram.com/wdxbb1" title="Instagram" target="_blank" rel="noopener noreffer me"><i class="fab fa-instagram fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">计算机网络：可靠数据传输协议原理</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-04">2021-11-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">可靠数据传输协议原理 构造可靠传输协议 可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。
+其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。
+将发送方称为S，接收方成为R，考虑以上几种情况：
+  一切正常
+S向R发送0号分组，R收到了分组，利用检验和判断分组是否正确，如果正确，R向S发送一个0号分组的ACK确认分组，告诉S已经收到了正确分组。S再向R发送下一个分组1。
+  分组丢失
+S向R发送0号分组，此时S的定时器开始计时，0号分组在传输过程中丢失，R没有收到任何数据，所以也没有向S发送任何确认信号。当计时器停止时，S向R在发送一个0号分组。
+  ACK丢失
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中丢失，当S的定时器停止时，S会再向R发送相同分组，此时R再次收到了相同的分组，开启冗余检测机制，会丢弃冗余的分组。
+  过早超时
+S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中超时，S又发了一个相同的分组给R，之后S收到该上一个分组ACK，但是它什么也不做。
+  流水线可靠数据传输协议 如果采取“可靠数据传输协议”：接收一个分组，等待一个ACK到达后，再发送下一个分组的方式，发送发大部分时间都处于等待中，会带来有效吞吐量小，发送方利用率低的缺陷。
+引入流水线技术有助于解决这种缺陷。即不以停等的方式运行，允许发送方发送多个分组而无须等待确认。
+这样的技术提出如下几个要求：
+ 增加序号的范围，每个分组必须有一个唯一的序号，有多个再输送中而未被确认的分组 发送方和接收方两端需要缓存多个分组。发送方最低限度要缓存那些已经发送但没有确认的分组。  解决流水线的差错恢复有两种基本方法：回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)
+GBN(回退N步) 窗口长度N由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。
+一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。
+GBN的运行过程如下图：
+发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。
+例如发送方批量发送了0—4号分组，其中3号分组丢失。
+对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；
+对于接收方：它收到了0、1、2号分组，每收到一个就发送该分组的ACK。由于未收到3号分组，它接收到4号分组后，把4号分组丢弃，再发送上一个正确分组的ACK，即2号ACK。直到接收到3号分组为止。
+GBN协议允许发送方用多个分组填充流水线，因此避免了停等协议中的信道利用率问题，使用到了序号、累计确认、检验和、超时重传操作等技术。
+选择重传 GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。
+选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。
+分组重新排序问题：
+分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。
+当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。
+解决：
+确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。</div><div class="post-footer">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/">计算机网络: 面向连接的传输-TCP</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-01">2021-11-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">TCP是因特网运输层的面向连接的可靠的运输协议。依赖于差错检测、重传、累计确认、定时器以及带有序号和确认号的首部字段，使得它可以在不可靠的IP协议之上，提供可靠的运输协议。
 3.5.1 TCP连接概述   TCP是面向连接的。这里的连接指的是一两条逻辑连接，其共同状态包括要维护的参数、TCP缓存等,仅仅保留在两个通信端系统的TCP程序中。
@@ -142,7 +176,7 @@ NextSeqNum和SendBase的差组成了窗口。</div><div class="post-footer">
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
         </div>
     </footer></div>
 
