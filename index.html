@@ -102,6 +102,21 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="https://weibo.com/5971704717" title="微博" target="_blank" rel="noopener noreffer me"><i class="fab fa-weibo fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">部署web应用程序到centos系统遇到的防火墙问题及解决</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-26">2022-01-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">最初的目的 最近用go写了一个在线剪贴板的web小项目，在本地主机上调试了感觉还行，遂打算部署到甲骨文的VPS上（centos-8）。
+环境搭建好了之后，成功运行在8080端口，curl localhost:8080也可以正常获取到网页，但是我的浏览器远程就是无法访问。在stackoverflow搜索了解，感觉是VPS防火墙的问题。并有了以下的解决步骤。此外，在解决问题的过程中还发现了一个有趣的小工具&ndash;cockpid,一个在web端管理VPS的工具，是centos和redhat系统自带的。
+解决过程 在开始之前，首先去VPS提供商管理页面设置好相应的防火墙规则。之后在对VPS的防火墙设置规则。
+  查看VPS防火墙状态： sudo systemctl status firewalld 可以看到防火墙是正常运行的。
+  查看VPS防火墙开启的端口和服务 firewall-cmd --list-all 可以看到，我的VPS开启了cockpit dhcpv6-client http ssh这些个服务，以及一个8080端口（这是我主动开启之后的显示，一开始只有cockpit dhcpv6-client ssh这三项）。
+如果想要查看某个服务占据的端口，可以用grep ssh /etc/services这个命令(以ssh为例)，可以看到ssh使用的是本机22端口。   开启希望的服务和端口。 开启http服务（即80端口）：sudo firewall-cmd --add-service=http --permanent 开启自定义端口：firewall-cmd --zone=public --permanent --remove-port 8080 不仅可以开端口，也可以关：firewall-cmd --zone=public --permanent --remove-service http
+但是最后一定要重载以下使之生效：firewall-cmd --reload
+之后可以再用firewall-cmd --list-all命令查看有没有成功。
+  4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
+安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
+以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld</div><div class="post-footer">
+        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/">M1 Mac安装mysql过程</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-21">2022-01-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
 1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
@@ -266,21 +281,6 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 因此，集线器下的是一个广播局域网。并且当同时收到两个接口发来的帧时，将发生碰撞，生出该帧的节点必须重传。
 1. 以太网帧结构 ​  数据(46~1500字节)：承载IP数据报。MTU（最大传输单元），一般为1500字节，如果IP数据报超过1500，主机必须将数据报分片；最小为46字节，如果小于46字节，数据报必须被填充到46字节（利用IP数据报中长度字节去除填充部分）。 目的地址(6字节)：目的适配器的MAC地址。当目的适配器收到一个以太网帧，当该帧中的目的地址是自身地址或者是广播地址时，该适配器将帧的数据字段内容传给网络层；当收到其他MAC地址的帧，丢弃之。 源地址(6字节)：包含了传输该帧到局域网上的适配器MAC地址。 类型字段(2字段)：指定了数据帧的不同网络层协议。 CRC(4字节)：循环冗余检测，使得接收适配器检测帧是否引入了差错。 前同步码(8字节)：前7个字节用于同步两个适配器的时钟；第8个字节提示重要的内容就要到了。  以太网技术向网络层提供服务的特点：</div><div class="post-footer">
         <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/">计算机网络：网络层协议</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-17">2021-11-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">网络层协议 ​
-控制平面作为一种网络范围的逻辑，不仅控制沿着从源主机到目的主机的端到端路径间的路由器如何转发数据报，而且控制网络层组件和服务如何配置和管理。
-OSPF是一种运行在单一ISP的网络中的路由选择算法。BGP是一种在因特网中用于 互联所有网络的路由选择算法，因此常被称为因特网的“黏合剂” 。
-5.2 路由选择算法 其目的是从发送方到接收方的过程中确定一条通过路由器网络的好的路径(等价于路由)。通常，一条好路径指具有最低开销的路径。
-分类  根据该算法是集中式还是分散式  集中式路由选择算法：用完整的、全局性的网络知识计算岀从源到目的地之间的最低开销路径。 要求该算法在真正开始计算以前，要以某种方式获得这些信息。 具有全局状态信息的算法常被称作链路状态(Link State, LS) 算法。 分散式路由选择算法：没有节点拥有关于所有网络链路开销的完整信息。 相反，每个节点仅有与其直接相连链路的开销知识即可开始工作。然后，通过迭 代计算过程以及与相邻节点的信息交换，一个节点逐渐计算出到达某目的节点或 一组目的节点的最低开销路径。   根据算法是静态的还是动态  在静态路由选择算法(static routing algorithm)：路由随时间的变化非常缓慢，通常是人工进行调整(如人为手工编辑一条链路开销) 。 动态路由选择算法(dynamic routing algorithm) ：随着网络流量负载或拓扑发生变化而改变路由选择路径。一个动态算法可周期性地运行或直接响应拓扑或链路开销的变化而运行。   根据它是负载敏感的还是负载迟钝的进行划分  负载敏感算法：链路开销会动态地变化以反映出底层链路的当前拥塞水平。如果当前拥塞的一条链路与高开销相联系，则路由选择算法趋向于绕开该 拥塞链路来选择路由。 负载迟钝算法：某条链路的开销不明确反映当前或者最近的拥塞水平。    5.2.2 距离向量路由选择算法 5.3 因特网中自治系统内部的路由选择:OSPF 上述讨论的LS（狄杰斯特拉）和距离向量路由选择协议都不能适用于整个网络，原因有如下两点：
- 网络规模。当今的因特网由数亿台主机组成。在这些主机中存储的路由选择信息显然需要巨大容量的内存。并且求出所有路由器之间的链路开销需要巨大的负担，并且距离向量算法可能永远无法收敛。 管理自治。因特网是ISP的网络，其中每个ISP都有它自己的路由器网络。ISP通常希望按自己的意愿运行路由器(如在自己的网络中运行它所选择的某种路由选择算法)，或对外部隐藏其网络的内部组织面貌。  自治系统（AS）：一个自治系统由其全局唯一的AS号(ASN)所标识。每个AS由一组通常处在相同管理控制下的路由器组成。 通常在一个ISP中的路由器以及互联它们的链路构成一个AS；也有某些ISP将网络划分为多个AS；也有一个一级ISP在整个网络使用一个庞大的AS，其他子ISP再进行划分为多个AS。
-开放最短路优先(OSPF) OSPF是一种链路状态协议，它使用洪泛链路状态信息和Dijkstra最低开销路径算法。 使用OSPF, —台路由器构建了一幅关于整个自治系统的完整拓扑图(即一幅图)。于是, 每台路由器在本地运行Dijkstra的最短路径算法，以确定一个以自身为根节点到所有子网的最短路径树。
-各条链路开销是由网络管理员配置，管理员也许会选择将所有链路开销设为1,因而实现了最少跳数路由选择，或者可能会选择将链路权值按与链路容量成反比来设置，从而不鼓励流量使用低带宽链路。
-使用OSPF时，路由器向自治系统内所有其他路由器广播路由选择信息，而不仅仅是向其相邻路由器广播。每当一条链路的状态发生变化时(如开销的变化或连接/中断状态的变化)，路由器就会广播链路状态信息。即使链路状态未发生变化，它也要周期性地 (至少每隔30 min一次)广播链路状态 。
-优点：
-  安全。路由器间的OSPF报文能够配置两类鉴别，即简单的和MD5的。使用简单的鉴别，每台路由器配置相同的口令。当一台路由器发送一个OSPF分组，它以明文方式包括了口令 。MD5的要对比报文携带的MD5散列和路由去计算出来的MD5值。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">

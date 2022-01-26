@@ -1,9 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>小记 - Category - Zeva`s Space</title>
-        <link>https://ZevaXu.github.io/categories/%E5%B0%8F%E8%AE%B0/</link>
-        <description>小记 - Category - Zeva`s Space</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 26 Jan 2022 22:59:59 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/%E5%B0%8F%E8%AE%B0/" rel="self" type="application/rss+xml" /><item>
+        <title>Linux - Tag - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/tags/linux/</link>
+        <description>Linux - Tag - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Wed, 26 Jan 2022 22:59:59 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
     <title>部署web应用程序到centos系统遇到的防火墙问题及解决</title>
     <link>https://ZevaXu.github.io/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</link>
     <pubDate>Wed, 26 Jan 2022 22:59:59 &#43;0800</pubDate>
@@ -20,17 +20,5 @@
   4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
 安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
 以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld]]></description>
-</item><item>
-    <title>M1 Mac安装mysql过程</title>
-    <link>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</link>
-    <pubDate>Fri, 21 Jan 2022 22:33:21 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</guid>
-    <description><![CDATA[设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
-1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
-1 2 3 4  sudo mysql.server start //开启服务 sudo mysql.server stop //关闭服务 sudo mysql.server restart //重启服务 sudo mysql.server status //查看状态   注意需要输入Mac开机密码来确认上述命令的执行。
-初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：
-1  mysql_secure_installation   一切设置完毕就可以正常使用了 卸载mysql 首先用以下命令卸载
-1  brew uninstall mysql   要想彻底清除数据库文件，还要去/opt/homebrew/var目录执行： sudo rm -rf mysql命令。]]></description>
 </item></channel>
 </rss>
