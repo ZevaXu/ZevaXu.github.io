@@ -205,8 +205,8 @@ float64:
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var compote = int(apples) + int(oranges)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var compote = int(apples) + int(oranges)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于将一个大尺寸的整数类型转为一个小尺寸的整数类型，或者是将一个浮点数转为整数，可能会改变数值或丢失精度。</p>
 <p>浮点数到整数的转换将丢失任何小数部分，然后向数轴零方向截断。</p>
@@ -235,17 +235,17 @@ float64:
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">  var x complex128 = complex(1, 2) // 1+2i 
-  var y complex128 = complex(3, 4) // 3+4i 
-  fmt.Println(x*y) // &#34;(-5+10i)&#34; 
-  fmt.Println(real(x*y)) // &#34;-5&#34; 
-  fmt.Println(imag(x*y)) // &#34;10&#34;
-
-
-  //也可以如下定义
-  x := 1 + 2i 
-  y := 3 + 4i
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  var x complex128 = complex(1, 2) // 1+2i 
+</span></span><span class="line"><span class="cl">  var y complex128 = complex(3, 4) // 3+4i 
+</span></span><span class="line"><span class="cl">  fmt.Println(x*y) // &#34;(-5+10i)&#34; 
+</span></span><span class="line"><span class="cl">  fmt.Println(real(x*y)) // &#34;-5&#34; 
+</span></span><span class="line"><span class="cl">  fmt.Println(imag(x*y)) // &#34;10&#34;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  //也可以如下定义
+</span></span><span class="line"><span class="cl">  x := 1 + 2i 
+</span></span><span class="line"><span class="cl">  y := 3 + 4i
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>复数也可以用==和!=进行相等比较。只有两个复数的实部和虚部都相等的时候它们才是相等。</p>
 <h2 id="34-布尔型">3.4 布尔型</h2>
@@ -259,9 +259,9 @@ float64:
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">s := &#34;你好&#34;
-fmt.Println(len(s)) // 6
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">s := &#34;你好&#34;
+</span></span><span class="line"><span class="cl">fmt.Println(len(s)) // 6
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>字符串的值是不可变的：一个字符串包含的字节序列永远不会被改变；但是可以给一个字符串变量分配一个新字符串值。</p>
 <div class="highlight"><div class="chroma">
@@ -273,12 +273,12 @@ fmt.Println(len(s)) // 6
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">s := &#34;你好&#34;
-fmt.Println(&#34;开始: %d\n&#34;, len(s)) //6
-t := &#34;不好？&#34;
-s = t
-fmt.Println(&#34;后来: %d\n&#34;, len(s)) //9
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">s := &#34;你好&#34;
+</span></span><span class="line"><span class="cl">fmt.Println(&#34;开始: %d\n&#34;, len(s)) //6
+</span></span><span class="line"><span class="cl">t := &#34;不好？&#34;
+</span></span><span class="line"><span class="cl">s = t
+</span></span><span class="line"><span class="cl">fmt.Println(&#34;后来: %d\n&#34;, len(s)) //9
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>不变性意味如果两个字符串共享相同的底层数据的话也是安全的，这使得复制任何长度的字符串代价是低廉的。</p>
 <h3 id="351-字符串字面值">3.5.1 字符串字面值</h3>
@@ -323,10 +323,10 @@ fmt.Println(&#34;后来: %d\n&#34;, len(s)) //9
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">s := &#34;你好，不好也好&#34; 
-b := []byte(s) // [228 189 160 229 165 189 239 188 140 228 184 141 229 165 189 228 185 159 229 165 189]
-s2 := string(b) // &#34;你好，不好也好&#34; 
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">s := &#34;你好，不好也好&#34; 
+</span></span><span class="line"><span class="cl">b := []byte(s) // [228 189 160 229 165 189 239 188 140 228 184 141 229 165 189 228 185 159 229 165 189]
+</span></span><span class="line"><span class="cl">s2 := string(b) // &#34;你好，不好也好&#34; 
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="36-常量">3.6 常量</h2>
 <p>常量表达式的值在编译期计算，而不是在运行期。</p>
@@ -341,12 +341,12 @@ s2 := string(b) // &#34;你好，不好也好&#34;
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">const pi = 3.14159
-const ( 
-    e = 2.71828182845904523536028747135266249775724709369995957496696763 
-    pi = 3.14159265358979323846264338327950288419716939937510582097494459 
-)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">const pi = 3.14159
+</span></span><span class="line"><span class="cl">const ( 
+</span></span><span class="line"><span class="cl">    e = 2.71828182845904523536028747135266249775724709369995957496696763 
+</span></span><span class="line"><span class="cl">    pi = 3.14159265358979323846264338327950288419716939937510582097494459 
+</span></span><span class="line"><span class="cl">)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="361-iota常量生成器">3.6.1 iota常量生成器</h3>
 <p>在一个常量声明语句块中，每写一个语句，都会自增1。</p>

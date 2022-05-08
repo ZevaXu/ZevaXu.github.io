@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>甲骨文VPS搭建trojan步骤 - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="甲骨文VPS搭建trojan步骤" />
+<meta property="og:description" content="甲骨文VPS搭建trojan步骤 VPS准备 需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。
+防火墙设置 ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。
+之后，再去VPS实例里面更改防火墙设置，我的机器是centos8系统，用Firewalld命令更改防火墙设置。
+1 2 3 4 5 6 7 8  # 列出已开启的端口/服务 firewall-cmd --list-all # 开启端口 firewall-cmd --zone=public --permanent --add-port 8080/tcp # 重载配置 firewall-cmd --reload   安装docker以及拉取要用的镜像 安装docker参照docker官方文档
+安装好docker后拉取trojan镜像。
+1 2  # 拉取数据库，此处的端口映射、root密码、数据库名称都可以改 docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2   此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。
+1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" /><meta property="og:image" content="https://ZevaXu.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-20T14:41:05+08:00" />
+<meta property="article:modified_time" content="2022-03-20T14:41:05+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ZevaXu.github.io/logo.png"/>
+
+<meta name="twitter:title" content="甲骨文VPS搭建trojan步骤"/>
+<meta name="twitter:description" content="甲骨文VPS搭建trojan步骤 VPS准备 需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。
+防火墙设置 ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。
+之后，再去VPS实例里面更改防火墙设置，我的机器是centos8系统，用Firewalld命令更改防火墙设置。
+1 2 3 4 5 6 7 8  # 列出已开启的端口/服务 firewall-cmd --list-all # 开启端口 firewall-cmd --zone=public --permanent --add-port 8080/tcp # 重载配置 firewall-cmd --reload   安装docker以及拉取要用的镜像 安装docker参照docker官方文档
+安装好docker后拉取trojan镜像。
+1 2  # 拉取数据库，此处的端口映射、root密码、数据库名称都可以改 docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2   此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。
+1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题："/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" /><link rel="prev" href="https://ZevaXu.github.io/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "甲骨文VPS搭建trojan步骤",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4\/"
+        },"genre": "posts","keywords": "VPS","wordcount":  243 ,
+        "url": "https:\/\/ZevaXu.github.io\/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4\/","datePublished": "2022-03-20T14:41:05+08:00","dateModified": "2022-03-20T14:41:05+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/catch-the-cat/"> Game </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/catch-the-cat/" title="">Game</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">甲骨文VPS搭建trojan步骤</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-03-20">2022-03-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;243 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#vps准备">VPS准备</a></li>
+        <li><a href="#防火墙设置">防火墙设置</a></li>
+        <li><a href="#安装docker以及拉取要用的镜像">安装docker以及拉取要用的镜像</a></li>
+        <li><a href="#bbr加速和伪装网站">BBR加速和伪装网站</a>
+          <ul>
+            <li><a href="#开启bbr加速">开启bbr加速</a></li>
+            <li><a href="#伪装站点">伪装站点</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="甲骨文vps搭建trojan步骤">甲骨文VPS搭建trojan步骤</h1>
+<h3 id="vps准备">VPS准备</h3>
+<p>需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1725-FOHJQg.png" alt="20220320-1725-FOHJQg" style="zoom: 33%;" />
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1727-KYznYj.png" alt="20220320-1727-KYznYj" style="zoom:33%;" />
+<h3 id="防火墙设置">防火墙设置</h3>
+<p>ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1727-CyQeWT.png" alt="20220320-1727-CyQeWT" style="zoom:33%;" />
+<p>之后，再去VPS实例里面更改防火墙设置，我的机器是centos8系统，用Firewalld命令更改防火墙设置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 列出已开启的端口/服务
+</span></span><span class="line"><span class="cl">firewall-cmd --list-all 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 开启端口
+</span></span><span class="line"><span class="cl">firewall-cmd --zone=public --permanent --add-port 8080/tcp
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 重载配置
+</span></span><span class="line"><span class="cl">firewall-cmd --reload
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1734-3CUKHN.png" alt="20220320-1734-3CUKHN" style="zoom: 50%;" />
+<h3 id="安装docker以及拉取要用的镜像">安装docker以及拉取要用的镜像</h3>
+<p>安装docker参照<a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreffer">docker官方文档</a></p>
+<p>安装好docker后拉取<a href="https://github.com/Jrohy/trojan" target="_blank" rel="noopener noreffer">trojan镜像</a>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 拉取数据库，此处的端口映射、root密码、数据库名称都可以改
+</span></span><span class="line"><span class="cl">docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1744-5p0Wcx.png" alt="20220320-1744-5p0Wcx" style="zoom:50%;" />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#拉取trojan镜像
+</span></span><span class="line"><span class="cl">docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 进入容器
+</span></span><span class="line"><span class="cl">docker exec -it trojan bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#开启trojan 会自动开始安装 按提示输入信息即可
+</span></span><span class="line"><span class="cl">trojan
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>此时可能有一些问题：</p>
+<ol>
+<li>
+<p>解析问题</p>
+ <img src="/Users/zhxu/Library/Application%20Support/typora-user-images/image-20220320185951719.png" alt="image-20220320185951719" style="zoom:33%;" />
+</li>
+</ol>
+<p>​	选一个证书发行机构（推荐zeroSSL），输入域名（已经解析到VPS的ip）,如果开启了cloudflare的代理功能，此处可能报错，域名解析地址不正确。再输入邮箱，等待脚本自动申请证书。</p>
+<p>如果有输出类似如下，说明证书申请成功：</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1911-X3XUBT.png" alt="20220320-1911-X3XUBT" style="zoom:50%;" />
+<p>没有上图输出，那就是申请失败，无法开启trojan。此时需要做的是：</p>
+<ol>
+<li>查看VPS上是否开启了其他web服务，如nginx、web应用等。可能是它们占用了申请证书时需要用到的端口，暂时关闭这些服务，再尝试申请。</li>
+<li>可能你用的域名已经在证书发行机构申请过了域名。此时去域名解析处添加一个记录，用新添加的域名尝试。</li>
+<li>可能是80、443端口没有开放。此时开饭这些端口再尝试。</li>
+</ol>
+<p>成功申请好证书之后，只需要在管理界面重新启动一次trojan即可。</p>
+<h3 id="bbr加速和伪装网站">BBR加速和伪装网站</h3>
+<h4 id="开启bbr加速">开启bbr加速</h4>
+<blockquote>
+<p>BBR是谷歌开发出了一种加速网络传输协议 TCP 的新算法，这种算法通过优化传输速度，避免路由堵塞现象的产生。<a href="https://www.leixue.com/so/BBR" target="_blank" rel="noopener noreffer">BBR</a> 利用瓶颈带宽和往返传播时间，被认为是迄今为止跨越不同路由发送数据的最快方法，当数据路由拥挤时，能够更有效地处理流量。目前 Google 已经将 BBR 投入 YouTube 使用。有消息透露，BBR 通过优化使 YouTube 流量平均增长了 4%，在其他一些方面则达到了 14%。</p>
+</blockquote>
+<p>centos8 只能开启bbr，一些其他的bbr魔改会卸载一些系统内核，导致VPS无法连接。</p>
+<p><strong>1.开启BBR</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">echo &#34;net.core.default_qdisc=fq&#34; &gt;&gt; /etc/sysctl.conf
+</span></span><span class="line"><span class="cl">echo &#34;net.ipv4.tcp_congestion_control=bbr&#34; &gt;&gt; /etc/sysctl.conf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>保存退出后，执行下边的命令使配置生效</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sysctl -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>2.检查 BBR 是否开启成功</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sysctl -n net.ipv4.tcp_congestion_control
+</span></span><span class="line"><span class="cl">lsmod | grep bbr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-1931-KOZu4D.png" alt="20220320-1931-KOZu4D" style="zoom:50%;" />
+<h4 id="伪装站点">伪装站点</h4>
+<p>安装好此trojan后，自带一个web管理界面，需要的可以开启，我个人觉得不需要，防止被探查到，就关闭了。下面是相关命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 开启
+</span></span><span class="line"><span class="cl">systemctl start trojan-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">#关闭
+</span></span><span class="line"><span class="cl">systemctl stop trojan-web
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 允许自启动
+</span></span><span class="line"><span class="cl">systemctl enable trojan-web
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>利用nginxproxymanager部署站点</p>
+<p>参照<a href="https://github.com/NginxProxyManager/nginx-proxy-manager/issues/280" target="_blank" rel="noopener noreffer">链接</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd {path-to-install-npm}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker-compose down
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">vim docker-compose.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">version: &#39;3&#39;
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">  app:
+</span></span><span class="line"><span class="cl">    image: &#39;jc21/nginx-proxy-manager:latest&#39;
+</span></span><span class="line"><span class="cl">    restart: unless-stopped
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - &#39;80:80&#39;
+</span></span><span class="line"><span class="cl">      - &#39;81:81&#39;
+</span></span><span class="line"><span class="cl">      - &#39;443:443&#39;
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - ./data:/data
+</span></span><span class="line"><span class="cl">      - ./letsencrypt:/etc/letsencrypt
+</span></span><span class="line"><span class="cl">      - ./websites/:/mnt/user/appdata/NginxProxyManager/websites/
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">docker-compose up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>进入npm管理后台，新增加一天反代</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">root /mnt/user/appdata/NginxProxyManager/websites/test;
+</span></span><span class="line"><span class="cl">index index.html;
+</span></span><span class="line"><span class="cl">location / {
+</span></span><span class="line"><span class="cl">    try_files $uri /index.html /index.html;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在path-to-install-npm/websites/ 目录下放入编辑好的html文件index.html（可以从github上clone一个静态博客等）。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220320-2017-J5D05B.png" alt="20220320-2017-J5D05B" style="zoom:50%;" />
+<p>然后再访问下代理的域名，看看是不是指向了html文件。</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-03-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤" data-hashtags="VPS"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-hashtag="VPS"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤" data-ralateuid="5971704717"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/" data-title="甲骨文VPS搭建trojan步骤"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vps/">VPS</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/" class="prev" rel="prev" title="部署web应用程序到centos系统遇到的防火墙问题及解决"><i class="fas fa-angle-left fa-fw"></i>部署web应用程序到centos系统遇到的防火墙问题及解决</a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

@@ -247,8 +247,8 @@ fmt.Printf()
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var 变量名 类型 = 表达式
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var 变量名 类型 = 表达式
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中，类型和<code>= 表达式</code>两者可省略其一。编译器会自动推断变量的类型或者初始值。</p>
 <p>各个类型的0值：</p>
@@ -277,10 +277,10 @@ fmt.Printf()
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var i,j,k int
-var b,f,s = true,2.3,&#34;foo&#34;
-var f,err = os.Open(name)
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var i,j,k int
+</span></span><span class="line"><span class="cl">var b,f,s = true,2.3,&#34;foo&#34;
+</span></span><span class="line"><span class="cl">var f,err = os.Open(name)
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="231-简短变量声明">2.3.1 简短变量声明</h3>
 <div class="highlight"><div class="chroma">
@@ -291,11 +291,11 @@ var f,err = os.Open(name)
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">变量名 := 表达式
-i := 0
-i,j := 0,1 //声明+（可能赋值）
-i,j = j,i //赋值
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">变量名 := 表达式
+</span></span><span class="line"><span class="cl">i := 0
+</span></span><span class="line"><span class="cl">i,j := 0,1 //声明+（可能赋值）
+</span></span><span class="line"><span class="cl">i,j = j,i //赋值
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>左边为单个变量：</p>
 <p>该变量必须为首次声明，语句即起到声明+初始化的作用。</p>
@@ -309,11 +309,11 @@ i,j = j,i //赋值
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">i := 0
-i ++
-i,j:= 2,3
-j++    
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">i := 0
+</span></span><span class="line"><span class="cl">i ++
+</span></span><span class="line"><span class="cl">i,j:= 2,3
+</span></span><span class="line"><span class="cl">j++    
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="232-指针">2.3.2 指针</h3>
 <p>go中的指针对C语言中指针类型进行了一定的限制，使其变得更加安全。</p>
@@ -326,9 +326,9 @@ j++    
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var x int
-addr := &amp;x    
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var x int
+</span></span><span class="line"><span class="cl">addr := &amp;x    
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>那么addr的类型为<code>*int</code>，addr被称为“指向int类型的指针”，保存了x变量的内存地址。</p>
 <p><strong>指针运算符：</strong></p>
@@ -346,14 +346,14 @@ addr := &amp;x    
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">i := 0
-i++
-t := &amp;i
-fmt.Println(i, t)//1 0x140000140a0
-fmt.Println(*t)//1
-fmt.Println(&amp;*t)//0x140000140a0
-fmt.Println(*&amp;*t)//1    
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">i := 0
+</span></span><span class="line"><span class="cl">i++
+</span></span><span class="line"><span class="cl">t := &amp;i
+</span></span><span class="line"><span class="cl">fmt.Println(i, t)//1 0x140000140a0
+</span></span><span class="line"><span class="cl">fmt.Println(*t)//1
+</span></span><span class="line"><span class="cl">fmt.Println(&amp;*t)//0x140000140a0
+</span></span><span class="line"><span class="cl">fmt.Println(*&amp;*t)//1    
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>指针类型的0值为nil。</p>
 <p>指针之间也可以比较，当取值（地址）相同或者全部为nil时，才相等。</p>
@@ -363,9 +363,9 @@ fmt.Println(*&amp;*t)//1    
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var x, y int 
-fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == nil) // &#34;true false false&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var x, y int 
+</span></span><span class="line"><span class="cl">fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == nil) // &#34;true false false&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>go语言中局部变量的地址也是安全的：</p>
 <div class="highlight"><div class="chroma">
@@ -377,12 +377,12 @@ fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == nil) // &#34;true fals
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var p = f()
-
-func f() *int { 
-    v := 1 return &amp;v 
-}
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var p = f()
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">func f() *int { 
+</span></span><span class="line"><span class="cl">    v := 1 return &amp;v 
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="233-new函数">2.3.3 new函数</h3>
 <p>另一个创建变量的方法是调用用内建的new函数。表达式new(T)将创建一个T类型的匿名变量，初始化为T类型的零值，然后返回变量地址，返回的指针类型为*T。</p>
@@ -394,11 +394,11 @@ func f() *int {
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">p := new(int) // p, *int 类型, 指向匿名的 int 变量 
-fmt.Println(*p) // &#34;0&#34; 
-*p = 2 // 设置 int 匿名变量的值为 2 
-fmt.Println(*p) // &#34;2&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">p := new(int) // p, *int 类型, 指向匿名的 int 变量 
+</span></span><span class="line"><span class="cl">fmt.Println(*p) // &#34;0&#34; 
+</span></span><span class="line"><span class="cl">*p = 2 // 设置 int 匿名变量的值为 2 
+</span></span><span class="line"><span class="cl">fmt.Println(*p) // &#34;2&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="234-变量的生命周期">2.3.4 变量的生命周期</h3>
 <p>变量的生命周期指的是在程序运行期间变量有效存在的时间间隔。</p>
@@ -414,10 +414,10 @@ fmt.Println(*p) // &#34;2&#34;
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">x, y = y, x
-
-a[i], a[j] = a[j], a[i]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">x, y = y, x
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">a[i], a[j] = a[j], a[i]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="242-可赋值性">2.4.2 可赋值性</h3>
 <p>在赋值语句左边的变量和右边最终的求到的值必须有相同的数据类型。更直白地说，只有右边的值对于左边的变量是可赋值的，赋值语句才是允许的。</p>
@@ -433,8 +433,8 @@ a[i], a[j] = a[j], a[i]
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">type 类型名字 底层类型
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">type 类型名字 底层类型
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>类型声明语句一般出现在包一级，因此如果新创建的类型名字的首字符大写，则在外部包也可以使用。目前中文汉字作为不能导出的类型。</p>
 <div class="highlight"><div class="chroma">
@@ -456,22 +456,22 @@ a[i], a[j] = a[j], a[i]
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">tempconv</span>
-
-<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
-
-<span class="kd">type</span> <span class="nx">Celsius</span> <span class="kt">float64</span> <span class="c1">// 摄氏温度 
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">Fahrenheit</span> <span class="kt">float64</span> <span class="c1">// 华氏温度
-</span><span class="c1"></span>
-<span class="kd">const</span> <span class="p">(</span> 
-    <span class="nx">AbsoluteZeroC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="o">-</span><span class="mf">273.15</span> <span class="c1">// 绝对零度 
-</span><span class="c1"></span>    <span class="nx">FreezingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 结冰点温度 
-</span><span class="c1"></span>    <span class="nx">BoilingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">100</span> <span class="c1">// 沸水温度 )
-</span><span class="c1"></span>
-<span class="kd">func</span> <span class="nf">CToF</span><span class="p">(</span><span class="nx">c</span> <span class="nx">Celsius</span><span class="p">)</span> <span class="nx">Fahrenheit</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Fahrenheit</span><span class="p">(</span><span class="nx">c</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="p">}</span>
-
-<span class="kd">func</span> <span class="nf">FToC</span><span class="p">(</span><span class="nx">f</span> <span class="nx">Fahrenheit</span><span class="p">)</span> <span class="nx">Celsius</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Celsius</span><span class="p">((</span><span class="nx">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span> <span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">tempconv</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Celsius</span> <span class="kt">float64</span> <span class="c1">// 摄氏温度 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">Fahrenheit</span> <span class="kt">float64</span> <span class="c1">// 华氏温度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">const</span> <span class="p">(</span> 
+</span></span><span class="line"><span class="cl">    <span class="nx">AbsoluteZeroC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="o">-</span><span class="mf">273.15</span> <span class="c1">// 绝对零度 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">FreezingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">0</span> <span class="c1">// 结冰点温度 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">BoilingC</span> <span class="nx">Celsius</span> <span class="p">=</span> <span class="mi">100</span> <span class="c1">// 沸水温度 )
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">CToF</span><span class="p">(</span><span class="nx">c</span> <span class="nx">Celsius</span><span class="p">)</span> <span class="nx">Fahrenheit</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Fahrenheit</span><span class="p">(</span><span class="nx">c</span><span class="o">*</span><span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span><span class="p">)</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">FToC</span><span class="p">(</span><span class="nx">f</span> <span class="nx">Fahrenheit</span><span class="p">)</span> <span class="nx">Celsius</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">Celsius</span><span class="p">((</span><span class="nx">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">9</span><span class="p">)</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>为什么要像上述代码自定义类型：</p>
 <ul>
@@ -496,13 +496,13 @@ a[i], a[j] = a[j], a[i]
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">var c Celsius 
-var f Fahrenheit 
-fmt.Println(c == 0) // &#34;true&#34; 
-fmt.Println(f &gt;= 0) // &#34;true&#34; 
-fmt.Println(c == f) // compile error: type mismatch 
-fmt.Println(c == Celsius(f)) // &#34;true&#34;!
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">var c Celsius 
+</span></span><span class="line"><span class="cl">var f Fahrenheit 
+</span></span><span class="line"><span class="cl">fmt.Println(c == 0) // &#34;true&#34; 
+</span></span><span class="line"><span class="cl">fmt.Println(f &gt;= 0) // &#34;true&#34; 
+</span></span><span class="line"><span class="cl">fmt.Println(c == f) // compile error: type mismatch 
+</span></span><span class="line"><span class="cl">fmt.Println(c == Celsius(f)) // &#34;true&#34;!
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="27-作用域">2.7 作用域</h2>
 <p>作用域和生命周期：</p>
@@ -552,24 +552,24 @@ fmt.Println(c == Celsius(f)) // &#34;true&#34;!
 </span><span class="lnt">17
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
-
-<span class="kn">import</span> <span class="p">{</span>    
-    <span class="s">&#34;fmt&#34;</span>
-    <span class="s">&#34;math/rand&#34;</span>
-    <span class="s">&#34;time&#34;</span>
-
-<span class="p">}</span>
-
-<span class="kd">var</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span> <span class="kt">bool</span>
-
-<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">i</span> <span class="kt">int</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span><span class="p">)</span>
-    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">)</span>
-    <span class="nx">rand</span><span class="p">.</span><span class="nf">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">())</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="p">{</span>    
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;fmt&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;math/rand&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;time&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span> <span class="kt">bool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">i</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">python</span><span class="p">,</span> <span class="nx">java</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">math</span><span class="p">.</span><span class="nx">pi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rand</span><span class="p">.</span><span class="nf">Seed</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nf">Now</span><span class="p">().</span><span class="nf">UnixNano</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于应用程序（可以运行的程序）来说，必须要有一个main包，main包下可以包含若干个go文件，但是必须有且仅有一个go文件中包含一个main函数，作为程序的入口。</p>
 <p>对于供其他人使用的模块(库)来说，可以没有main包。</p>

@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>VPS - Tag - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/tags/vps/</link>
+        <description>VPS - Tag - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 20 Mar 2022 14:41:05 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/vps/" rel="self" type="application/rss+xml" /><item>
+    <title>甲骨文VPS搭建trojan步骤</title>
+    <link>https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/</link>
+    <pubDate>Sun, 20 Mar 2022 14:41:05 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/</guid>
+    <description><![CDATA[甲骨文VPS搭建trojan步骤 VPS准备 需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。
+防火墙设置 ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。
+之后，再去VPS实例里面更改防火墙设置，我的机器是centos8系统，用Firewalld命令更改防火墙设置。
+1 2 3 4 5 6 7 8  # 列出已开启的端口/服务 firewall-cmd --list-all # 开启端口 firewall-cmd --zone=public --permanent --add-port 8080/tcp # 重载配置 firewall-cmd --reload   安装docker以及拉取要用的镜像 安装docker参照docker官方文档
+安装好docker后拉取trojan镜像。
+1 2  # 拉取数据库，此处的端口映射、root密码、数据库名称都可以改 docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2   此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。
+1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题：]]></description>
+</item></channel>
+</rss>

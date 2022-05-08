@@ -156,8 +156,8 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">brew install mysql
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">brew install mysql
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>等待安装完毕后，可以使用下列命令开启或停止mysql服务：</p>
 <div class="highlight"><div class="chroma">
@@ -168,11 +168,11 @@
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">sudo mysql.server start  //开启服务
-sudo mysql.server stop   //关闭服务
-sudo mysql.server restart  //重启服务
-sudo mysql.server status  //查看状态
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sudo mysql.server start  //开启服务
+</span></span><span class="line"><span class="cl">sudo mysql.server stop   //关闭服务
+</span></span><span class="line"><span class="cl">sudo mysql.server restart  //重启服务
+</span></span><span class="line"><span class="cl">sudo mysql.server status  //查看状态
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注意需要输入Mac开机密码来确认上述命令的执行。</p>
 <p>初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：</p>
@@ -181,8 +181,8 @@ sudo mysql.server status  //查看状态
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">mysql_secure_installation
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysql_secure_installation
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>一切设置完毕就可以正常使用了
 <img
@@ -200,8 +200,8 @@ sudo mysql.server status  //查看状态
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">brew uninstall mysql
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">brew uninstall mysql
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>要想彻底清除数据库文件，还要去<code>/opt/homebrew/var</code>目录执行：
 <code>sudo rm -rf mysql</code>命令。</p>
