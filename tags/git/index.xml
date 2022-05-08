@@ -1,0 +1,17 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Git - Tag - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/tags/git/</link>
+        <description>Git - Tag - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Sun, 08 May 2022 12:00:52 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/git/" rel="self" type="application/rss+xml" /><item>
+    <title>Git命令 基础</title>
+    <link>https://ZevaXu.github.io/git%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Sun, 08 May 2022 12:00:52 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/git%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
+查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
+ 将尚未进行版本控制的本地目录转换为 Git 仓库； 从其它服务器 克隆 一个已存在的 Git 仓库。  两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。
+本地目录转换为 Git 仓库 1 2 3 4 5 6 7  cd project_path # 空文件夹 git init.]]></description>
+</item></channel>
+</rss>

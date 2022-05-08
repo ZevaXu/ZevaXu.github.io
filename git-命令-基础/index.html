@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title> - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="" />
+<meta property="og:description" content="git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
+查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
+ 将尚未进行版本控制的本地目录转换为 Git 仓库； 从其它服务器 克隆 一个已存在的 Git 仓库。  两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。
+本地目录转换为 Git 仓库 1 2 3 4 5 6 7  cd project_path # 空文件夹 git init." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://ZevaXu.github.io/logo.png"/><meta property="article:section" content="posts" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ZevaXu.github.io/logo.png"/>
+
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
+查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
+ 将尚未进行版本控制的本地目录转换为 Git 仓库； 从其它服务器 克隆 一个已存在的 Git 仓库。  两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。
+本地目录转换为 Git 仓库 1 2 3 4 5 6 7  cd project_path # 空文件夹 git init."/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" /><link rel="prev" href="https://ZevaXu.github.io/%E8%AE%BE%E7%BD%AEvps%E7%94%A8%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/" /><link rel="next" href="https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80\/"
+        },"genre": "posts","wordcount":  624 ,
+        "url": "https:\/\/ZevaXu.github.io\/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80\/","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/catch-the-cat/"> Game </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/catch-the-cat/" title="">Game</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX"></h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="0001-01-01">0001-01-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;624 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;3 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#git-config">git config</a>
+      <ul>
+        <li><a href="#查看文件位置以及所有的配置">查看文件位置以及所有的配置：</a></li>
+        <li><a href="#用户信息">用户信息</a></li>
+        <li><a href="#查看配置信息">查看配置信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#获取git仓库">获取git仓库</a>
+      <ul>
+        <li><a href="#本地目录转换为-git-仓库">本地目录转换为 Git 仓库</a></li>
+        <li><a href="#克隆现有的仓库">克隆现有的仓库</a></li>
+      </ul>
+    </li>
+    <li><a href="#记录更新到仓库">记录更新到仓库</a>
+      <ul>
+        <li><a href="#查看当前文件状态">查看当前文件状态</a></li>
+        <li><a href="#跟踪新文件">跟踪新文件</a>
+          <ul>
+            <li><a href="#状态简览">状态简览</a></li>
+            <li><a href="#忽略文件">忽略文件</a></li>
+          </ul>
+        </li>
+        <li><a href="#查看已暂存和未暂存的修改">查看已暂存和未暂存的修改</a></li>
+        <li><a href="#提交更新">提交更新</a>
+          <ul>
+            <li><a href="#跳过使用暂存区域">跳过使用暂存区域</a></li>
+          </ul>
+        </li>
+        <li><a href="#移除文件">移除文件</a>
+          <ul>
+            <li><a href="#将文件从git仓库删除">将文件从git仓库删除</a></li>
+          </ul>
+        </li>
+        <li><a href="#移动文件">移动文件</a></li>
+      </ul>
+    </li>
+    <li><a href="#查看提交历史">查看提交历史</a>
+      <ul>
+        <li>
+          <ul>
+            <li><a href="#常用选项">常用选项</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#撤销操作">撤销操作</a></li>
+    <li><a href="#远程仓库的使用">远程仓库的使用</a>
+      <ul>
+        <li><a href="#查看远程仓库">查看远程仓库</a></li>
+        <li><a href="#添加远程仓库">添加远程仓库</a></li>
+        <li><a href="#从远程仓库拉取和抓取">从远程仓库拉取和抓取</a></li>
+        <li><a href="#推送到远程仓库">推送到远程仓库</a></li>
+        <li><a href="#查看远程仓库-1">查看远程仓库</a></li>
+        <li><a href="#远程仓库重命名与移除">远程仓库重命名与移除</a></li>
+      </ul>
+    </li>
+    <li><a href="#打标签">打标签</a>
+      <ul>
+        <li><a href="#列出标签">列出标签</a></li>
+        <li><a href="#创建附注标签">创建附注标签</a></li>
+        <li><a href="#创建轻量标签">创建轻量标签</a></li>
+        <li><a href="#后期标签">后期标签</a></li>
+        <li><a href="#共享标签">共享标签</a></li>
+        <li><a href="#删除标签">删除标签</a></li>
+      </ul>
+    </li>
+    <li><a href="#git别名">Git别名</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="git-config">git config</h2>
+<p>Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。</p>
+<h3 id="查看文件位置以及所有的配置">查看文件位置以及所有的配置：</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --list --show-origin
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&gt; /opt/homebrew/etc/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="用户信息">用户信息</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --global user.name &#34;John Doe&#34;
+</span></span><span class="line"><span class="cl">git config --global user.email johndoe@example.com
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看配置信息">查看配置信息</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --list(-l)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="获取git仓库">获取git仓库</h2>
+<p>通常有两种获取 Git 项目仓库的方式：</p>
+<ol>
+<li>将尚未进行版本控制的本地目录转换为 Git 仓库；</li>
+<li>从其它服务器 克隆 一个已存在的 Git 仓库。</li>
+</ol>
+<p>两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。</p>
+<h3 id="本地目录转换为-git-仓库">本地目录转换为 Git 仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cd project_path # 空文件夹
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git init. # 会自动创建一个 .git 目录（git仓库的主干）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git add *.c
+</span></span><span class="line"><span class="cl">git add LICNESE
+</span></span><span class="line"><span class="cl">git commit -m &#39;初次提交&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1206-fHpSv6.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1206-fHpSv6.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1206-fHpSv6.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1206-fHpSv6.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1206-fHpSv6.png"
+        title="20220503-1206-fHpSv6" /></p>
+<h3 id="克隆现有的仓库">克隆现有的仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/libgit2/libgit2
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这会在当前目录下创建一个名为 “libgit2” 的目录，并在这个目录下初始化一个 .git 文件夹， 从远程仓库拉取下所有数据放入 .git 文件夹，然后从中读取最新版本的文件的拷贝。</p>
+<p>Git 支持多种数据传输协议。 上面的例子使用的是 https:// 协议，不过你也可以使用 git:// 协议或者使用SSH 传输协议，比如 user@server:path/to/repo.git 。</p>
+<h2 id="记录更新到仓库">记录更新到仓库</h2>
+<p>工作目录下的每一个文件都不外乎这两种状态：已跟踪 或 未跟踪。</p>
+<p>**已跟踪：**的文件是指那些被纳入了版本控制的文件，在上一次快照中有它们的记录，在工作一段时间后， 它们的状态可能是未修改、已修改或已放入暂存区。简而言之，已跟踪的文件就是 Git 已经知道的文件</p>
+<p>**未跟踪：**工作目录中除已跟踪文件外的其它所有文件都属于未跟踪文件，它们既不存在于上次快照的记录中，也没有被放入暂存区。 初次克隆某个仓库的时候，工作目录中的所有文件都属于已跟踪文件，并处于未修改状态，因为 Git刚刚检出了它们， 而你尚未编辑过它们。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1158-VoYlGM.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1158-VoYlGM.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1158-VoYlGM.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1158-VoYlGM.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1158-VoYlGM.png"
+        title="20220503-1158-VoYlGM" /></p>
+<h3 id="查看当前文件状态">查看当前文件状态</h3>
+<p><code>git statues</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1200-o9KkfD.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1200-o9KkfD.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1200-o9KkfD.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1200-o9KkfD.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220503-1200-o9KkfD.png"
+        title="20220503-1200-o9KkfD" /></p>
+<p>这说明你现在的工作目录相当干净。换句话说，<strong>所有已跟踪文件在上次提交后都未被更改过。</strong></p>
+<p>此外，上面的信息还表明，<strong>当前目录下没有出现任何处于未跟踪状态的新文件</strong>，否则 Git 会在这里列出来。</p>
+<p>最后，<strong>该命令还显示了当前所在分支</strong>，并告诉你这个分支同远程服务器上对应的分支没有偏离。 现在，分支名是“stable”，这是默认的分支名。</p>
+<h3 id="跟踪新文件">跟踪新文件</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git add &lt;文件名&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>自行创建一个文件后，<code>git status</code>查看git状态会显示<code>未跟踪的文件</code>。<code>git add &lt;文件&gt;</code>之后，则变成<code>待提交状态</code>。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1118-CC11DC.png" alt="20220507-1118-CC11DC" style="zoom:50%;" />
+<p>只要在 Changes to be committed 这行下面的，就说明是已暂存状态。 如果此时提交，那么该文件在你运行 git add 时的版本将被留存在后续的历史记录中。</p>
+<p>git add 命令使用文件或目录的路径作为参数；如果参数是目录的路径，该命令将递归地跟踪该目录下的所有文件。</p>
+<p><code>git add</code>只会暂存运行改命令时刻的文件内容，之后进行的修改并没有记录。</p>
+<h4 id="状态简览">状态简览</h4>
+<p><code>git status -s(--short)</code></p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1130-3PslYX.png" alt="20220507-1130-3PslYX" style="zoom:50%;" />
+<p>新添加的未跟踪文件前面有 ?? 标记，新添加到暂存区中的文件前面有 A 标记，修改过的文件前面有 M 标记。</p>
+<p>输出中有两栏，左栏指明了暂存区的状态，右栏指明了工作区的状态。例如，上面的状态报告显示： README 文件在工作区已修改但尚未暂存，而 lib/simplegit.rb 文件已修改且已暂存。 Rakefile 文件已修改，暂存后又作了修改，因此该文件的修改中既有已暂存的部分，又有未暂存的部分。</p>
+<h4 id="忽略文件">忽略文件</h4>
+<p><code>.gitignore</code></p>
+<p>把不需要纳入git管理的文件列入其中即可。</p>
+<p>格式规范：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">* 所有空行或者以 # 开头的行都会被 Git 忽略。
+</span></span><span class="line"><span class="cl">* 可以使用标准的 glob 模式匹配，它会递归地应用在整个工作区中。
+</span></span><span class="line"><span class="cl">* 匹配模式可以以（/）开头防止递归。
+</span></span><span class="line"><span class="cl">* 匹配模式可以以（/）结尾指定目录。
+</span></span><span class="line"><span class="cl">* 要忽略指定模式以外的文件或目录，可以在模式前加上叹号（!）取反。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>shell简化的正则表达式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">星号（*）匹配零个或多个任意字符；
+</span></span><span class="line"><span class="cl">[abc] 匹配任何一个列在方括号中的字符 （这个例子要么匹配一个 a，要么匹配一个 b，要么匹配一个 c）； 
+</span></span><span class="line"><span class="cl">问号（?）只匹配一个任意字符；
+</span></span><span class="line"><span class="cl">如果在方括号中使用短划线分隔两个字符，表示所有在这两个字符范围内的都可以匹配（比如 [0-9] 表示匹配所有 0 到 9 的数字）。
+</span></span><span class="line"><span class="cl">使用两个星号（**）表示匹配任意中间目录，比如 a/**/z 可以匹配 a/z 、 a/b/z 或 a/b/c/z 等。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 忽略所有的 .a 文件
+</span></span><span class="line"><span class="cl">*.a
+</span></span><span class="line"><span class="cl"># 但跟踪所有的 lib.a，即便你在前面忽略了 .a 文件
+</span></span><span class="line"><span class="cl">!lib.a
+</span></span><span class="line"><span class="cl"># 只忽略当前目录下的 TODO 文件，而不忽略 subdir/TODO
+</span></span><span class="line"><span class="cl">/TODO
+</span></span><span class="line"><span class="cl"># 忽略任何目录下名为 build 的文件夹
+</span></span><span class="line"><span class="cl">build/
+</span></span><span class="line"><span class="cl"># 忽略 doc/notes.txt，但不忽略 doc/server/arch.txt
+</span></span><span class="line"><span class="cl">doc/*.txt
+</span></span><span class="line"><span class="cl"># 忽略 doc/ 目录及其所有子目录下的 .pdf 文件
+</span></span><span class="line"><span class="cl">doc/**/*.pdf
+</span></span><span class="line"><span class="cl"># https://github.com/github/gitignore 列出详细的针对不同语言的忽略列表
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看已暂存和未暂存的修改">查看已暂存和未暂存的修改</h3>
+<p><code>git diff</code></p>
+<p>git diff 本身只显示尚未暂存的改动，而不是自上次提交以来所做的所有改动。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1142-hTV1CP.png" alt="20220507-1142-hTV1CP" style="zoom:50%;" />
+<h3 id="提交更新">提交更新</h3>
+<p><code>git commit</code></p>
+<p>每一次运行提交操作，都是对你项目作一次快照，以后可以回到这个状态，或者进行比较。</p>
+<h4 id="跳过使用暂存区域">跳过使用暂存区域</h4>
+<p><code>git commit -a</code></p>
+<p>不想一个个<code>git add</code>也可以跳过这一步，就会自动把所有已经跟踪过的文件暂存起来一并提交。</p>
+<h3 id="移除文件">移除文件</h3>
+<p><code>git rm </code></p>
+<p>将文件从暂存区移除，再提交。</p>
+<p>如果要删除之前修改过或已经放到暂存区的文件，则必须使用强制删除选项 -f（译注：即 force 的首字母）。</p>
+<h4 id="将文件从git仓库删除">将文件从git仓库删除</h4>
+<p><code>git rm --cached</code></p>
+<p>文件依然保留在本地，但是git不会再跟踪。</p>
+<h3 id="移动文件">移动文件</h3>
+<p><code>git mv</code></p>
+<p>Git 并不显式跟踪文件移动操作。 如果在 Git 中重命名了某个文件，仓库中存储的元数据并不会体现出这是一次改名操作。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git mv 相当于三条命令
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">mv README.md README
+</span></span><span class="line"><span class="cl">git rm README.md
+</span></span><span class="line"><span class="cl">git add README
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="查看提交历史">查看提交历史</h2>
+<p><code>git log</code></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1207-TXfKpv.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1207-TXfKpv.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1207-TXfKpv.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1207-TXfKpv.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220507-1207-TXfKpv.png"
+        title="20220507-1207-TXfKpv" /></p>
+<p>不传入任何参数的默认情况下，git log 会按时间先后顺序列出所有的提交，最近的更新排在最上面。 正如你所看到的，这个命令会列出每个提交的 SHA-1 校验和、作者的名字和电子邮件地址、提交时间以及提交说明。</p>
+<h4 id="常用选项">常用选项</h4>
+<p>-p: 它会显示每次提交所引入的差异</p>
+<p>-2: 限制输出2条记录</p>
+<p>&ndash;stat: 列出一个总结性的信息。列出所有被修改过的文文件，多少文件被修改等。</p>
+<p>&ndash;pretty: 以美观的形式展现，并可以自定义输出格式</p>
+<h2 id="撤销操作">撤销操作</h2>
+<p><code>git commit --amend</code></p>
+<p>如果前一次提交没有提交完整，比如忘记add 某个文件，或者commit描述不太对。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git commit -m &#39;initial commit&#39;
+</span></span><span class="line"><span class="cl">git add forgotten_file
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git commit --amend
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最后只有一个提交，后面的提交会覆盖头一次提交。</p>
+<h2 id="远程仓库的使用">远程仓库的使用</h2>
+<h3 id="查看远程仓库">查看远程仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote
+</span></span><span class="line"><span class="cl">-v 显示仓库对应的url
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220508-1033-Bbd3ij.png" alt="20220508-1033-Bbd3ij" style="zoom:50%;" />
+<h3 id="添加远程仓库">添加远程仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone url
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git remote add &lt;短命名&gt; url
+</span></span><span class="line"><span class="cl"># 用pb代替url
+</span></span><span class="line"><span class="cl">git remote add pb https://github.com/paulboone/ticgit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="从远程仓库拉取和抓取">从远程仓库拉取和抓取</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git fetch &lt;remote&gt; # 从远程仓库获取本地没有的内容
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git clone # 克隆了一个仓库，命令会自动将其添加为远程仓库并默认以 “origin” 为简
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="推送到远程仓库">推送到远程仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push &lt;remote&gt; &lt;branch&gt;
+</span></span><span class="line"><span class="cl">git push origin master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只有当你有所克隆服务器的写入权限，并且之前没有人推送过时，这条命令才能生效。</p>
+<p>当你和其他人在同一时间克隆，他们先推送到上游然后你再推送到上游，你的推送就会毫无疑问地被拒绝。 你必须先抓取他们的工作并将其合并进你的工作后才能推送。</p>
+<h3 id="查看远程仓库-1">查看远程仓库</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote show &lt;remotr&gt;
+</span></span><span class="line"><span class="cl">git remote show origin
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220508-1115-azQ46k.png" alt="20220508-1115-azQ46k" style="zoom:50%;" />
+<h3 id="远程仓库重命名与移除">远程仓库重命名与移除</h3>
+<p>重命名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote rename &lt;old_name&gt; &lt;new_name&gt;
+</span></span><span class="line"><span class="cl">git remote rename pb paul
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>移除</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git remote remove paul
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>一旦你使用这种方式删除了一个远程仓库，那么所有和这个远程仓库相关的远程跟踪分支以及配置信息也会一起被删除。</p>
+<h2 id="打标签">打标签</h2>
+<p>用于标记发布版本等</p>
+<h3 id="列出标签">列出标签</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git tag
+</span></span><span class="line"><span class="cl">-l 匹配
+</span></span><span class="line"><span class="cl">git tag -l &#34;v1.8*&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建附注标签">创建附注标签</h3>
+<p>附注标签是存储在 Git 数据库中的一个完整对象， 它们是可以被校验的，其中包含打标签者的名字、电子邮件地址、日期时间， 此外还有一个标签信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git tag -a 
+</span></span><span class="line"><span class="cl">git tag -a v1.4 -m &#34;my version 1.4&#34;
+</span></span><span class="line"><span class="cl">-m 指定一条存储在标签中的信息
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">查看标签：
+</span></span><span class="line"><span class="cl">git show v1.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="创建轻量标签">创建轻量标签</h3>
+<p>轻量标签相比附注标签是一条更简单的标签，没有其他信息。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 打标签
+</span></span><span class="line"><span class="cl">git tag v1.4
+</span></span><span class="line"><span class="cl">#查看标签
+</span></span><span class="line"><span class="cl">git show v1.4
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="后期标签">后期标签</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 查看提交历史
+</span></span><span class="line"><span class="cl">git log --pretty=online
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 给历史提交打标签
+</span></span><span class="line"><span class="cl">git tag -a v1.2 9fceb02
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="共享标签">共享标签</h3>
+<p>默认情况下，git push 命令并不会传送标签到远程仓库服务器上。 在创建完标签后你必须显式地推送标签到共享服务器上。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push origin &lt;tagname&gt;
+</span></span><span class="line"><span class="cl">git push origin v1.5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="删除标签">删除标签</h3>
+<p>删除本地标签</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git tag -d &lt;tag_name&gt;
+</span></span><span class="line"><span class="cl">git tag -d v1.4-lw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>推送到远程</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git push orgin --delete &lt;tag_name&gt;
+</span></span><span class="line"><span class="cl"># 或者
+</span></span><span class="line"><span class="cl">git push &lt;remote&gt; :refs/tags/&lt;tagname&gt; 
+</span></span><span class="line"><span class="cl">git push origin :refs/tags/v1.4-lw
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="git别名">Git别名</h2>
+<p>为git命令创建别名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git config --global alias.co checkout
+</span></span><span class="line"><span class="cl">git config --global alias.br branch
+</span></span><span class="line"><span class="cl">git config --global alias.ci commit
+</span></span><span class="line"><span class="cl">git config --global alias.st status
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git config --global alias.last &#39;log -1 HEAD&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当要输入 git commit 时，只需要输入 git ci</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 0001-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title=""><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title="" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title=""><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title="" data-ralateuid="5971704717"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title="" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title="" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/" data-title=""><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E8%AE%BE%E7%BD%AEvps%E7%94%A8%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/" class="prev" rel="prev" title=""><i class="fas fa-angle-left fa-fw"></i></a>
+            <a href="/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Conda常用命令">Conda常用命令<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
