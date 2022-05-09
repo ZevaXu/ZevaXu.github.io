@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Shell语言基础 - Zeva`s Space</title><meta name="Description" content="Blog &amp; Note about Zeva"><meta property="og:title" content="Shell语言基础" />
+<meta property="og:description" content="变量 read 从键盘输入读取变量
+1 2 3 4 5  read [-pt] variable -p 提示 -t 时间 read -p &#34;Please keyin your name: &#34; -t 30 named   ​	declare / typeset 宣告变量的类型
+1 2 3 4 5 6 7 8 9  declare [-aixr] variable -a 数组类型 -i 整数类型 -x 环境变量类型 -r 设置为只读类型 默认类型为字符串 declare -i sum=100&#43;200&#43;300 echo ${sum}    默认类型为字符串 只能计算整数类型（1/3=0）  命令别名 alias 给指令设置别名，新创一个新的指令， 你可以直接下达该指令" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" /><meta property="og:image" content="https://ZevaXu.github.io/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-05-09T10:07:25+08:00" />
+<meta property="article:modified_time" content="2022-05-09T10:07:25+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://ZevaXu.github.io/logo.png"/>
+
+<meta name="twitter:title" content="Shell语言基础"/>
+<meta name="twitter:description" content="变量 read 从键盘输入读取变量
+1 2 3 4 5  read [-pt] variable -p 提示 -t 时间 read -p &#34;Please keyin your name: &#34; -t 30 named   ​	declare / typeset 宣告变量的类型
+1 2 3 4 5 6 7 8 9  declare [-aixr] variable -a 数组类型 -i 整数类型 -x 环境变量类型 -r 设置为只读类型 默认类型为字符串 declare -i sum=100&#43;200&#43;300 echo ${sum}    默认类型为字符串 只能计算整数类型（1/3=0）  命令别名 alias 给指令设置别名，新创一个新的指令， 你可以直接下达该指令"/>
+<meta name="application-name" content="LoveIt">
+<meta name="apple-mobile-web-app-title" content="LoveIt"><meta name="theme-color" content="#ffffff"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" /><link rel="prev" href="https://ZevaXu.github.io/acme%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/" /><link rel="next" href="https://ZevaXu.github.io/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Shell语言基础",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/ZevaXu.github.io\/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80\/"
+        },"genre": "posts","keywords": "Linux,Shell","wordcount":  249 ,
+        "url": "https:\/\/ZevaXu.github.io\/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80\/","datePublished": "2022-05-09T10:07:25+08:00","dateModified": "2022-05-09T10:07:25+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"author": {
+                "@type": "Person",
+                "name": "Zeva"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> Categories </a><a class="menu-item" href="/catch-the-cat/"> Game </a><a class="menu-item" href="/tags/"> Tags </a><a class="menu-item" href="/posts/"> Archives </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="Zeva`s Space">Zeva&#39; Space</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="Search titles or contents..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="Search">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="Clear">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        Cancel
+                    </a>
+                </div><a class="menu-item" href="/categories/" title="">Categories</a><a class="menu-item" href="/catch-the-cat/" title="">Game</a><a class="menu-item" href="/tags/" title="">Tags</a><a class="menu-item" href="/posts/" title="">Archives</a><a href="javascript:void(0);" class="menu-item theme-switch" title="Switch Theme">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">Contents</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Shell语言基础</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="far fa-folder fa-fw"></i>学习</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2022-05-09">2022-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;249 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;2 minutes&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="true">
+                <div class="details-summary toc-title">
+                    <span>Contents</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#变量">变量</a>
+      <ul>
+        <li><a href="#read">read</a></li>
+        <li><a href="#declare--typeset">declare / typeset</a></li>
+      </ul>
+    </li>
+    <li><a href="#命令别名">命令别名</a>
+      <ul>
+        <li><a href="#alias">alias</a></li>
+        <li><a href="#unalias">unalias</a></li>
+      </ul>
+    </li>
+    <li><a href="#历史命令-history">历史命令 history</a>
+      <ul>
+        <li><a href="#history">history</a></li>
+      </ul>
+    </li>
+    <li><a href="#路径与指令搜索顺序">路径与指令搜索顺序</a></li>
+    <li><a href="#bash的环境配置文件">bash的环境配置文件</a></li>
+    <li><a href="#组合键通用字符和特殊符号">组合键、通用字符和特殊符号</a></li>
+    <li><a href="#同时执行多条命令">同时执行多条命令</a></li>
+    <li><a href="#管线命令">管线命令</a>
+      <ul>
+        <li><a href="#截取命令">截取命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="变量">变量</h2>
+<h3 id="read">read</h3>
+<p>从键盘输入读取变量</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">read [-pt] variable
+</span></span><span class="line"><span class="cl">-p 提示
+</span></span><span class="line"><span class="cl">-t 时间
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">read -p &#34;Please keyin your name: &#34; -t 30 named
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1340-gS2fGF.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1340-gS2fGF.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1340-gS2fGF.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1340-gS2fGF.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1340-gS2fGF.png"
+        title="20220421-1340-gS2fGF" /></p>
+<h3 id="declare--typeset">declare / typeset</h3>
+<p>宣告变量的类型</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">declare [-aixr] variable
+</span></span><span class="line"><span class="cl">-a 数组类型
+</span></span><span class="line"><span class="cl">-i 整数类型
+</span></span><span class="line"><span class="cl">-x 环境变量类型
+</span></span><span class="line"><span class="cl">-r 设置为只读类型
+</span></span><span class="line"><span class="cl">默认类型为字符串
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">declare -i sum=100+200+300
+</span></span><span class="line"><span class="cl">echo ${sum}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1346-kNmqlf.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1346-kNmqlf.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1346-kNmqlf.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1346-kNmqlf.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1346-kNmqlf.png"
+        title="20220421-1346-kNmqlf" /></p>
+<ul>
+<li>默认类型为字符串</li>
+<li>只能计算整数类型（1/3=0）</li>
+</ul>
+<h2 id="命令别名">命令别名</h2>
+<h3 id="alias">alias</h3>
+<p>给指令设置别名，新创一个新的指令， 你可以直接下达该指令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">alias lm=&#39;ls -al | more&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="unalias">unalias</h3>
+<p>取消别名</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">unalias lm
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="历史命令-history">历史命令 history</h2>
+<h3 id="history">history</h3>
+<p>查询历史命令</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">history n [-acrw]
+</span></span><span class="line"><span class="cl">n 数字，列出最近n条记录
+</span></span><span class="line"><span class="cl">-a 将目前新增的命令写入文件中
+</span></span><span class="line"><span class="cl">-c 清除目前shell中所有的history内容
+</span></span><span class="line"><span class="cl">-r 读取histfiles的内容
+</span></span><span class="line"><span class="cl">-w 写入到histfiles
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="路径与指令搜索顺序">路径与指令搜索顺序</h2>
+<ol>
+<li>以相对/绝对路径执行指令，例如“ /bin/ls ”或“ ./ls ”；</li>
+<li>由 alias 找到该指令来执行；</li>
+<li>由 bash 内置的 （builtin） 指令来执行；</li>
+<li>通过 $PATH 这个变量的顺序搜寻到的第一个指令来执行。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">type -a &lt;指令&gt;
+</span></span><span class="line"><span class="cl">查看指令的搜索顺序
+</span></span></code></pre></td></tr></table>
+</div>
+</div><img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1432-DA7mnz.png" alt="20220421-1432-DA7mnz" style="zoom: 67%;" />
+<h2 id="bash的环境配置文件">bash的环境配置文件</h2>
+<p><strong>login shell会读取的配置文件</strong></p>
+<ol>
+<li>/etc/profile :这是系统整体的设置，你最好不要修改这个文件；</li>
+<li>~/.bash_profile 或 ~/.bash_login 或 ~/.profile：属于使用者个人设置，你要改自己的数据，就写入这里！</li>
+</ol>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1444-7SpfVK.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1444-7SpfVK.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1444-7SpfVK.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1444-7SpfVK.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1444-7SpfVK.png"
+        title="20220421-1444-7SpfVK" /></p>
+<p><strong>source</strong></p>
+<p>读取环境配置文件的指令</p>
+<h2 id="组合键通用字符和特殊符号">组合键、通用字符和特殊符号</h2>
+<p><strong>默认组合键</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1456-UjKNar.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1456-UjKNar.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1456-UjKNar.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1456-UjKNar.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1456-UjKNar.png"
+        title="20220421-1456-UjKNar" /></p>
+<p><strong>万用字符 （wildcard）</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1457-Q1aqcA.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1457-Q1aqcA.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1457-Q1aqcA.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1457-Q1aqcA.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1457-Q1aqcA.png"
+        title="20220421-1457-Q1aqcA" /></p>
+<p>使用例子：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1459-pyG90F.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1459-pyG90F.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1459-pyG90F.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1459-pyG90F.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1459-pyG90F.png"
+        title="20220421-1459-pyG90F" /></p>
+<p><strong>特殊符号</strong></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1508-BOD7VW.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1508-BOD7VW.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1508-BOD7VW.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1508-BOD7VW.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1508-BOD7VW.png"
+        title="20220421-1508-BOD7VW" /></p>
+<h2 id="同时执行多条命令">同时执行多条命令</h2>
+<p><strong>1. cmd;cmd</strong></p>
+<p>不考虑指令之间的相关性</p>
+<p>**2. cmd&amp;&amp;cmd 和 cmd||cmd **</p>
+<p>指令之间存在相关性</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1514-aFFiUX.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1514-aFFiUX.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1514-aFFiUX.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1514-aFFiUX.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1514-aFFiUX.png"
+        title="20220421-1514-aFFiUX" /></p>
+<p><code>$?</code>表示指令执行的回传值，0表示成功，非0表示执行不成功</p>
+<h2 id="管线命令">管线命令</h2>
+<p>管线命令可以对前一个命令执行后的输出标准进行处理和加工，产生用户最想要看到的格式。</p>
+<img src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1545-3T2MQ8.png" alt="20220421-1545-3T2MQ8" style="zoom:67%;" />
+<h3 id="截取命令">截取命令</h3>
+<p><strong>cut</strong></p>
+<p>将一行的信息按要求切割开，取一部分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cut [-dfc]
+</span></span><span class="line"><span class="cl">-d 接字符，表示以该字符切割
+</span></span><span class="line"><span class="cl">-f 接数字，与-d配合使用，表示取第几段
+</span></span><span class="line"><span class="cl">-c 接数字范围，表示取该范围内的字符
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">echo ${PATH} | cut -d &#39;:&#39; -f 5
+</span></span><span class="line"><span class="cl">echo ${PATH} | cut -c 5-19
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1553-YeVAb9.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1553-YeVAb9.png, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1553-YeVAb9.png 1.5x, https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1553-YeVAb9.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20220421-1553-YeVAb9.png"
+        title="20220421-1553-YeVAb9" /></p>
+<p><strong>grep</strong></p>
+<p>分析一行信息，若当中有需要的信息，将该行取出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">grep [-acinv] [--color=auto] &#39;搜索字符&#39; filename
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-a 将二进制文件以text文件搜索
+</span></span><span class="line"><span class="cl">-c 计算共搜索到多少个满足要求的
+</span></span><span class="line"><span class="cl">-i 忽略大小写
+</span></span><span class="line"><span class="cl">-n 输出行号
+</span></span><span class="line"><span class="cl">-v 反向选择
+</span></span><span class="line"><span class="cl">--color=auto 加上颜色
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">last | grep &#39;root&#39; #last 显示登录者信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="../../../../../Library/Application%20Support/typora-user-images/image-20220421160817649.png"
+        data-srcset="../../../../../Library/Application%20Support/typora-user-images/image-20220421160817649.png, ../../../../../Library/Application%20Support/typora-user-images/image-20220421160817649.png 1.5x, ../../../../../Library/Application%20Support/typora-user-images/image-20220421160817649.png 2x"
+        data-sizes="auto"
+        alt="../../../../../Library/Application%20Support/typora-user-images/image-20220421160817649.png"
+        title="image-20220421160817649" /></p>
+<p><strong>sort</strong></p>
+<p>排序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">last | sort
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>uniq</strong></p>
+<p>重复的数据只取一行显示</p>
+<p><strong>wc</strong></p>
+<p>统计文件里有多少字符、多少行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wc [-lwm]
+</span></span><span class="line"><span class="cl">-l 列出行数
+</span></span><span class="line"><span class="cl">-w 列出多少英文字符
+</span></span><span class="line"><span class="cl">-m 多少字符
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">last | sort | uniq | wc -l
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>Updated on 2022-05-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span>
+                            <a class="link-to-markdown" href="/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.md" target="_blank">Read Markdown</a>
+                        </span></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="Share on Twitter" data-sharer="twitter" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础" data-hashtags="Linux,Shell"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="Share on Facebook" data-sharer="facebook" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-hashtag="Linux,Shell"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="Share on WhatsApp" data-sharer="whatsapp" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="javascript:void(0);" title="Share on Line" data-sharer="line" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="javascript:void(0);" title="Share on 微博" data-sharer="weibo" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础" data-ralateuid="5971704717"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="Share on Myspace" data-sharer="myspace" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="javascript:void(0);" title="Share on Blogger" data-sharer="blogger" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="javascript:void(0);" title="Share on Evernote" data-sharer="evernote" data-url="https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" data-title="Shell语言基础"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linuxshell/">Linux,Shell</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/acme%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/" class="prev" rel="prev" title="Acme申请ssl证书"><i class="fas fa-angle-left fa-fw"></i>Acme申请ssl证书</a>
+            <a href="/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="next" rel="next" title="Vim常用命令">Vim常用命令<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2021 - 2022</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">Zeva</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="Back to Top">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="View Comments">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/autocomplete/autocomplete.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js"></script><script type="text/javascript" src="/lib/katex/auto-render.min.js"></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js"></script><script type="text/javascript" src="/lib/katex/mhchem.min.js"></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"Copy to clipboard","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"Got it!","link":"Learn more","message":"This website uses Cookies to improve your experience."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","maxResultLength":10,"noResultsFound":"No results found","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

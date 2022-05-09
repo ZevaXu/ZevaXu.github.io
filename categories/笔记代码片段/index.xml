@@ -1,0 +1,26 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>笔记,代码片段 - Category - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/categories/%E7%AC%94%E8%AE%B0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/</link>
+        <description>笔记,代码片段 - Category - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 09 May 2022 10:32:40 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/%E7%AC%94%E8%AE%B0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" rel="self" type="application/rss+xml" /><item>
+    <title>Vim常用命令</title>
+    <link>https://ZevaXu.github.io/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+    <pubDate>Mon, 09 May 2022 10:32:40 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+    <description><![CDATA[一般模式 一般模式即初次进入vim页面时的默认模式，此时可以进行移动光标、复制、粘贴、删除和查找等操作。
+移动光标 以页为单位   ctrl + f 向下移动一页
+  ctrl + b 向上移动一页
+  以行为单位   G 移到文件最后行
+  n + G 移到文件第n行
+  n + 回车 向下移动n行
+  gg 移动到文件首行
+  以字符为单位   0 移到行首
+  $ 移到行尾
+  3 + 空格 向右移动3个字符
+  搜索与替换   /word 光标向下搜索
+  ？word 光标向4上搜索
+  n 继续搜光标下一个]]></description>
+</item></channel>
+</rss>

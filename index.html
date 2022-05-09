@@ -102,6 +102,67 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="https://weibo.com/5971704717" title="微博" target="_blank" rel="noopener noreffer me"><i class="fab fa-weibo fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Vim常用命令</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/"><i class="far fa-folder fa-fw"></i>笔记,代码片段</a></span></div><div class="content">一般模式 一般模式即初次进入vim页面时的默认模式，此时可以进行移动光标、复制、粘贴、删除和查找等操作。
+移动光标 以页为单位   ctrl + f 向下移动一页
+  ctrl + b 向上移动一页
+  以行为单位   G 移到文件最后行
+  n + G 移到文件第n行
+  n + 回车 向下移动n行
+  gg 移动到文件首行
+  以字符为单位   0 移到行首
+  $ 移到行尾
+  3 + 空格 向右移动3个字符
+  搜索与替换   /word 光标向下搜索
+  ？word 光标向4上搜索
+  n 继续搜光标下一个</div><div class="post-footer">
+        <a href="/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linuxvim/">Linux,vim</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">Shell语言基础</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%AD%A6%E4%B9%A0/"><i class="far fa-folder fa-fw"></i>学习</a></span></div><div class="content">变量 read 从键盘输入读取变量
+1 2 3 4 5  read [-pt] variable -p 提示 -t 时间 read -p &#34;Please keyin your name: &#34; -t 30 named   ​	declare / typeset 宣告变量的类型
+1 2 3 4 5 6 7 8 9  declare [-aixr] variable -a 数组类型 -i 整数类型 -x 环境变量类型 -r 设置为只读类型 默认类型为字符串 declare -i sum=100+200+300 echo ${sum}    默认类型为字符串 只能计算整数类型（1/3=0）  命令别名 alias 给指令设置别名，新创一个新的指令， 你可以直接下达该指令</div><div class="post-footer">
+        <a href="/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linuxshell/">Linux,Shell</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/acme%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/">Acme申请ssl证书</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">acme申请SSL证书 说明 按照官方的文档 中的通过添加域名解析API的方法操作了n次，一直不成功，索性用简单的standalone方法来申请吧。
+准备条件  准备好域名 域名解析到VPS上 VPS的80端口开放  步骤 1. 安装acme.sh curl https://get.acme.sh | sh -s email=my@example.com my@example.com替换成自己邮箱，随意填写应该也没问题，不要求验证。 如官方文档中说的，此命令会执行三个操作
+ 把 acme.sh 安装到你的 home 目录下~/.acme.sh 创建 一个 bash 的 alias, 方便你的使用: alias acme.sh=~/.acme.sh/acme.sh 自动为你创建 cronjob, 每天 0:00 点自动检测所有的证书, 如果快过期了, 需要更新, 则会自动更新证书.  2. 生成证书 如果你还没有运行任何 web 服务, 80 端口是空闲的, 那么 acme.sh 还能假装自己是一个webserver, 临时听在80 端口, 完成验证: acme.sh --issue -d mydomain.com --standalone mydomain.com替换为自己的域名
+当命令行有下图所示输出，表示成功了 3. 安装证书 前面证书生成以后, 接下来需要把证书 copy 到真正需要用它的地方.</div><div class="post-footer">
+        <a href="/acme%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linuxweb/">Linux,Web</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/linux%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86/">Linux账号管理</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">Linux 账号与群组 UID与GID 每个登陆的使用者至少都会取得两个 ID ，一个是使用者 ID （User ID ，简称 UID）、一个是群组 ID （Group ID ，简称 GID）
+  /etc/passwd :存放uid相关信息
+1  用户名：密码：UID（用户ID）：GID（组ID）：描述性信息：主目录：默认Shell     /etc/group: 存放gid群组信息
+  /etc/shadow：存放密码信息
+1  用户名：加密密码：最后一次修改时间：最小修改时间间隔：密码有效期：密码需要变更前的警告天数：密码过期后的宽限时间：账号失效时间：保留字段   详情
+  1 2 3 4 5 6 7 8  # 查看用户id id ubuntu # 查看支持的群组 第一个输出的群组即为有效群组 groups # 切换有效群组 newgrp docker   账号管理 useradd 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19  useradd [-u UID] [-g 初始群组] [-G 次要群组] [-mM] [-c 说明] [-d 主文件夹路径] [-s shell] 账号名 -u 数字，指定一个uid -g 初始群组 -G 可加入的其他群组 -M 强制，不创建主文件夹 -m 默认，创建主文件夹，权限700 -c 说明内容 -d 指定某个路径为主文件夹 -r 创建系统账号 -s 接shell -e 账号失效日期&#39;YYYY-MM-DD&#39;,对于shadow第8个字段 -f 指定密码失效时间 0表示立刻失效，-1 表示永不失效 # 创建账号 useradd test # 设置密码 passwd test    在 /etc/passwd 里面创建一行与帐号相关的数据，包括创建 UID/GID/主文件夹等； 在 /etc/shadow 里面将此帐号的密码相关参数填入，但是尚未有密码； 在 /etc/group 里面加入一个与帐号名称一模一样的群组名称； 在 /home 下面创建一个与帐号同名的目录作为使用者主文件夹，且权限为 700 /etc/default/useradd 文件包含创建用户的初始化详细设定  passwd 设置密码</div><div class="post-footer">
+        <a href="/linux%E8%B4%A6%E5%8F%B7%E7%AE%A1%E7%90%86/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/">Linux软链接和硬链接</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">Hard link 实体链接、硬链接
+预备知识  每个文件都会占用一个 inode ，文件内容由 inode 的记录来指向； 想要读取该文件，必须要经过目录记录的文件名来指向到正确的 inode 号码才能读取。 文件名只与目录有关，但是文件内容则与 inode 有关。  原理 hard link是在某个目录下新增一个文件名，连接到某个inode号码。
+1  ll -i [文件名] # 显示文件的inode号码   建立一个硬链接后，再次查看两个文件名的inode。
+两个是一样的，权限字段后的数字2表示有多少个文件名链接到此inode。
+好处 如果你将任何一个“文件名”删除，其实 inode 与 block 都还是存在的！ 此时你可以通过另一个“文件名”来读取到正确的文件数据喔！此外，不论你使用哪个“文件名”来编辑， 最终的结果都会写入到相同的 inode 与 block 中，因此均能进行数据的修改。
+限制  不支持为目录创建hard link 不能跨文件系统  Symbolic link 符号链接、软链接
+Symbolic link 就是在创建一个独立的文件，而这个文件会让数据的读取指向他 link 的那个文件的文件名！由于只是利用文件来做为指向的动作， 所以，当来源文件被删除之后，symbolic link 的文件会“开不了”，也就是找不到原始的文件名。
+实操 删除之前创建的硬链接，再新建一个软链接，可以看到，实际上是新建立的一个新的文件，拥有和原始文件不同的inode。
+该文件大小是7bytes，是因为箭头右边的文件名字符数量是7个。
+这个 Symbolic Link 与 Windows 的捷径可以给他划上等号，由 Symbolic link所创建的文件为一个独立的新的文件，所以会占用掉 inode 与 block 。</div><div class="post-footer">
+        <a href="/linux%E8%BD%AF%E9%93%BE%E6%8E%A5%E5%92%8C%E7%A1%AC%E9%93%BE%E6%8E%A5/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/vps%E9%85%8D%E7%BD%AEssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/">VPS配置SSH密钥登录</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-09">2022-05-09</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">基本配置 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20  #新建一个user sudo useradd -d /home/xzh xzh # 为其设置密码 passwd xzh # 配置基本配置文件（环境变量等） cp ./bashrc /home/xzh/.bashrc cp ./bash_profile /home/xzh/.bash_profile # 改变 配置文件属性 chown xzh /home/xzh/.bashrc chmod 760 /home/xzh/.bash_profile # 自定义$PS1变量（每条命令前面显示的格式） PS1=&#34;\[\e[37;40m\][\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\\$ &#34; 追加到.bashrc中 # 切换到xzh su xzh   通过密码登录VPS 1 2 3  # 通过ssh登录到主机 ssh xzh@ip &gt;&gt; 输入密码   配置ssh_key登录VPS 1  ssh-keygen -t rsa # 生成一对 rsa 私钥和公钥在 ～/.</div><div class="post-footer">
+        <a href="/vps%E9%85%8D%E7%BD%AEssh%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/git%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/">Git命令 基础</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-08">2022-05-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
 查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
@@ -120,128 +181,6 @@
 1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题：</div><div class="post-footer">
         <a href="/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vps/">VPS</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">部署web应用程序到centos系统遇到的防火墙问题及解决</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-26">2022-01-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">最初的目的 最近用go写了一个在线剪贴板的web小项目，在本地主机上调试了感觉还行，遂打算部署到甲骨文的VPS上（centos-8）。
-环境搭建好了之后，成功运行在8080端口，curl localhost:8080也可以正常获取到网页，但是我的浏览器远程就是无法访问。在stackoverflow搜索了解，感觉是VPS防火墙的问题。并有了以下的解决步骤。此外，在解决问题的过程中还发现了一个有趣的小工具&ndash;cockpid,一个在web端管理VPS的工具，是centos和redhat系统自带的。
-解决过程 在开始之前，首先去VPS提供商管理页面设置好相应的防火墙规则。之后在对VPS的防火墙设置规则。
-  查看VPS防火墙状态： sudo systemctl status firewalld 可以看到防火墙是正常运行的。
-  查看VPS防火墙开启的端口和服务 firewall-cmd --list-all 可以看到，我的VPS开启了cockpit dhcpv6-client http ssh这些个服务，以及一个8080端口（这是我主动开启之后的显示，一开始只有cockpit dhcpv6-client ssh这三项）。
-如果想要查看某个服务占据的端口，可以用grep ssh /etc/services这个命令(以ssh为例)，可以看到ssh使用的是本机22端口。   开启希望的服务和端口。 开启http服务（即80端口）：sudo firewall-cmd --add-service=http --permanent 开启自定义端口：firewall-cmd --zone=public --permanent --remove-port 8080 不仅可以开端口，也可以关：firewall-cmd --zone=public --permanent --remove-service http
-但是最后一定要重载以下使之生效：firewall-cmd --reload
-之后可以再用firewall-cmd --list-all命令查看有没有成功。
-  4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
-安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
-以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld</div><div class="post-footer">
-        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/">M1 Mac安装mysql过程</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-21">2022-01-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
-1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
-1 2 3 4  sudo mysql.server start //开启服务 sudo mysql.server stop //关闭服务 sudo mysql.server restart //重启服务 sudo mysql.server status //查看状态   注意需要输入Mac开机密码来确认上述命令的执行。
-初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：
-1  mysql_secure_installation   一切设置完毕就可以正常使用了 卸载mysql 首先用以下命令卸载
-1  brew uninstall mysql   要想彻底清除数据库文件，还要去/opt/homebrew/var目录执行： sudo rm -rf mysql命令。</div><div class="post-footer">
-        <a href="/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mysql/">mysql</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Go:复合数据类型</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-20">2021-12-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">复合数据类型 主要的四种复合数据类型：
- 数组：同构的元素组成，内存大小固定 结构体：异构元素组成，内存大小固定 切片：动态数据类型 映射：动态数据类型  4.1 数组 数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。
-数组的定义
-1 2 3 4 5 6 7  var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0 var b [3]int = [3]{1,2,3} //自定义数组的初始值 // 也可以用简短声明 d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断   当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。
-1 2 3 4 5  a := [2]int{1, 2} b := [...]int{1, 2} c := [2]int{1, 3} fmt.Println(a == b, a == c, b == c) // true,false,false   数组的长度等于其容量</div><div class="post-footer">
-        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/">计算机网络: 无线网络和移动网络</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-16">2021-12-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">7.1 概述 无线网络中的要素：
- 无线主机。可能移动、可能不动。 无线链路。主机通过无线通信链路连接到一个基站或者另外一个主机。 基站。负责向与之关联的无线主机发送数据和从主机那接收数据，协调与之相关联的多个无线主机的传输。如蜂窝塔、LAN接入点。 网络基础设施  7.2 无线链路和网络特征 有线网络和无线网络的重要区别主要在链路层，如：
- 递减的信号强度。电磁波在穿过物体和随之距离增加会减弱（路径损耗）。 来自其他源的干扰。同一个频段下发送信号的电波源将相互干扰。 多径传播。当电磁波的一部分受物体和地面反射，在发送方和接收方之间走了不同长度的路径，回造成信号模糊。  所以，无线链路中的比特差错比有线链路中更为常见。
-信噪比(Signal-to-Noise,SNR)：所收到的信号和噪声强度的相对测量（越大越好）。
-比特差错率(BER)：收到的有错传输比特的概率。
-  当调制方案一定，SNR越高，BER越低。发送方通过增加发送功率可以提高SNR，但是当功率超过一定阈值时，不会有显著效果。
-  给定SNR，具有较高比特传输率的调制技术将具有较高的BER。
-  物理层调制技术的动态选择能用于适配对信道条件的调制技术。
-  CDMA 码分多址，多址技术的一种，用于一个基站同多个用户传输数据。
-时分多址TDMA：也是一种多址技术，将时间分为不同的时间片，每个时间片与一个用户通信。（GSM中使用）
-频分多址FDMA：按照频率的不同与多个用户通信。
-CDMA比方：
-让聚会的客人使用多种语言谈论，人们实际上非常善于锁定他们能听懂的语言，而过滤其他的谈话。
-7.3 WI-FI：802.11 无线LAN 7.3.1 协议及信道与关联 WI-FI协议簇下有几套不同的标准。它们都适用相同的媒体访问协议CSMA/CA、链路层帧使用相同的帧结构、向后兼容（旧设备可以支持新协议）。
-2.4GHz：2.4～2.458GHz频段，无须执照的频道
-5GHz：5.1～5.8GHz频段
-安装一个AP时，需要分配一个SSID和一个信道号。
-SSID：一个AP的服务集标志符号，代表着不同的WI-FI信号。
-信道号：在一个频段范围内，不同的信道（2.4GHz频段内就有11个信道，其中有部分是重叠的，仅当两个信道相互隔着4个其他信道时，才叫非重叠的。比如1、6、11信道就是非重叠的）
-无线主机加入AP：
-被动扫描：802.11标准规定每个AP要周期性的发送信标帧，每个信标帧包括该AP的SSID和MAC地址。
-主动扫描：通过向无线主机范围内所有的AP发送广播探测帧，AP会响应该探测帧。
-一旦主机连接上一个AP，通过DHCP协议获取了一个AP的子网IP。
-AP也可以要求主机鉴权：
-​ 基于MAC地址
-​ 基于用户名和口令
-7.3.3 802.11 帧  有效载荷:承载数据，IP数据报或者ARP分组等。允许的最大长度为2312字节，但是通常小于1500字节。 CRC：循环冗余校验 地址字段：包含4个MAC地址 序号、持续期和帧控制字段：序号用于使接收方区分新传输的帧和以前帧的重传；持续期包括了节点预约信道的持续期；  7.3.5 802.11 中的高级特色 速率适应 实现了一种具有速率自适应能力，该能力自适应地根据当前和近期信道特点来选择下面的物理层调制技术。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4%E6%91%98%E6%8A%84%E4%B8%8E%E8%AF%BB%E5%90%8E%E6%84%9F/">万历十五年摘抄与读后感</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-16">2021-12-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E9%98%85%E8%AF%BB/"><i class="far fa-folder fa-fw"></i>阅读</a></span></div><div class="content">摘抄   各式各样的社会关系也使他们结成小集团。出生于一省一县，是为“乡谊”，同一年考中举人或进士，是为“年谊”。同年的举人或进士就像学校里的同班一样，在原则上有彼此关照的义务，他们的考官则不消说是终身的恩师。婚姻关系，包括男女双方的远亲近属，是为“姻谊”。这多种的“谊”是形成文官派系的一个主要原因
-  申时行没有忽略文官的双重性格：即虽称公仆，实系主人；有阳则有阴。他必须恰如其分地处理此中矛盾
-  各式各样的社会关系也使他们结成小集团。出生于一省一县，是为“乡谊”，同一年考中举人或进士，是为“年谊”。同年的举人或进士就像学校里的同班一样，在原则上有彼此关照的义务，他们的考官则不消说是终身的恩师。多种的“谊”是形成文官派系的一个主要原因。
-  个人的私心会随时随地变迁，只有伦理道德永恒不变。
-  万历的看法是，邹元标和其他诤谏者并非对他尽忠，而是出于自私自利，即所谓“讪君卖直”。这些人把正直当作商品，甚至不惜用诽谤讪议人君的方法作本钱，然后招摇贩卖他正直的声望。
-  “首鼠两端”，即遇事左顾右盼缺乏决心。
-  申时行生平不愿宣扬别人的缺点，对于提拔自己的人，更不会妄加批判。他只是从这悲剧的内幕中得到了教益
-  在下层行政单位间许多实际问题尚未解决以前，行政效率的增进，必然是缓慢的、有限度的
-  如入火聚，得清凉门。”即能在狂燎烈焰之中有冰凝水静的感觉
-  利用这些小事可以促使公众注意，引起文官参加，假以时日，使小事积累而成大事，细微末节的局部问题转化而成为整个道德问题。在程序上讲，发展中的步伐则须前后衔接，第一步没有收到效果之前决不轻率采取第二步
-  而且出场交锋的人物起先总是无名小卒，直到时机成熟才有大将出马。这种方式，大凡久在政治圈子里的人物，都已看透，他们可以从青萍之末，预测大风暴的来临。
-  别人也和他一样，一身而具有“阴”、“阳”的两重性。有“阳”则有“阴”，既有道德伦理，就有私心贪欲。这种“阴”也决非人世间的力量所能加以消灭的。
-  他可以把他不喜欢的官员革职查办，但是很难升迁拔擢他所喜欢的官员
-  皇位是一种社会制度，他朱翊钧却是一个有血有肉的个人。一登皇位，他的全部言行都要符合道德的规范，但是道德规范的解释却分属于文官。他不被允许能和他的臣僚一样，在阳之外另外存在着阴。他之被拘束是无限的，任何个性的表露都有可能被指责为逾越道德规范。
-  他欣赏自己“从中调剂，就事匡维”这一处世和执政的原则，对待皇帝的办法则是“显谏者不若潜移为妙”，因为这种办法既对皇帝的权威无损，而臣下的目的又可以达到，这比之于臣下在奏章上奚落昏庸的皇帝，而皇帝用荆条痛打犯上的群臣总要高明得多。
-  由于成宪的不可更改，一个年轻皇帝没有能把自己的创造能力在政治生活中充分使用，他的个性也无从发挥，反而被半信半疑地引导进这乌有之乡，充当了活着的祖宗
-  他朱翊钧生前有九五之尊，死后被称为神宗显皇帝，而几百年之后他带给人们最强烈的印象，仍然是命运的残酷。
-  个人而对抗强大的社会力量，加之在具体处理这些诉讼的时候又过于自信，师心自用既没有对地方上的情形作过周密的考察，也没有宣布法律的准则，更没有建立专门的机构去调查案情、听取申辩以作出公正的裁决，海瑞的不能成功已不待言而自明
-  提出辞职的奏疏中他痛斥“举朝之士，皆妇人也”。这种一概骂倒的狷介之气，使他在文官集团中失去了普遍的同情。
-  地方官所关心的是他们的考成，而考成的主要标准乃是田赋之能否按时如额缴解、社会秩序之能否清平安定。扶植私人商业的发展，则照例不在他们的职责范围之内。何况商业的发展，如照资本主义的产权法，必须承认私人财产的绝对性。这绝对性超过传统的道德观念。
-  在我们这个古老的礼义之邦里，绝大多数的农民实际上早被列为顽民愚氓，不在文化教养之内，即使在模范官员海瑞的笔下，这些乡民也似乎只是一群动物，既浑浑噩噩，又狠毒狡诈，易于冲动。日常生活中为小事而发生口角已属司空见惯，打架斗殴以致死伤也时有发生。纠纷的一方有时还愤而自杀以倾陷仇家；即或由于病死，家属也总要千方百计归之于被殴打致死。
-  也许是有鉴于唐朝藩镇的跋扈，本朝从洪武开始，就具有这重文轻武的趋向。大约经过了一百年，文官集团进入了成熟的阶段，他们的社会地位上升到历史上的最高点，换句话说，也就是武官的社会地位下降到历史上的最低点。这种畸形的出现，原因在于本朝的政治组织为一元化，一元化的思想基础则是两千年来的孔孟之道。如果让军队保持独立的、严格的组织，和文官集团分庭抗礼，这一元化的统治就不可能如所预期地成长、发展，以至于登峰造极。这种制度既经固定，将领们即使出生入死屡建奇功，其社会影响也未必抵得上一篇精彩的大块文章。
-  然则严峻的纪律，仅是治军方针的一面；另一方面则必须鼓舞士气。士兵的自尊心和自信心在这里起着重要的作用。一支经常被敌人打得落花流水的部队谈不上自尊和自信，必胜的信念有赖于能力和技术，而能力和技术又来自平时的刻苦训练。</div><div class="post-footer">
-        <a href="/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4%E6%91%98%E6%8A%84%E4%B8%8E%E8%AF%BB%E5%90%8E%E6%84%9F/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4/">万历十五年</a>,&nbsp;<a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Go语言基础—3.基础数据类型</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-02">2021-12-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">3 基础数据类型 虽然从底层而言，所有的数据都是由比特组成，但计算机一般操作的是固定大小的数，如整数、浮点数、比特数组、内存地址等。进一步将这些数组织在一起，就可表达更多的对象。
-Go语言将数据类型分为四类：基础类型、复合类型、引用类型和接口类型。
-3.1 整型 基础类型
-有符号：
-int8、int16、int32、int64四种
-无符号：
-uint8、uint16、uint32、uint64四种
-rune：对应int32，表示一个Unicode码点。这两个名称可以互换使用
-byte：是uint8类型的等价类型，强调数值是一个原始的数据而不是一个小的整数。
-int：32位操作系统—int32、64位操作系统—int64
-uintptr:一种无符号的整数类型,没有指定具体的bit大小但是足以容纳指针.
-类型转换
-算术和逻辑运算的二元操作中必须是相同的类型，所以int32和int64不能直接相加减。
-显示类型转换：
-1  var compote = int(apples) + int(oranges)   对于将一个大尺寸的整数类型转为一个小尺寸的整数类型，或者是将一个浮点数转为整数，可能会改变数值或丢失精度。
-浮点数到整数的转换将丢失任何小数部分，然后向数轴零方向截断。
-3.2 浮点数 Go语言提供了两种精度的浮点数，float32和float64。
-float32
-1.4e-45～3.4e38；
-精度到6个十进制位
-float64:
-4.9e-324～1.8e308
-精度到15个十进制位
-3.3 复数 Go语言提供了两种精度的复数类型：complex64和complex128。
-内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部：
-1 2 3 4 5 6 7 8 9 10  var x complex128 = complex(1, 2) // 1+2i var y complex128 = complex(3, 4) // 3+4i fmt.</div><div class="post-footer">
-        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
 </article><ul class="pagination"><li class="page-item active">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -249,6 +188,10 @@ float64:
                 </li><li class="page-item ">
                     <span class="page-link">
                         <a href="/page/2/">2</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/3/">3</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

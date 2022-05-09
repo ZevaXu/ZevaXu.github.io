@@ -102,6 +102,128 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="https://weibo.com/5971704717" title="微博" target="_blank" rel="noopener noreffer me"><i class="fab fa-weibo fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">部署web应用程序到centos系统遇到的防火墙问题及解决</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-26">2022-01-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">最初的目的 最近用go写了一个在线剪贴板的web小项目，在本地主机上调试了感觉还行，遂打算部署到甲骨文的VPS上（centos-8）。
+环境搭建好了之后，成功运行在8080端口，curl localhost:8080也可以正常获取到网页，但是我的浏览器远程就是无法访问。在stackoverflow搜索了解，感觉是VPS防火墙的问题。并有了以下的解决步骤。此外，在解决问题的过程中还发现了一个有趣的小工具&ndash;cockpid,一个在web端管理VPS的工具，是centos和redhat系统自带的。
+解决过程 在开始之前，首先去VPS提供商管理页面设置好相应的防火墙规则。之后在对VPS的防火墙设置规则。
+  查看VPS防火墙状态： sudo systemctl status firewalld 可以看到防火墙是正常运行的。
+  查看VPS防火墙开启的端口和服务 firewall-cmd --list-all 可以看到，我的VPS开启了cockpit dhcpv6-client http ssh这些个服务，以及一个8080端口（这是我主动开启之后的显示，一开始只有cockpit dhcpv6-client ssh这三项）。
+如果想要查看某个服务占据的端口，可以用grep ssh /etc/services这个命令(以ssh为例)，可以看到ssh使用的是本机22端口。   开启希望的服务和端口。 开启http服务（即80端口）：sudo firewall-cmd --add-service=http --permanent 开启自定义端口：firewall-cmd --zone=public --permanent --remove-port 8080 不仅可以开端口，也可以关：firewall-cmd --zone=public --permanent --remove-service http
+但是最后一定要重载以下使之生效：firewall-cmd --reload
+之后可以再用firewall-cmd --list-all命令查看有没有成功。
+  4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
+安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
+以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld</div><div class="post-footer">
+        <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/">M1 Mac安装mysql过程</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-21">2022-01-21</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
+1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
+1 2 3 4  sudo mysql.server start //开启服务 sudo mysql.server stop //关闭服务 sudo mysql.server restart //重启服务 sudo mysql.server status //查看状态   注意需要输入Mac开机密码来确认上述命令的执行。
+初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：
+1  mysql_secure_installation   一切设置完毕就可以正常使用了 卸载mysql 首先用以下命令卸载
+1  brew uninstall mysql   要想彻底清除数据库文件，还要去/opt/homebrew/var目录执行： sudo rm -rf mysql命令。</div><div class="post-footer">
+        <a href="/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mysql/">mysql</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Go:复合数据类型</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-20">2021-12-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">复合数据类型 主要的四种复合数据类型：
+ 数组：同构的元素组成，内存大小固定 结构体：异构元素组成，内存大小固定 切片：动态数据类型 映射：动态数据类型  4.1 数组 数组是由固定长度的特定类型元素组成的序列，可以通过索引下标来访问，下标的范围从0到长度减1。
+数组的定义
+1 2 3 4 5 6 7  var a [3]int //根据元素类型的初始值来初始化 int类型初始值为0 var b [3]int = [3]{1,2,3} //自定义数组的初始值 // 也可以用简短声明 d := [...]int{1,2,3} //省略号 表示根据初始值个数来自动推断   当数组的元素是可比价的，那么数组也是可以比较的，仅当元素个数相等、所有元素都相等，数组才相等。
+1 2 3 4 5  a := [2]int{1, 2} b := [...]int{1, 2} c := [2]int{1, 3} fmt.Println(a == b, a == c, b == c) // true,false,false   数组的长度等于其容量</div><div class="post-footer">
+        <a href="/go%E5%A4%8D%E5%90%88%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/">计算机网络: 无线网络和移动网络</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-16">2021-12-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">7.1 概述 无线网络中的要素：
+ 无线主机。可能移动、可能不动。 无线链路。主机通过无线通信链路连接到一个基站或者另外一个主机。 基站。负责向与之关联的无线主机发送数据和从主机那接收数据，协调与之相关联的多个无线主机的传输。如蜂窝塔、LAN接入点。 网络基础设施  7.2 无线链路和网络特征 有线网络和无线网络的重要区别主要在链路层，如：
+ 递减的信号强度。电磁波在穿过物体和随之距离增加会减弱（路径损耗）。 来自其他源的干扰。同一个频段下发送信号的电波源将相互干扰。 多径传播。当电磁波的一部分受物体和地面反射，在发送方和接收方之间走了不同长度的路径，回造成信号模糊。  所以，无线链路中的比特差错比有线链路中更为常见。
+信噪比(Signal-to-Noise,SNR)：所收到的信号和噪声强度的相对测量（越大越好）。
+比特差错率(BER)：收到的有错传输比特的概率。
+  当调制方案一定，SNR越高，BER越低。发送方通过增加发送功率可以提高SNR，但是当功率超过一定阈值时，不会有显著效果。
+  给定SNR，具有较高比特传输率的调制技术将具有较高的BER。
+  物理层调制技术的动态选择能用于适配对信道条件的调制技术。
+  CDMA 码分多址，多址技术的一种，用于一个基站同多个用户传输数据。
+时分多址TDMA：也是一种多址技术，将时间分为不同的时间片，每个时间片与一个用户通信。（GSM中使用）
+频分多址FDMA：按照频率的不同与多个用户通信。
+CDMA比方：
+让聚会的客人使用多种语言谈论，人们实际上非常善于锁定他们能听懂的语言，而过滤其他的谈话。
+7.3 WI-FI：802.11 无线LAN 7.3.1 协议及信道与关联 WI-FI协议簇下有几套不同的标准。它们都适用相同的媒体访问协议CSMA/CA、链路层帧使用相同的帧结构、向后兼容（旧设备可以支持新协议）。
+2.4GHz：2.4～2.458GHz频段，无须执照的频道
+5GHz：5.1～5.8GHz频段
+安装一个AP时，需要分配一个SSID和一个信道号。
+SSID：一个AP的服务集标志符号，代表着不同的WI-FI信号。
+信道号：在一个频段范围内，不同的信道（2.4GHz频段内就有11个信道，其中有部分是重叠的，仅当两个信道相互隔着4个其他信道时，才叫非重叠的。比如1、6、11信道就是非重叠的）
+无线主机加入AP：
+被动扫描：802.11标准规定每个AP要周期性的发送信标帧，每个信标帧包括该AP的SSID和MAC地址。
+主动扫描：通过向无线主机范围内所有的AP发送广播探测帧，AP会响应该探测帧。
+一旦主机连接上一个AP，通过DHCP协议获取了一个AP的子网IP。
+AP也可以要求主机鉴权：
+​ 基于MAC地址
+​ 基于用户名和口令
+7.3.3 802.11 帧  有效载荷:承载数据，IP数据报或者ARP分组等。允许的最大长度为2312字节，但是通常小于1500字节。 CRC：循环冗余校验 地址字段：包含4个MAC地址 序号、持续期和帧控制字段：序号用于使接收方区分新传输的帧和以前帧的重传；持续期包括了节点预约信道的持续期；  7.3.5 802.11 中的高级特色 速率适应 实现了一种具有速率自适应能力，该能力自适应地根据当前和近期信道特点来选择下面的物理层调制技术。</div><div class="post-footer">
+        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C%E5%92%8C%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4%E6%91%98%E6%8A%84%E4%B8%8E%E8%AF%BB%E5%90%8E%E6%84%9F/">万历十五年摘抄与读后感</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-16">2021-12-16</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E9%98%85%E8%AF%BB/"><i class="far fa-folder fa-fw"></i>阅读</a></span></div><div class="content">摘抄   各式各样的社会关系也使他们结成小集团。出生于一省一县，是为“乡谊”，同一年考中举人或进士，是为“年谊”。同年的举人或进士就像学校里的同班一样，在原则上有彼此关照的义务，他们的考官则不消说是终身的恩师。婚姻关系，包括男女双方的远亲近属，是为“姻谊”。这多种的“谊”是形成文官派系的一个主要原因
+  申时行没有忽略文官的双重性格：即虽称公仆，实系主人；有阳则有阴。他必须恰如其分地处理此中矛盾
+  各式各样的社会关系也使他们结成小集团。出生于一省一县，是为“乡谊”，同一年考中举人或进士，是为“年谊”。同年的举人或进士就像学校里的同班一样，在原则上有彼此关照的义务，他们的考官则不消说是终身的恩师。多种的“谊”是形成文官派系的一个主要原因。
+  个人的私心会随时随地变迁，只有伦理道德永恒不变。
+  万历的看法是，邹元标和其他诤谏者并非对他尽忠，而是出于自私自利，即所谓“讪君卖直”。这些人把正直当作商品，甚至不惜用诽谤讪议人君的方法作本钱，然后招摇贩卖他正直的声望。
+  “首鼠两端”，即遇事左顾右盼缺乏决心。
+  申时行生平不愿宣扬别人的缺点，对于提拔自己的人，更不会妄加批判。他只是从这悲剧的内幕中得到了教益
+  在下层行政单位间许多实际问题尚未解决以前，行政效率的增进，必然是缓慢的、有限度的
+  如入火聚，得清凉门。”即能在狂燎烈焰之中有冰凝水静的感觉
+  利用这些小事可以促使公众注意，引起文官参加，假以时日，使小事积累而成大事，细微末节的局部问题转化而成为整个道德问题。在程序上讲，发展中的步伐则须前后衔接，第一步没有收到效果之前决不轻率采取第二步
+  而且出场交锋的人物起先总是无名小卒，直到时机成熟才有大将出马。这种方式，大凡久在政治圈子里的人物，都已看透，他们可以从青萍之末，预测大风暴的来临。
+  别人也和他一样，一身而具有“阴”、“阳”的两重性。有“阳”则有“阴”，既有道德伦理，就有私心贪欲。这种“阴”也决非人世间的力量所能加以消灭的。
+  他可以把他不喜欢的官员革职查办，但是很难升迁拔擢他所喜欢的官员
+  皇位是一种社会制度，他朱翊钧却是一个有血有肉的个人。一登皇位，他的全部言行都要符合道德的规范，但是道德规范的解释却分属于文官。他不被允许能和他的臣僚一样，在阳之外另外存在着阴。他之被拘束是无限的，任何个性的表露都有可能被指责为逾越道德规范。
+  他欣赏自己“从中调剂，就事匡维”这一处世和执政的原则，对待皇帝的办法则是“显谏者不若潜移为妙”，因为这种办法既对皇帝的权威无损，而臣下的目的又可以达到，这比之于臣下在奏章上奚落昏庸的皇帝，而皇帝用荆条痛打犯上的群臣总要高明得多。
+  由于成宪的不可更改，一个年轻皇帝没有能把自己的创造能力在政治生活中充分使用，他的个性也无从发挥，反而被半信半疑地引导进这乌有之乡，充当了活着的祖宗
+  他朱翊钧生前有九五之尊，死后被称为神宗显皇帝，而几百年之后他带给人们最强烈的印象，仍然是命运的残酷。
+  个人而对抗强大的社会力量，加之在具体处理这些诉讼的时候又过于自信，师心自用既没有对地方上的情形作过周密的考察，也没有宣布法律的准则，更没有建立专门的机构去调查案情、听取申辩以作出公正的裁决，海瑞的不能成功已不待言而自明
+  提出辞职的奏疏中他痛斥“举朝之士，皆妇人也”。这种一概骂倒的狷介之气，使他在文官集团中失去了普遍的同情。
+  地方官所关心的是他们的考成，而考成的主要标准乃是田赋之能否按时如额缴解、社会秩序之能否清平安定。扶植私人商业的发展，则照例不在他们的职责范围之内。何况商业的发展，如照资本主义的产权法，必须承认私人财产的绝对性。这绝对性超过传统的道德观念。
+  在我们这个古老的礼义之邦里，绝大多数的农民实际上早被列为顽民愚氓，不在文化教养之内，即使在模范官员海瑞的笔下，这些乡民也似乎只是一群动物，既浑浑噩噩，又狠毒狡诈，易于冲动。日常生活中为小事而发生口角已属司空见惯，打架斗殴以致死伤也时有发生。纠纷的一方有时还愤而自杀以倾陷仇家；即或由于病死，家属也总要千方百计归之于被殴打致死。
+  也许是有鉴于唐朝藩镇的跋扈，本朝从洪武开始，就具有这重文轻武的趋向。大约经过了一百年，文官集团进入了成熟的阶段，他们的社会地位上升到历史上的最高点，换句话说，也就是武官的社会地位下降到历史上的最低点。这种畸形的出现，原因在于本朝的政治组织为一元化，一元化的思想基础则是两千年来的孔孟之道。如果让军队保持独立的、严格的组织，和文官集团分庭抗礼，这一元化的统治就不可能如所预期地成长、发展，以至于登峰造极。这种制度既经固定，将领们即使出生入死屡建奇功，其社会影响也未必抵得上一篇精彩的大块文章。
+  然则严峻的纪律，仅是治军方针的一面；另一方面则必须鼓舞士气。士兵的自尊心和自信心在这里起着重要的作用。一支经常被敌人打得落花流水的部队谈不上自尊和自信，必胜的信念有赖于能力和技术，而能力和技术又来自平时的刻苦训练。</div><div class="post-footer">
+        <a href="/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4%E6%91%98%E6%8A%84%E4%B8%8E%E8%AF%BB%E5%90%8E%E6%84%9F/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B8%87%E5%8E%86%E5%8D%81%E4%BA%94%E5%B9%B4/">万历十五年</a>,&nbsp;<a href="/tags/%E8%AF%BB%E4%B9%A6/">读书</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Go语言基础—3.基础数据类型</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-02">2021-12-02</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">3 基础数据类型 虽然从底层而言，所有的数据都是由比特组成，但计算机一般操作的是固定大小的数，如整数、浮点数、比特数组、内存地址等。进一步将这些数组织在一起，就可表达更多的对象。
+Go语言将数据类型分为四类：基础类型、复合类型、引用类型和接口类型。
+3.1 整型 基础类型
+有符号：
+int8、int16、int32、int64四种
+无符号：
+uint8、uint16、uint32、uint64四种
+rune：对应int32，表示一个Unicode码点。这两个名称可以互换使用
+byte：是uint8类型的等价类型，强调数值是一个原始的数据而不是一个小的整数。
+int：32位操作系统—int32、64位操作系统—int64
+uintptr:一种无符号的整数类型,没有指定具体的bit大小但是足以容纳指针.
+类型转换
+算术和逻辑运算的二元操作中必须是相同的类型，所以int32和int64不能直接相加减。
+显示类型转换：
+1  var compote = int(apples) + int(oranges)   对于将一个大尺寸的整数类型转为一个小尺寸的整数类型，或者是将一个浮点数转为整数，可能会改变数值或丢失精度。
+浮点数到整数的转换将丢失任何小数部分，然后向数轴零方向截断。
+3.2 浮点数 Go语言提供了两种精度的浮点数，float32和float64。
+float32
+1.4e-45～3.4e38；
+精度到6个十进制位
+float64:
+4.9e-324～1.8e308
+精度到15个十进制位
+3.3 复数 Go语言提供了两种精度的复数类型：complex64和complex128。
+内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部：
+1 2 3 4 5 6 7 8 9 10  var x complex128 = complex(1, 2) // 1+2i var y complex128 = complex(3, 4) // 3+4i fmt.</div><div class="post-footer">
+        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/">Go语言基础—2.程序结构</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-01">2021-12-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">2.1 命名 命名规则：
   字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。
@@ -160,100 +282,6 @@ ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议
 1. 以太网帧结构 ​  数据(46~1500字节)：承载IP数据报。MTU（最大传输单元），一般为1500字节，如果IP数据报超过1500，主机必须将数据报分片；最小为46字节，如果小于46字节，数据报必须被填充到46字节（利用IP数据报中长度字节去除填充部分）。 目的地址(6字节)：目的适配器的MAC地址。当目的适配器收到一个以太网帧，当该帧中的目的地址是自身地址或者是广播地址时，该适配器将帧的数据字段内容传给网络层；当收到其他MAC地址的帧，丢弃之。 源地址(6字节)：包含了传输该帧到局域网上的适配器MAC地址。 类型字段(2字段)：指定了数据帧的不同网络层协议。 CRC(4字节)：循环冗余检测，使得接收适配器检测帧是否引入了差错。 前同步码(8字节)：前7个字节用于同步两个适配器的时钟；第8个字节提示重要的内容就要到了。  以太网技术向网络层提供服务的特点：</div><div class="post-footer">
         <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/">计算机网络：网络层协议</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-17">2021-11-17</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">网络层协议 ​
-控制平面作为一种网络范围的逻辑，不仅控制沿着从源主机到目的主机的端到端路径间的路由器如何转发数据报，而且控制网络层组件和服务如何配置和管理。
-OSPF是一种运行在单一ISP的网络中的路由选择算法。BGP是一种在因特网中用于 互联所有网络的路由选择算法，因此常被称为因特网的“黏合剂” 。
-5.2 路由选择算法 其目的是从发送方到接收方的过程中确定一条通过路由器网络的好的路径(等价于路由)。通常，一条好路径指具有最低开销的路径。
-分类  根据该算法是集中式还是分散式  集中式路由选择算法：用完整的、全局性的网络知识计算岀从源到目的地之间的最低开销路径。 要求该算法在真正开始计算以前，要以某种方式获得这些信息。 具有全局状态信息的算法常被称作链路状态(Link State, LS) 算法。 分散式路由选择算法：没有节点拥有关于所有网络链路开销的完整信息。 相反，每个节点仅有与其直接相连链路的开销知识即可开始工作。然后，通过迭 代计算过程以及与相邻节点的信息交换，一个节点逐渐计算出到达某目的节点或 一组目的节点的最低开销路径。   根据算法是静态的还是动态  在静态路由选择算法(static routing algorithm)：路由随时间的变化非常缓慢，通常是人工进行调整(如人为手工编辑一条链路开销) 。 动态路由选择算法(dynamic routing algorithm) ：随着网络流量负载或拓扑发生变化而改变路由选择路径。一个动态算法可周期性地运行或直接响应拓扑或链路开销的变化而运行。   根据它是负载敏感的还是负载迟钝的进行划分  负载敏感算法：链路开销会动态地变化以反映出底层链路的当前拥塞水平。如果当前拥塞的一条链路与高开销相联系，则路由选择算法趋向于绕开该 拥塞链路来选择路由。 负载迟钝算法：某条链路的开销不明确反映当前或者最近的拥塞水平。    5.2.2 距离向量路由选择算法 5.3 因特网中自治系统内部的路由选择:OSPF 上述讨论的LS（狄杰斯特拉）和距离向量路由选择协议都不能适用于整个网络，原因有如下两点：
- 网络规模。当今的因特网由数亿台主机组成。在这些主机中存储的路由选择信息显然需要巨大容量的内存。并且求出所有路由器之间的链路开销需要巨大的负担，并且距离向量算法可能永远无法收敛。 管理自治。因特网是ISP的网络，其中每个ISP都有它自己的路由器网络。ISP通常希望按自己的意愿运行路由器(如在自己的网络中运行它所选择的某种路由选择算法)，或对外部隐藏其网络的内部组织面貌。  自治系统（AS）：一个自治系统由其全局唯一的AS号(ASN)所标识。每个AS由一组通常处在相同管理控制下的路由器组成。 通常在一个ISP中的路由器以及互联它们的链路构成一个AS；也有某些ISP将网络划分为多个AS；也有一个一级ISP在整个网络使用一个庞大的AS，其他子ISP再进行划分为多个AS。
-开放最短路优先(OSPF) OSPF是一种链路状态协议，它使用洪泛链路状态信息和Dijkstra最低开销路径算法。 使用OSPF, —台路由器构建了一幅关于整个自治系统的完整拓扑图(即一幅图)。于是, 每台路由器在本地运行Dijkstra的最短路径算法，以确定一个以自身为根节点到所有子网的最短路径树。
-各条链路开销是由网络管理员配置，管理员也许会选择将所有链路开销设为1,因而实现了最少跳数路由选择，或者可能会选择将链路权值按与链路容量成反比来设置，从而不鼓励流量使用低带宽链路。
-使用OSPF时，路由器向自治系统内所有其他路由器广播路由选择信息，而不仅仅是向其相邻路由器广播。每当一条链路的状态发生变化时(如开销的变化或连接/中断状态的变化)，路由器就会广播链路状态信息。即使链路状态未发生变化，它也要周期性地 (至少每隔30 min一次)广播链路状态 。
-优点：
-  安全。路由器间的OSPF报文能够配置两类鉴别，即简单的和MD5的。使用简单的鉴别，每台路由器配置相同的口令。当一台路由器发送一个OSPF分组，它以明文方式包括了口令 。MD5的要对比报文携带的MD5散列和路由去计算出来的MD5值。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%BD%91%E7%BB%9C%E5%B1%82%E5%8D%8F%E8%AE%AE/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">计算机网络：可靠数据传输协议原理</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-04">2021-11-04</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">可靠数据传输协议原理 构造可靠传输协议 可靠数据传输协议是由 检验和、序号、定时器、肯定和否定确认这几个机制来确保的。
-其中检验和用于接收方判断分组是否发生错误，序号帮助发送方决定重新发送哪个分组，接收方发送肯定和否定确认告诉发送方是否正确接收到了分组。
-将发送方称为S，接收方成为R，考虑以上几种情况：
-  一切正常
-S向R发送0号分组，R收到了分组，利用检验和判断分组是否正确，如果正确，R向S发送一个0号分组的ACK确认分组，告诉S已经收到了正确分组。S再向R发送下一个分组1。
-  分组丢失
-S向R发送0号分组，此时S的定时器开始计时，0号分组在传输过程中丢失，R没有收到任何数据，所以也没有向S发送任何确认信号。当计时器停止时，S向R在发送一个0号分组。
-  ACK丢失
-S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中丢失，当S的定时器停止时，S会再向R发送相同分组，此时R再次收到了相同的分组，开启冗余检测机制，会丢弃冗余的分组。
-  过早超时
-S向R发送0号分组，并开启了定时器。R收到了分组，并回传一个ACK信号，但是信号在传输过程中超时，S又发了一个相同的分组给R，之后S收到该上一个分组ACK，但是它什么也不做。
-  流水线可靠数据传输协议 如果采取“可靠数据传输协议”：接收一个分组，等待一个ACK到达后，再发送下一个分组的方式，发送发大部分时间都处于等待中，会带来有效吞吐量小，发送方利用率低的缺陷。
-引入流水线技术有助于解决这种缺陷。即不以停等的方式运行，允许发送方发送多个分组而无须等待确认。
-这样的技术提出如下几个要求：
- 增加序号的范围，每个分组必须有一个唯一的序号，有多个再输送中而未被确认的分组 发送方和接收方两端需要缓存多个分组。发送方最低限度要缓存那些已经发送但没有确认的分组。  解决流水线的差错恢复有两种基本方法：回退N步（go-back-N,GBN)、选择重传(Selective Repeat,SR)
-GBN(回退N步) 窗口长度N由包括两部分（已发送但未被确认的分组和可用但是还没有发送的分组序号）组成。
-一个分组的序号承载在分组首部的一个固定长度字段中规定，例如如果只分配1比特给这个字段，那么这个序号空间只能是0和1。
-GBN的运行过程如下图：
-发送方批量发送多个分组，并为每个已经发送的分组开启一个定时器，接收方按序接收分组，每接收到一个分组，发送一个ACK。
-例如发送方批量发送了0—4号分组，其中3号分组丢失。
-对于发送方：它的3号计时器到期后，就把3号及3号之后的分组再重新发送；
-对于接收方：它收到了0、1、2号分组，每收到一个就发送该分组的ACK。由于未收到3号分组，它接收到4号分组后，把4号分组丢弃，再发送上一个正确分组的ACK，即2号ACK。直到接收到3号分组为止。
-GBN协议允许发送方用多个分组填充流水线，因此避免了停等协议中的信道利用率问题，使用到了序号、累计确认、检验和、超时重传操作等技术。
-选择重传 GBN协议也存在一些性能问题，当窗口长度和传输时延过大时，单个分组的差错带来的大量不必要重传的分组再次重传。
-选择重传协议通过让接收方缓存没有确认的分组以及维护一个窗口的方式，实现发送方仅仅重传接收方没有收到或者受损的分组。
-分组重新排序问题：
-分组重新排序的表现：一个具有序号或者确认号x的分组的旧副本可能突然出现。
-当信道是一个网络时，分组重新排序是可能发生的，此时，网络相当于缓存了分组，并随时可能把分组释放出来。
-解决：
-确保一个序号不被重新使用，假定分组在网络中的存活时间最大为3分钟。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E5%8E%9F%E7%90%86/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/">计算机网络: 面向连接的传输-TCP</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-01">2021-11-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">TCP是因特网运输层的面向连接的可靠的运输协议。依赖于差错检测、重传、累计确认、定时器以及带有序号和确认号的首部字段，使得它可以在不可靠的IP协议之上，提供可靠的运输协议。
-3.5.1 TCP连接概述   TCP是面向连接的。这里的连接指的是一两条逻辑连接，其共同状态包括要维护的参数、TCP缓存等,仅仅保留在两个通信端系统的TCP程序中。
-  *TCP是点到点的。即单个发送方和单个接收方之间的连接，其中发送方被称为客户端，接收端被称为服务器。
-  *建立连接的过程：客户先发送一个特殊（首部字段特殊）的TCP报文段，服务器用另一个特殊的TCP报文段来响应，最后客户端再用第三个特殊报文段作为响应，前两个报文段不承载任何应用层数据。这样一个建立连接的过程称为三次握手。
-  一旦建立起TCP连接，两个应用进程旧可以相互发送数据。客户进程将数据通过套接字传给TCP，TCP将这些数据存入发送缓存，接下来再陆续从发送缓存里取出数据，封装送给网络层。
-  *MSS（Maximum Segment Size,最大报文长度）：报文段里应用层数据的最大长度，不包括首部字段。
-  *MTU（Maximum Transmission Unit,最大传输单元）：包含TCP首部的报文段最大长度，以太网和PPP链路层协议都有1500字节的MTU，一个典型值是1460。
-  TCP连接的组成：客户端主机上的缓存、变量与套接字；服务器主机上的缓存、变量与套接字。
-3.5.2 TCP报文段结构 TCP的首部一般是20字节，比UDP首部多12字节。
- 源端口号和目的端口号：用于多路复用/分解 32比特的序号字段/32比特的确认号字段：用于实现可靠数据传输 16比特的接收窗口字段，用于流量控制 4比特首部长度字段：指示了TCP的首部长度 可选与变长的选项字段：用于连接双方协商最大报文长度（MSS） 6比特的标志字段：  ACK：指示确认字段中的值是否有效 RST、SYN、FIN：用于连接的建立和断开。 CWR、ECE：拥塞明确。 PSH：数据是否立即交给上层。 URG：指示包含紧急数据。    序号和确认号 序号和确认号是TCP首部中最重要的两个字段。一个报文段的序号是报文段首字节的字节流编号。 假定数据流由一个包含500000字节的文件组成，其MSS为1000字节，数据流的首字节编号是0。该TCP将为该数据流构建500个报文段。给第一个报文段分配序号0,第二个报文段分配序号1000,第三个报文段分配序号2000,以此类推。每一个序号被填入到相应TCP 报文段首部的序号字段中。
-确认号用于接收端向发送端发送已经接收到的正确顺序报文段中，序号最大的报文段。也就是主机正在等待的数据的下一个字节的序号
-3.5.3 往返时间的估计和超时 TCP采用超时/重传机制来处理报文段的丢失问题，那么如何设置超时间隔呢。
-估计往返时间 RTT（SimpleRTT ）:某报文段被发出（交给IP）到对该报文的确认被收到之间的时间间隔。 由于路由器的拥塞，报文段的RTT会随时间波动，TCP维持一个RTT的均值（EstimatedRTT)，一旦获得一个新的R TT，TCP采用下列公式来更新EstimatedRTT： DevRTT ：RTT偏差，用于估算SampleRTT 一般会偏离EstimatedRTT的程度，RTT波动较小，则DevRTT值就很小。
-设置和管理重传超时间隔 超时间隔被定义为上式，初始Timeoutinterval为1秒，当出现超时后，Timeoutinterval值将加倍，再次接收报文段后，再使用上式计算Timeoutinterval。
-3.5.4 可靠数据传输 英特网网络层（IP服务）是不可靠的，IP服务的数据报可能会溢出路由器缓存而丢失；也可能是乱序到达；数据报中的比特还可能会损坏（0变成1）。 TCP在IP不可靠的尽力而为的服务上创建了一种可靠数据传输服务，确保一个进程从其接收缓存中读取的数据流是无损坏、无间隙、非冗余、按序的数据流。下图给出了TCP发送方的高度简化描述。
-NextSeqNum和SendBase的差组成了窗口。</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E7%9A%84%E4%BC%A0%E8%BE%93tcp/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Conda常用命令</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-04-20">2021-04-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">conda常用命令 1. 管理conda   查看conda版本
-1  conda --version     查看python版本
-1  conda --python     进入/退出python环境
-1 2  python quit()     更新conda版本
-1  conda update conda      2. 管理环境   创建一个环境
-1  conda create --name python34 python=3.4 #创建一个名为python34的环境，指定python版本为3.4     切换环境
-1 2 3 4  #windows activate python34 #mac/linux source activate python34     删除一个已有的环境</div><div class="post-footer">
-        <a href="/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/conda/">conda</a>,&nbsp;<a href="/tags/python/">python</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/"></a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
-查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
- 将尚未进行版本控制的本地目录转换为 Git 仓库； 从其它服务器 克隆 一个已存在的 Git 仓库。  两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。
-本地目录转换为 Git 仓库 1 2 3 4 5 6 7  cd project_path # 空文件夹 git init.</div><div class="post-footer">
-        <a href="/git-%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/">Read More</a></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%BE%E7%BD%AEvps%E7%94%A8%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/"></a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="0001-01-01">0001-01-01</time></span></div><div class="content">设置VPS用密钥登录   生成rsa密钥对
-1 2 3 4 5 6 7 8  cd ~ # 进入当前用户的工作目录 mkdir .ssh # 创建.ssh文件加 chmod -R 700 .ssh # 修改权限 ssh-keygen -t rsa # 生成秘钥 cd .ssh # 进入.ssh目录 touch authorized_keys # 生成公钥文件 cat id_rsa.pub &gt;&gt; authorized_keys # 将之前生成的公钥内容输出到公钥文件中 chmod 600 authorized_keys # 修改权限   之后将id_rsa文件保存到本地电脑中，可以复制粘贴里面内容也可直接保存文件。
-  修改系统配置
-1 2 3 4 5 6  vim /etc/ssh/sshd_config 修改 RSAAuthentication yes StrictModes no PubkeyAuthentication yes AuthorizedKeysFile .</div><div class="post-footer">
-        <a href="/%E8%AE%BE%E7%BD%AEvps%E7%94%A8%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95/">Read More</a></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -261,6 +289,10 @@ NextSeqNum和SendBase的差组成了窗口。</div><div class="post-footer">
                 </li><li class="page-item active">
                     <span class="page-link">
                         <a href="/page/2/">2</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/3/">3</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

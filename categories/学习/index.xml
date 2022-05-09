@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>学习 - Category - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/categories/%E5%AD%A6%E4%B9%A0/</link>
+        <description>学习 - Category - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 09 May 2022 10:07:25 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/%E5%AD%A6%E4%B9%A0/" rel="self" type="application/rss+xml" /><item>
+    <title>Shell语言基础</title>
+    <link>https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Mon, 09 May 2022 10:07:25 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/shell%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[变量 read 从键盘输入读取变量
+1 2 3 4 5  read [-pt] variable -p 提示 -t 时间 read -p &#34;Please keyin your name: &#34; -t 30 named   ​	declare / typeset 宣告变量的类型
+1 2 3 4 5 6 7 8 9  declare [-aixr] variable -a 数组类型 -i 整数类型 -x 环境变量类型 -r 设置为只读类型 默认类型为字符串 declare -i sum=100+200+300 echo ${sum}    默认类型为字符串 只能计算整数类型（1/3=0）  命令别名 alias 给指令设置别名，新创一个新的指令， 你可以直接下达该指令]]></description>
+</item></channel>
+</rss>
