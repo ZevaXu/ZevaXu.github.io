@@ -1,0 +1,24 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>跨境支付 - Category - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/categories/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/</link>
+        <description>跨境支付 - Category - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 16:10:30 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98/" rel="self" type="application/rss+xml" /><item>
+    <title>跨境支付100词</title>
+    <link>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</link>
+    <pubDate>Tue, 31 May 2022 16:10:30 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</guid>
+    <description><![CDATA[跨境支付100词   IBAN，是指国际银行帐户号码（The International Bank Account Number），通常简称IBAN，是由欧洲银行标准委员会（ European Committee for Banking Standards，简称 ECBS）按照其标准制定的一个银行帐户号码。参加ECBS的会员国的银行帐户号码都有一个对应杜IBAN号码。可以联系你的开户行获取IBAN号码。IBAN号码最多是34位字符串。IBAN的编号规定包括国别代码＋银行代码＋地区＋账户人账号＋校验码，当在欧元区未使用IBAN账号时，会被额外收取人工干预费。中国的银行是没有IBAN号码的，IBAN只适用于欧洲。此码没有SWIFT CODE普遍。
+**人话：**是欧洲内部使用的一套银行卡账户系统，每个iban代表一个银行卡账户。
+  SWIFT Code，该号相当于各个银行的身份证号。每个银行(包括每个分行、支行)都有一个代码，是由银行名称的英文缩写和总行所在地的英文缩写(也有用数字加字母表示某城市的)以及该分行所在地的代码(字母、数字或混合)组成。
+在国际上，银行的SWIFT Code 都是统一的格式，例如：BKCHCNBJ110 ，1-4位为一家银行的统一代码(中国银行为BKCH)，5-6位代表国家代码(中国为CN)，7-8位代表城市代码(北京为BJ)，110代表北京市分行。其中总行的SWIFT Code没有所在地代码，位数为8位(如中国银行总行BKCHCNBJ)，其余都为11位。
+查询各个银行的swift代码：swift代码查询
+  ABA(ROUTING NUMBE),是指美国银行家协会（American Bankers Association ），按照其标准制定的一个银行帐户号码，通常是美国的银行才有，9位数字，叫做 ABA Number，也就是它们的 Routing Number，也称作 Routing Transit Number 或 ABA Number，它是由ABA(美国银行家协会)在美联储监管和协助下提出的金融机构识别码，很多金融机构都有一个，主要用于和银行相关的交易，转帐，清算等的路由确认，由9位值(不是数！8位内容加1个校验码)构成。我们收到的美国支票，通常在其正面左下角都印有上该银行的Routing Number。
+**人话：**类似swift code，同样是美国各个银行或金融机构的身份证。美国的银行一般只使用Routing Number，几乎不用Swift Code。
+  电汇（telegraphic transfer，T/T），是一种电子转帐方式，可以通过这种方式直接在您的银行账户中接收资金或发出资金。类似银行转账。
+  支票账户，是一种最基本的交易账户，可用于日常生活消费，类似国内的活期借记卡，钱存进去可以进行消费，几乎没有利息。
+  储蓄账户，支票账户用于日常交易，储蓄账户则可以帮助您实现短期和长期储蓄目标，可以赚取利息，储备资金，不可用做日常消费。
+  ]]></description>
+</item></channel>
+</rss>

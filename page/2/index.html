@@ -102,6 +102,17 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="https://weibo.com/5971704717" title="微博" target="_blank" rel="noopener noreffer me"><i class="fab fa-weibo fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/">甲骨文VPS搭建trojan步骤</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-03-20">2022-03-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">甲骨文VPS搭建trojan步骤 VPS准备 需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。
+防火墙设置 ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。
+之后，再去VPS实例里面更改防火墙设置，我的机器是centos8系统，用Firewalld命令更改防火墙设置。
+1 2 3 4 5 6 7 8  # 列出已开启的端口/服务 firewall-cmd --list-all # 开启端口 firewall-cmd --zone=public --permanent --add-port 8080/tcp # 重载配置 firewall-cmd --reload   安装docker以及拉取要用的镜像 安装docker参照docker官方文档
+安装好docker后拉取trojan镜像。
+1 2  # 拉取数据库，此处的端口映射、root密码、数据库名称都可以改 docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2   此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。
+1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题：</div><div class="post-footer">
+        <a href="/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vps/">VPS</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/">部署web应用程序到centos系统遇到的防火墙问题及解决</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-01-26">2022-01-26</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">最初的目的 最近用go写了一个在线剪贴板的web小项目，在本地主机上调试了感觉还行，遂打算部署到甲骨文的VPS上（centos-8）。
 环境搭建好了之后，成功运行在8080端口，curl localhost:8080也可以正常获取到网页，但是我的浏览器远程就是无法访问。在stackoverflow搜索了解，感觉是VPS防火墙的问题。并有了以下的解决步骤。此外，在解决问题的过程中还发现了一个有趣的小工具&ndash;cockpid,一个在web端管理VPS的工具，是centos和redhat系统自带的。
@@ -248,40 +259,6 @@ fmt.Printf()
   布尔类型为false</div><div class="post-footer">
         <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/">计算机网络：链路层和局域网</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-11-23">2021-11-23</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">链路层和局域网 6.1 链路层概述 在本章中，将运行链路层协议的任何设备称为节点，节点包括主机、路由器、交换机和wifi接入点。把沿着通信路径连接相邻的通信信道称为链路。
-该数据报将实际通过6段链路：发送主机与WiFi接入点之间的WiFi链路，接入点和链路层交换机之间的以太网链路，链路层交换机与路由器之间的链路，两台路由器之间的链路，最后是交换机和服务器之间的以太网链路。在通过特定的链路时，传 输节点将数据报封装在链路层帧中，并将该帧传送到链路中。
-注意到这3段运输是由不同的公司管理，使用了完全不同的运输方式（豪华大轿车、飞机和火车）。尽管运输方式不同，但它们都提供了将旅客从一个地点运输到相邻地点的基本服务。在这个运输类比中，一个游客好比一个数据报，每个运输区段好比一条链路，每种运输方式好比一种链路层协议，而该旅行社好比一个路由选择协议。
-6.1.1 链路层提供的服务 6.4 交换局域网 6.4.1 链路层寻址和ARP 交换机运行在链路层，它们交换链路层帧，不识别网络层地址。
-网络层和链路层都需要地址。
-1. MAC地址 并不是主机或路由器具有链路层地址，是它们的适配器（网卡、网络接口）具有链路层地址。
-MAC地址（LAN 地址、物理地址），长度为6字节，被设定为永久的（但是软件可以改变）。
-IEEE管理着MAC地址的分配，网卡厂商生产网卡时，IEEE固定一个MAC地址的前24比特，后面毕业由厂商自己分配。
-无论机器在何方，MAC地址总是不会变，不像IP地址具有层次结构，在不同的局域网，IP地址会改变。（MAC地址像身份证号，IP地址像邮政编码）
-当某些适配器要向另一目的适配器发送一个帧，源适配器将包含目的适配器MAC地址插入到该帧中，发送到局域网。适配器接收到帧，与自己的MAC地址匹配，匹配上则接收，不匹配则丢弃。
-当适配器想让局域网内所有适配器都接收一个帧，就插入一个特殊的MAC广播地址（48个1，FF- FF- FF- FF- FF- FF）
-为什么既要MAC地址，又要IP地址？
-IP地址工作在网络层，MAC地址工作在链路层。
-局域网是为了任意网络层协议而设计的，不仅仅是IP和HTTP，如果适配器被分配为IP地址，而不是MAC地址，那么将不能方便的支持其他网络层协议。
-如果适配器使用网络层地址，而不是MAC地址，那么适配器缓存必须存储IP地址，每次改变都要重新配置。
-如果适配器不使用地址，IP数据报向上网络层传递，网络层根据数据报携带的目的地址匹配，那么对于每个帧，主机都将花费时间和资源去处理。
-总而言之，不同的层需要它们自己的寻址方案，目前，我们看到有3种类型的地址：应用层的主机名、网络层的IP地址、链路层的MAC地址。
-2. 地址解析协议ARP 地址解析协议：完成网络层IP地址和链路层MAC地址的转换，将IP地址解析为MAC地址（DNS将主机名解析为IP地址）。ARP只为在同一个子网上的主机和路由器解析IP地址。
-ARP表：
-每个主机和路由器在内存中都有一个ARP表，该表包含了IP地址到MAC地址的转换，每条记录都有一个生存时期（一般20分钟），ARP表不一定记录了局域网内所有主机IP和MAC的条目。
-当ARP表中没有目的主机对应的MAC地址时：
- 源主机向适配器传递一个包含MAC广播地址的ARP查询分组 子网上所有的适配器都能接收该分组，并向上传递给其ARPmo模块 IP地址匹配的适配器会发送一个ARP响应分组 源主机更新其ARP表  查询ARP报文在广播帧中发送，响应ARP报文在标准帧中发送。
-ARP表是即插即用的，自动建立，当主机与子网断开，其他主机内存中的ARP表最终也不会保留该主机的记录。
-ARP表既包含网络层IP地址，也包含链路层MAC地址，所以该协议是跨链路层和网络层边界的协议。
-发送数据报到子网以外 右上角主机A向右下角主机B发送数据。
- A发送的数据报携带B的IP地址和路由器的MAC地址 路由器接收到数据报，更具其ARP表，转发携带B的IP地址和B的MAC地址的数据报  6.4.2 以太网 以太网是到目前为止最流行的有线局域网技术，而且到可能预见的将来它可能仍保持这一位置。
-集线器：
-工作在物理层，作用于比特而不是帧，当表示一个0或者1的一个比特到达一个接口，集线器重新生出这个比特，并将其能量强度放大，将该比特向其他所有接口传输出去。
-因此，集线器下的是一个广播局域网。并且当同时收到两个接口发来的帧时，将发生碰撞，生出该帧的节点必须重传。
-1. 以太网帧结构 ​  数据(46~1500字节)：承载IP数据报。MTU（最大传输单元），一般为1500字节，如果IP数据报超过1500，主机必须将数据报分片；最小为46字节，如果小于46字节，数据报必须被填充到46字节（利用IP数据报中长度字节去除填充部分）。 目的地址(6字节)：目的适配器的MAC地址。当目的适配器收到一个以太网帧，当该帧中的目的地址是自身地址或者是广播地址时，该适配器将帧的数据字段内容传给网络层；当收到其他MAC地址的帧，丢弃之。 源地址(6字节)：包含了传输该帧到局域网上的适配器MAC地址。 类型字段(2字段)：指定了数据帧的不同网络层协议。 CRC(4字节)：循环冗余检测，使得接收适配器检测帧是否引入了差错。 前同步码(8字节)：前7个字节用于同步两个适配器的时钟；第8个字节提示重要的内容就要到了。  以太网技术向网络层提供服务的特点：</div><div class="post-footer">
-        <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E9%93%BE%E8%B7%AF%E5%B1%82%E5%92%8C%E5%B1%80%E5%9F%9F%E7%BD%91/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>

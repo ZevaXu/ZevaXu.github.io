@@ -3,9 +3,26 @@
         <title>Zeva`s Space</title>
         <link>https://ZevaXu.github.io/</link>
         <description>Blog &amp; Note about Zeva</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 09 May 2022 10:32:40 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 16:10:30 &#43;0800</lastBuildDate>
             <atom:link href="https://ZevaXu.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>跨境支付100词</title>
+    <link>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</link>
+    <pubDate>Tue, 31 May 2022 16:10:30 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</guid>
+    <description><![CDATA[跨境支付100词   IBAN，是指国际银行帐户号码（The International Bank Account Number），通常简称IBAN，是由欧洲银行标准委员会（ European Committee for Banking Standards，简称 ECBS）按照其标准制定的一个银行帐户号码。参加ECBS的会员国的银行帐户号码都有一个对应杜IBAN号码。可以联系你的开户行获取IBAN号码。IBAN号码最多是34位字符串。IBAN的编号规定包括国别代码＋银行代码＋地区＋账户人账号＋校验码，当在欧元区未使用IBAN账号时，会被额外收取人工干预费。中国的银行是没有IBAN号码的，IBAN只适用于欧洲。此码没有SWIFT CODE普遍。
+**人话：**是欧洲内部使用的一套银行卡账户系统，每个iban代表一个银行卡账户。
+  SWIFT Code，该号相当于各个银行的身份证号。每个银行(包括每个分行、支行)都有一个代码，是由银行名称的英文缩写和总行所在地的英文缩写(也有用数字加字母表示某城市的)以及该分行所在地的代码(字母、数字或混合)组成。
+在国际上，银行的SWIFT Code 都是统一的格式，例如：BKCHCNBJ110 ，1-4位为一家银行的统一代码(中国银行为BKCH)，5-6位代表国家代码(中国为CN)，7-8位代表城市代码(北京为BJ)，110代表北京市分行。其中总行的SWIFT Code没有所在地代码，位数为8位(如中国银行总行BKCHCNBJ)，其余都为11位。
+查询各个银行的swift代码：swift代码查询
+  ABA(ROUTING NUMBE),是指美国银行家协会（American Bankers Association ），按照其标准制定的一个银行帐户号码，通常是美国的银行才有，9位数字，叫做 ABA Number，也就是它们的 Routing Number，也称作 Routing Transit Number 或 ABA Number，它是由ABA(美国银行家协会)在美联储监管和协助下提出的金融机构识别码，很多金融机构都有一个，主要用于和银行相关的交易，转帐，清算等的路由确认，由9位值(不是数！8位内容加1个校验码)构成。我们收到的美国支票，通常在其正面左下角都印有上该银行的Routing Number。
+**人话：**类似swift code，同样是美国各个银行或金融机构的身份证。美国的银行一般只使用Routing Number，几乎不用Swift Code。
+  电汇（telegraphic transfer，T/T），是一种电子转帐方式，可以通过这种方式直接在您的银行账户中接收资金或发出资金。类似银行转账。
+  支票账户，是一种最基本的交易账户，可用于日常生活消费，类似国内的活期借记卡，钱存进去可以进行消费，几乎没有利息。
+  储蓄账户，支票账户用于日常交易，储蓄账户则可以帮助您实现短期和长期储蓄目标，可以赚取利息，储备资金，不可用做日常消费。
+  ]]></description>
+</item><item>
     <title>Vim常用命令</title>
     <link>https://ZevaXu.github.io/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
     <pubDate>Mon, 09 May 2022 10:32:40 &#43;0800</pubDate>
@@ -118,17 +135,5 @@ Symbolic link 就是在创建一个独立的文件，而这个文件会让数据
   4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
 安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
 以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld]]></description>
-</item><item>
-    <title>M1 Mac安装mysql过程</title>
-    <link>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</link>
-    <pubDate>Fri, 21 Jan 2022 22:33:21 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/m1-mac%E5%AE%89%E8%A3%85mysql%E8%BF%87%E7%A8%8B/</guid>
-    <description><![CDATA[设备信息 安装过程 通过homebrew安装，默认安装路径：/opt/homebrew/var，以下是homebrew官网搜索mysql的信息： 可以看到是原生支持m1芯片的。 在终端输入下列命令，进行安装：
-1  brew install mysql   等待安装完毕后，可以使用下列命令开启或停止mysql服务：
-1 2 3 4  sudo mysql.server start //开启服务 sudo mysql.server stop //关闭服务 sudo mysql.server restart //重启服务 sudo mysql.server status //查看状态   注意需要输入Mac开机密码来确认上述命令的执行。
-初次开启服务，mysql是没有设置密码的，即密码是空白，可使用以下命令来进行一些账户安全设置：
-1  mysql_secure_installation   一切设置完毕就可以正常使用了 卸载mysql 首先用以下命令卸载
-1  brew uninstall mysql   要想彻底清除数据库文件，还要去/opt/homebrew/var目录执行： sudo rm -rf mysql命令。]]></description>
 </item></channel>
 </rss>
