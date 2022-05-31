@@ -1,9 +1,9 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>python - Tag - Zeva`s Space</title>
-        <link>https://ZevaXu.github.io/tags/python/</link>
-        <description>python - Tag - Zeva`s Space</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 22:57:19 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/tags/python/" rel="self" type="application/rss+xml" /><item>
+        <title>想法记录 - Category - Zeva`s Space</title>
+        <link>https://ZevaXu.github.io/categories/%E6%83%B3%E6%B3%95%E8%AE%B0%E5%BD%95/</link>
+        <description>想法记录 - Category - Zeva`s Space</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 22:57:19 &#43;0800</lastBuildDate><atom:link href="https://ZevaXu.github.io/categories/%E6%83%B3%E6%B3%95%E8%AE%B0%E5%BD%95/" rel="self" type="application/rss+xml" /><item>
     <title>做智能行为识别系统项目有感</title>
     <link>https://ZevaXu.github.io/%E5%81%9A%E6%99%BA%E8%83%BD%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/</link>
     <pubDate>Tue, 31 May 2022 22:57:19 &#43;0800</pubDate>
@@ -19,18 +19,5 @@
 思而不写则怠
 于是乎，在写每个函数后，我都经过一段时间的思考，但是呢，可能由于想久了费脑筋，容易偷懒，就想别的事情去了。并且有些函数可能本身逻辑就有点复杂，一时间没办法在脑海里把方方面面构思清楚。这时不管怎样，尝试一下动手，在编码实现过程中，可能就慢慢理清了思路。
 遇到的问题与努力的方向 这个项目是用python写的，主要分为对图片的处理和对视频的处理，对图片处理很快也没太大问题，但是当处理视频时，由于存在一个不断读取和处理视频帧的循环，程序运行过程中，有一个严重的内存溢出问题。查资料、修改代码（面对对象方法改到函数式编程）、细致调试，最后发现是一个模块导入的问题，就是一行代码出错，却让我花了很多时间排查。但是同时也看到了自己薄弱的地方，一是对pytho面向对象编码知识点不熟悉，二是对更低层的东西项内存溢出、垃圾回收等机制不够了解。]]></description>
-</item><item>
-    <title>Conda常用命令</title>
-    <link>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-    <pubDate>Tue, 20 Apr 2021 10:29:20 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/conda%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-    <description><![CDATA[conda常用命令 1. 管理conda   查看conda版本
-1  conda --version     查看python版本
-1  conda --python     进入/退出python环境
-1 2  python quit()     更新conda版本
-1  conda update conda      2. 管理环境   创建一个环境
-1  conda create --name python34 python=3.4 #创建一个名为python34的环境，指定python版本为3.4     切换环境
-1 2 3 4  #windows activate python34 #mac/linux source activate python34     删除一个已有的环境]]></description>
 </item></channel>
 </rss>

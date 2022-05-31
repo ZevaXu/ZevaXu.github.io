@@ -3,21 +3,37 @@
         <title>Zeva`s Space</title>
         <link>https://ZevaXu.github.io/</link>
         <description>Blog &amp; Note about Zeva</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 16:10:30 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Tue, 31 May 2022 22:57:19 &#43;0800</lastBuildDate>
             <atom:link href="https://ZevaXu.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>做智能行为识别系统项目有感</title>
+    <link>https://ZevaXu.github.io/%E5%81%9A%E6%99%BA%E8%83%BD%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/</link>
+    <pubDate>Tue, 31 May 2022 22:57:19 &#43;0800</pubDate>
+    <author>Author</author>
+    <guid>https://ZevaXu.github.io/%E5%81%9A%E6%99%BA%E8%83%BD%E8%A1%8C%E4%B8%BA%E8%AF%86%E5%88%AB%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE%E6%9C%89%E6%84%9F/</guid>
+    <description><![CDATA[记录最近做的一个项目过程中得到的一点体会 背景： 应导师要求，需要做一个基于人体行为识别的项目，主要目标是通过对比示范动作和错误动作图片或视频，找到错误动作的具体错误部位，并给出一些可视化的反馈和文字提示，帮助纠正动作，设想的落地方向是在健身运动行业。
+拿到手之后，通过各个渠道收集相关资料，以及和同学的多方探讨，慢慢设想出一条大致可行的方案，于是着手编码开始实现，在实现过程中，通过在数据集上的不断测试效果，又前后推翻和修正了不少的想法。到今天，算是初步给出了一个可以交代的方案，这里不讲具体的方案实现过程，就将将在整个编码实现过程中得到的一些体会。
+体会： 写而不思则惘
+这里的写是写代码的意思。写而不思则惘：
+ 意思是动手之前一定要先充分理解问题，在脑子里勾勒出一个大致的方案  完成这个方案大致需要哪些步骤（函数接口） 对这些函数如何划分功能、解耦合   具体到写某个函数接口时，也要大致从这几个方面考虑好  该函数的功能 该函数接收的输入 该函数产生的输出 里面的逻辑怎么写才能用较少的内存、较少的循环、美观易于理解 函数可重用性的考虑 函数的可扩充性    在这点上，我就吃了不少亏，由于编码之前没有经过精心的设计和考虑，导致代码多次重构，一部分重构是因为最后识别的效果不太好，不满足预期，于是结合实际情况深思熟虑，不断调整现有的方案，调整代码。这就导致项目中百分之70到80的代码重写，前期的工作时间大量浪费。
+好记性不如烂笔头
+计算一个复杂的数学题，计算过程中，脑子既要不断思考，也要不断记忆思考过程中产生的“缓存文件”，如果脑容量不足，很快就会卡机，这时就需要通过笔记来记录这些缓存拉。所以，在思考、编码的过程中，一定要做好记录。可以记录过程中的随时产生的灵感和想法；也可以记录待办事项，把规划好但是还没实现的函数或者功能记录下来，作为下一步的工作目标。实测这样能大大提高效率。
+思而不写则怠
+于是乎，在写每个函数后，我都经过一段时间的思考，但是呢，可能由于想久了费脑筋，容易偷懒，就想别的事情去了。并且有些函数可能本身逻辑就有点复杂，一时间没办法在脑海里把方方面面构思清楚。这时不管怎样，尝试一下动手，在编码实现过程中，可能就慢慢理清了思路。
+遇到的问题与努力的方向 这个项目是用python写的，主要分为对图片的处理和对视频的处理，对图片处理很快也没太大问题，但是当处理视频时，由于存在一个不断读取和处理视频帧的循环，程序运行过程中，有一个严重的内存溢出问题。查资料、修改代码（面对对象方法改到函数式编程）、细致调试，最后发现是一个模块导入的问题，就是一行代码出错，却让我花了很多时间排查。但是同时也看到了自己薄弱的地方，一是对pytho面向对象编码知识点不熟悉，二是对更低层的东西项内存溢出、垃圾回收等机制不够了解。]]></description>
+</item><item>
     <title>跨境支付100词</title>
     <link>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</link>
     <pubDate>Tue, 31 May 2022 16:10:30 &#43;0800</pubDate>
     <author>Author</author>
     <guid>https://ZevaXu.github.io/%E8%B7%A8%E5%A2%83%E6%94%AF%E4%BB%98100%E8%AF%8D/</guid>
     <description><![CDATA[跨境支付100词   IBAN，是指国际银行帐户号码（The International Bank Account Number），通常简称IBAN，是由欧洲银行标准委员会（ European Committee for Banking Standards，简称 ECBS）按照其标准制定的一个银行帐户号码。参加ECBS的会员国的银行帐户号码都有一个对应杜IBAN号码。可以联系你的开户行获取IBAN号码。IBAN号码最多是34位字符串。IBAN的编号规定包括国别代码＋银行代码＋地区＋账户人账号＋校验码，当在欧元区未使用IBAN账号时，会被额外收取人工干预费。中国的银行是没有IBAN号码的，IBAN只适用于欧洲。此码没有SWIFT CODE普遍。
-**人话：**是欧洲内部使用的一套银行卡账户系统，每个iban代表一个银行卡账户。
+人话：是欧洲内部使用的一套银行卡账户系统，每个iban代表一个银行卡账户。
   SWIFT Code，该号相当于各个银行的身份证号。每个银行(包括每个分行、支行)都有一个代码，是由银行名称的英文缩写和总行所在地的英文缩写(也有用数字加字母表示某城市的)以及该分行所在地的代码(字母、数字或混合)组成。
 在国际上，银行的SWIFT Code 都是统一的格式，例如：BKCHCNBJ110 ，1-4位为一家银行的统一代码(中国银行为BKCH)，5-6位代表国家代码(中国为CN)，7-8位代表城市代码(北京为BJ)，110代表北京市分行。其中总行的SWIFT Code没有所在地代码，位数为8位(如中国银行总行BKCHCNBJ)，其余都为11位。
 查询各个银行的swift代码：swift代码查询
   ABA(ROUTING NUMBE),是指美国银行家协会（American Bankers Association ），按照其标准制定的一个银行帐户号码，通常是美国的银行才有，9位数字，叫做 ABA Number，也就是它们的 Routing Number，也称作 Routing Transit Number 或 ABA Number，它是由ABA(美国银行家协会)在美联储监管和协助下提出的金融机构识别码，很多金融机构都有一个，主要用于和银行相关的交易，转帐，清算等的路由确认，由9位值(不是数！8位内容加1个校验码)构成。我们收到的美国支票，通常在其正面左下角都印有上该银行的Routing Number。
-**人话：**类似swift code，同样是美国各个银行或金融机构的身份证。美国的银行一般只使用Routing Number，几乎不用Swift Code。
+人话：类似swift code，同样是美国各个银行或金融机构的身份证。美国的银行一般只使用Routing Number，几乎不用Swift Code。
   电汇（telegraphic transfer，T/T），是一种电子转帐方式，可以通过这种方式直接在您的银行账户中接收资金或发出资金。类似银行转账。
   支票账户，是一种最基本的交易账户，可用于日常生活消费，类似国内的活期借记卡，钱存进去可以进行消费，几乎没有利息。
   储蓄账户，支票账户用于日常交易，储蓄账户则可以帮助您实现短期和长期储蓄目标，可以赚取利息，储备资金，不可用做日常消费。
@@ -118,22 +134,5 @@ Symbolic link 就是在创建一个独立的文件，而这个文件会让数据
 安装好docker后拉取trojan镜像。
 1 2  # 拉取数据库，此处的端口映射、root密码、数据库名称都可以改 docker run --name trojan-mariadb --restart=always -p 3308:3306 -v /root/trojan_docker/mariadb:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=trojan_zeva -e MYSQL_ROOT_HOST=% -e MYSQL_DATABASE=trojan -d mariadb:10.2   此处需要注意，容器端口的选择不能是已经被占用的端口，不然会报错。
 1 2 3 4 5 6 7 8  #拉取trojan镜像 docker run -it -d --name trojan --net=host --restart=always -v /root/trojan_docker/root/:/root/ --privileged jrohy/trojan init # 进入容器 docker exec -it trojan bash #开启trojan 会自动开始安装 按提示输入信息即可 trojan   此时可能有一些问题：]]></description>
-</item><item>
-    <title>部署web应用程序到centos系统遇到的防火墙问题及解决</title>
-    <link>https://ZevaXu.github.io/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</link>
-    <pubDate>Wed, 26 Jan 2022 22:59:59 &#43;0800</pubDate>
-    <author>Author</author>
-    <guid>https://ZevaXu.github.io/%E9%83%A8%E7%BD%B2web%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%88%B0centos%E7%B3%BB%E7%BB%9F%E9%81%87%E5%88%B0%E7%9A%84%E9%98%B2%E7%81%AB%E5%A2%99%E9%97%AE%E9%A2%98%E5%8F%8A%E8%A7%A3%E5%86%B3/</guid>
-    <description><![CDATA[最初的目的 最近用go写了一个在线剪贴板的web小项目，在本地主机上调试了感觉还行，遂打算部署到甲骨文的VPS上（centos-8）。
-环境搭建好了之后，成功运行在8080端口，curl localhost:8080也可以正常获取到网页，但是我的浏览器远程就是无法访问。在stackoverflow搜索了解，感觉是VPS防火墙的问题。并有了以下的解决步骤。此外，在解决问题的过程中还发现了一个有趣的小工具&ndash;cockpid,一个在web端管理VPS的工具，是centos和redhat系统自带的。
-解决过程 在开始之前，首先去VPS提供商管理页面设置好相应的防火墙规则。之后在对VPS的防火墙设置规则。
-  查看VPS防火墙状态： sudo systemctl status firewalld 可以看到防火墙是正常运行的。
-  查看VPS防火墙开启的端口和服务 firewall-cmd --list-all 可以看到，我的VPS开启了cockpit dhcpv6-client http ssh这些个服务，以及一个8080端口（这是我主动开启之后的显示，一开始只有cockpit dhcpv6-client ssh这三项）。
-如果想要查看某个服务占据的端口，可以用grep ssh /etc/services这个命令(以ssh为例)，可以看到ssh使用的是本机22端口。   开启希望的服务和端口。 开启http服务（即80端口）：sudo firewall-cmd --add-service=http --permanent 开启自定义端口：firewall-cmd --zone=public --permanent --remove-port 8080 不仅可以开端口，也可以关：firewall-cmd --zone=public --permanent --remove-service http
-但是最后一定要重载以下使之生效：firewall-cmd --reload
-之后可以再用firewall-cmd --list-all命令查看有没有成功。
-  4.经过上述操作，我已经可以通过浏览器正常访问到我部署的web服务了，大功告成！ Cockpid 在之前查看VPS防火墙开启的端口和服务一步骤中，我看到有个名叫Cockpid的服务，一开始以为是个恶意程序（挖坑、肉鸡）,谨慎的上谷歌查了查，原来这家伙是centos自带的一个web端LINUX系统管理程序，这是它的官网（https://cockpit-project.org），这是它的一些介绍,以及安装过程。
-安装好之后，只需要打开URL（VPD的域名或IP地址:9090），即可使用。下图是cockpid的登陆界面： 我的VPS设置为ssh keys方式登陆，cockpid网页似乎只能通过用户名和密码登录，于是我先建了一个用户并登录，这是有关linux如何创建用户的说明。
-以下是cockpid提供的一些功能截图： 参考： [1] How to open and close ports on RHEL 8 / CentOS 8 Linux [2] How To Open Port 80 on CentOS [3] How to List Open Ports in Firewalld]]></description>
 </item></channel>
 </rss>

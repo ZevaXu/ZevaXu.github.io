@@ -102,6 +102,14 @@
         alt="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png"
         title="https://cdn.jsdelivr.net/gh/ZevaXu/picupload@master/uPic/20211205-1249-g7imnw.png" /></a></div><div class="links"><a href="https://github.com/ZevaXu" title="GitHub" target="_blank" rel="noopener noreffer me"><i class="fab fa-github-alt fa-fw"></i></a><a href="https://t.me/xxxx" title="Telegram" target="_blank" rel="noopener noreffer me"><i class="fab fa-telegram-plane fa-fw"></i></a><a href="https://weibo.com/5971704717" title="微博" target="_blank" rel="noopener noreffer me"><i class="fab fa-weibo fa-fw"></i></a><a href="mailto:xxxx@xxxx.com" title="Email" rel=" me"><i class="far fa-envelope fa-fw"></i></a><a href="/index.xml" title="RSS" target="_blank" rel="noopener noreffer me"><i class="fas fa-rss fa-fw"></i></a></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/git%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/">Git命令 基础</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-05-08">2022-05-08</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">git config Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量。 这些变量存储在一个配置文件中。
+查看文件位置以及所有的配置： 1 2 3  git config --list --show-origin &gt; /opt/homebrew/etc/   用户信息 1 2  git config --global user.name &#34;John Doe&#34; git config --global user.email johndoe@example.com   查看配置信息 1  git config --list(-l)   获取git仓库 通常有两种获取 Git 项目仓库的方式：
+ 将尚未进行版本控制的本地目录转换为 Git 仓库； 从其它服务器 克隆 一个已存在的 Git 仓库。  两种方式都会在你的本地机器上得到一个工作就绪的 Git 仓库。
+本地目录转换为 Git 仓库 1 2 3 4 5 6 7  cd project_path # 空文件夹 git init.</div><div class="post-footer">
+        <a href="/git%E5%91%BD%E4%BB%A4-%E5%9F%BA%E7%A1%80/">Read More</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/git/">Git</a></div></div>
+</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/%E7%94%B2%E9%AA%A8%E6%96%87vps%E6%90%AD%E5%BB%BAtrojan%E6%AD%A5%E9%AA%A4/">甲骨文VPS搭建trojan步骤</a>
     </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2022-03-20">2022-03-20</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E5%B0%8F%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>小记</a></span></div><div class="content">甲骨文VPS搭建trojan步骤 VPS准备 需要一台IP没有被墙的VPS，也就是不开代理的情况下可以通过SSH连接到 VPS。我自己用的是甲骨文的机器，甲骨文机器可以在不清除数据的情况下随时更改IP地址，这样的好处是，如果后续该ip被墙了，换一个ip，改一下域名解析就可以接着用。
 防火墙设置 ssh连接到VPS后，现在VPS提供商（我的是甲骨文）控制面板里更改防火墙设置。放行需要用到的端口（这里不建议打开所有端口）。
@@ -233,31 +241,6 @@ float64:
 内置的complex函数用于构建复数，内建的real和imag函数分别返回复数的实部和虚部：
 1 2 3 4 5 6 7 8 9 10  var x complex128 = complex(1, 2) // 1+2i var y complex128 = complex(3, 4) // 3+4i fmt.</div><div class="post-footer">
         <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%803.%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">Read More</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
-</article><article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/">Go语言基础—2.程序结构</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>Zeva</a></span>&nbsp;<span class="post-publish">published on <time datetime="2021-12-01">2021-12-01</time></span>&nbsp;<span class="post-category">included in <a href="/categories/%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>笔记</a></span></div><div class="content">2.1 命名 命名规则：
-  字母和下划线开头，后可以接任何数量的字母、数字或下划线（区分大小写）。
-  不能使用go关键字来命名。
-  不推荐使用go预定义名字命名。
-  习惯用驼峰命名法。
-  可见性：
-  在函数内定义，仅函数可用。
-  在函数外定义，包级可用。
-  循环体的变量仅循环内可用。
-  名字开头的大小写决定了是否是导出型（外部是否可以访问）
-fmt.Printf()
-  2.2 声明 声明语句定义了程序的各种实体对象以及部分或全部的属性。主要有4种类型的声明语句：
-  var：变量
-  const：常量
-  type：类型
-  func：函数
-  2.3 变量 声明变量的一般语法：
-1  var 变量名 类型 = 表达式   其中，类型和= 表达式两者可省略其一。编译器会自动推断变量的类型或者初始值。
-各个类型的0值：
-  整型类型0值为0
-  布尔类型为false</div><div class="post-footer">
-        <a href="/go%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80-2.%E7%A8%8B%E5%BA%8F%E7%BB%93%E6%9E%84/">Read More</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/go/">Go</a></div></div>
 </article><ul class="pagination"><li class="page-item ">
                     <span class="page-link">
